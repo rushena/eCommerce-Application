@@ -131,3 +131,4 @@ dist
 
 #test 
 __snapshots__
+coverage

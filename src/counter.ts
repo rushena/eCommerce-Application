@@ -9,3 +9,7 @@ export function setupCounter(element: HTMLButtonElement) {
 }
 const newLine = '';
 console.log(newLine);
+
+export function testFunction(a: number, b: number): number {
+  return a + b;
+}
