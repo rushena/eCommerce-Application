@@ -131,4 +131,17 @@ dist
 
 #test 
 __snapshots__
-coverage
+
+.DS_Store
+.idea
+*.cpuprofile
+*.local
+/.vscode/
+/docs/.vitepress/cache
+/packages/vite/LICENSE
+dist-ssr
+explorations
+node_modules
+playground-temp
+temp
+TODOs.md
