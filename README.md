@@ -6,7 +6,7 @@ Users can browse through a vast range of products, view detailed descriptions, a
 
 
 
-##Technologies
+## Technologies
 
 - Typescript
 - EsLint
@@ -15,31 +15,31 @@ Users can browse through a vast range of products, view detailed descriptions, a
 - Vite
 - ViTest
 
-##Install dependencies
+## Install dependencies
 
 ```sh
 npm install
 ```
 
-##Start Development server
+## Start Development server
 
 ```sh
 npm run dev
 ```
 
-##Create Build
+## Create Build
 
 ```sh
 npm run build
 ```
 
-##Run tests
+## Run tests
 
 ```sh
 npm run test
 ```
 
-##Run linter
+## Run linter
 
 ```sh
 npm run lint
