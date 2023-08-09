@@ -1,12 +1,13 @@
-import { getApiRoot } from './builClient.ts';
-import { RegistrationOptions, AuthResponse } from './authTypes.ts';
+import { getApiRoot } from '../apiRoot/builClient.ts';
+import { RegistrationOptions, AuthResponse } from './registerationTypes.ts';
 
 function getProject(options: RegistrationOptions) {
   return getApiRoot()
     .withProjectKey({
       projectKey: 'new-ecommerce-app',
     })
-    .customers()
+    .me()
+    .signup()
     .post({
       body: {
         email: options.email,
