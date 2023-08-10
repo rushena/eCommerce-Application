@@ -2,13 +2,12 @@ import {
   ClientBuilder,
   type AuthMiddlewareOptions,
   type HttpMiddlewareOptions,
+  Client,
 } from '@commercetools/sdk-client-v2';
 import {
   createApiBuilderFromCtpClient,
   ApiRoot,
 } from '@commercetools/platform-sdk';
-
-// Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: 'https://auth.europe-west1.gcp.commercetools.com',
   projectKey: 'new-ecommerce-app',
@@ -21,20 +20,33 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   ],
   fetch,
 };
-
-// Configure httpMiddlewareOptions
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: 'https://api.europe-west1.gcp.commercetools.com',
   fetch,
 };
 
-// Export the ClientBuilder
-const ctpClient = new ClientBuilder()
-  .withClientCredentialsFlow(authMiddlewareOptions)
-  .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware()
-  .build();
-
 export const getApiRoot: () => ApiRoot = () => {
+  const cookieValue = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('accesToken='))
+    ?.split('=')[1];
+  let ctpClient: Client;
+  // if user was logged in previously - has acces token in cookie, we create client with this token
+  // else create unnamed client(might need to use AnonymousSession, once we get to shopping cart)
+  if (cookieValue) {
+    console.log('user is logged in'); // check if this thing works
+    ctpClient = new ClientBuilder()
+      .withExistingTokenFlow(cookieValue, { force: true })
+      .withHttpMiddleware(httpMiddlewareOptions)
+      .withLoggerMiddleware()
+      .build();
+  } else {
+    console.log('user is NOT logged in');
+    ctpClient = new ClientBuilder()
+      .withClientCredentialsFlow(authMiddlewareOptions)
+      .withHttpMiddleware(httpMiddlewareOptions)
+      .withLoggerMiddleware()
+      .build();
+  }
   return createApiBuilderFromCtpClient(ctpClient);
 };

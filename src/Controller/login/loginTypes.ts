@@ -5,9 +5,10 @@ interface SuccesAuthResponse {
   lastName?: string;
   token: string;
 }
-
 interface ErrorAuthResponse {
   succes: false;
 }
 
 export type AuthResponse = SuccesAuthResponse | ErrorAuthResponse;
+
+export type User = { username: string; password: string };

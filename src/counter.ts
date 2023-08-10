@@ -9,8 +9,6 @@ export function setupCounter(element: HTMLButtonElement) {
   element.addEventListener('click', () => setCounter(counter + 1));
   setCounter(0);
 }
-const newLine = '';
-console.log(newLine);
 
 export function testFunction(a: number, b: number): number {
   return a + b;
@@ -21,7 +19,7 @@ export function authTest() {
   document.querySelector<HTMLButtonElement>('#counter')!.after(authButton);
   authButton.textContent = 'Sign in test5@gmail.com';
   authButton.addEventListener('click', async () => {
-    await authentication('test5@gmail.com', '123456'); // it returns some stuff but dont need it yet
+    await authentication({ username: 'test5@gmail.com', password: '123456' }); // it returns some stuff but dont need it yet
   });
 }
 

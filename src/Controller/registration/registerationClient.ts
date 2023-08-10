@@ -1,4 +1,4 @@
-import { getApiRoot } from '../apiRoot/builClient.ts';
+import { getApiRoot } from '../apiRoot/generalClient.ts';
 import { RegistrationOptions, AuthResponse } from './registerationTypes.ts';
 
 function getProject(options: RegistrationOptions) {
