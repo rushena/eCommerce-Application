@@ -1,7 +1,8 @@
+import { MyCustomerDraft } from '@commercetools/platform-sdk';
 import { getApiRoot } from '../apiRoot/generalClient.ts';
-import { RegistrationOptions, AuthResponse } from './registerationTypes.ts';
+import { AuthResponse } from './registerationTypes.ts';
 
-function getProject(options: RegistrationOptions) {
+function getProject(options: MyCustomerDraft) {
   return getApiRoot()
     .withProjectKey({
       projectKey: 'new-ecommerce-app',
@@ -14,13 +15,17 @@ function getProject(options: RegistrationOptions) {
         firstName: options.firstName,
         lastName: options.lastName,
         password: options.password,
+        dateOfBirth: options.dateOfBirth,
+        addresses: options.addresses,
+        defaultBillingAddress: options.defaultBillingAddress,
+        defaultShippingAddress: options.defaultShippingAddress,
       },
     })
     .execute();
 }
 
 export async function registration(
-  options: RegistrationOptions
+  options: MyCustomerDraft
 ): Promise<AuthResponse> {
   try {
     const project = await getProject(options);

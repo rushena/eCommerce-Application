@@ -2,6 +2,7 @@ import {
   ClientBuilder,
   type PasswordAuthMiddlewareOptions,
   type HttpMiddlewareOptions,
+  TokenCache,
 } from '@commercetools/sdk-client-v2';
 import {
   createApiBuilderFromCtpClient,
@@ -9,6 +10,20 @@ import {
 } from '@commercetools/platform-sdk';
 
 import { User } from '../login/loginTypes';
+
+function store(initVal: string): TokenCache {
+  let value = initVal;
+  return {
+    get: () => {
+      return { token: value, expirationTime: 173000 };
+    },
+    set: (val) => {
+      value = val.token;
+      document.cookie = `refreshToken=${val.refreshToken}; max-age=172000; path=/;`;
+      document.cookie = `accesToken=${val.token}; max-age=172000; path=/;`;
+    },
+  };
+}
 
 // Configure authMiddlewareOptions
 const passwordAuthMiddlewareOptions = function (
@@ -25,14 +40,7 @@ const passwordAuthMiddlewareOptions = function (
     scopes: [
       'manage_my_shopping_lists:new-ecommerce-app view_categories:new-ecommerce-app manage_customer_groups:new-ecommerce-app manage_my_business_units:new-ecommerce-app manage_my_orders:new-ecommerce-app view_published_products:new-ecommerce-app create_anonymous_token:new-ecommerce-app manage_my_profile:new-ecommerce-app manage_my_quotes:new-ecommerce-app manage_my_quote_requests:new-ecommerce-app manage_customers:new-ecommerce-app manage_my_payments:new-ecommerce-app',
     ],
-    tokenCache: {
-      get: () => {
-        return { token: '', expirationTime: 173000 };
-      },
-      set: (cache) => {
-        document.cookie = `accesToken=${cache.token}; max-age=172000; path=/;`;
-      },
-    },
+    tokenCache: store(''),
     fetch,
   };
 };

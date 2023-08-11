@@ -13,13 +13,4 @@ interface ErrorAuthResponse {
   token?: string;
 }
 
-export interface RegistrationOptions {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  billing?: string;
-  shipping?: string;
-}
-
 export type AuthResponse = SuccesAuthResponse | ErrorAuthResponse;

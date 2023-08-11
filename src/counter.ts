@@ -1,5 +1,6 @@
 import { registration } from './Controller/registration/registerationClient';
 import { authentication } from './Controller/login/loginClient';
+import { tests } from './Controller/apiRoot/testInterractions/registerationClient';
 export function setupCounter(element: HTMLButtonElement) {
   let counter = 0;
   const setCounter = (count: number) => {
@@ -12,6 +13,16 @@ export function setupCounter(element: HTMLButtonElement) {
 
 export function testFunction(a: number, b: number): number {
   return a + b;
+}
+
+export function loggedInterractions() {
+  const testButton = document.createElement('button');
+  document.querySelector<HTMLButtonElement>('#counter')!.after(testButton);
+  testButton.textContent = 'get Products test';
+  testButton.addEventListener('click', async () => {
+    const response = await tests();
+    console.log(response);
+  });
 }
 
 export function authTest() {
@@ -28,14 +39,14 @@ export function registrationTest() {
   document
     .querySelector<HTMLButtonElement>('#counter')!
     .after(regustrationButton);
-  regustrationButton.textContent = 'Sign up test5@gmail.com';
+  regustrationButton.textContent = 'Sign up test555@gmail.com';
   regustrationButton.addEventListener('click', async () => {
     await registration({
       // it returns some stuff but dont need it yet
-      email: 'test5@gmail.com',
+      email: 'test555@gmail.com',
       password: '123456',
       firstName: 'John',
-      lastName: 'Doe',
+      lastName: 'Doe', // for test just these inputs
     });
   });
 }
