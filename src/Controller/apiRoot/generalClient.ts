@@ -26,19 +26,16 @@ const httpMiddlewareOptions: HttpMiddlewareOptions = {
 };
 
 export const getApiRoot: () => ApiRoot = () => {
-  const refreshcookieValue = document.cookie
+  const accesscookieValue = document.cookie
     .split('; ')
-    .find((row) => row.startsWith('refreshToken='))
+    .find((row) => row.startsWith('accessToken='))
     ?.split('=')[1];
   let ctpClient: Client;
   // if user was logged in previously - has refresh token in cookie, we create client with this token
   // else create unnamed client(might need to use AnonymousSession, once we get to shopping cart)
-  if (refreshcookieValue) {
+  if (accesscookieValue) {
     ctpClient = new ClientBuilder()
-      .withRefreshTokenFlow({
-        ...authMiddlewareOptions,
-        refreshToken: refreshcookieValue,
-      })
+      .withExistingTokenFlow(`Bearer ${accesscookieValue}`, { force: true })
       .withHttpMiddleware(httpMiddlewareOptions)
       .withLoggerMiddleware()
       .build();

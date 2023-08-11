@@ -19,8 +19,7 @@ function store(initVal: string): TokenCache {
     },
     set: (val) => {
       value = val.token;
-      document.cookie = `refreshToken=${val.refreshToken}; max-age=172000; path=/;`;
-      document.cookie = `accesToken=${val.token}; max-age=172000; path=/;`;
+      document.cookie = `accessToken=${val.token}; max-age=172000; path=/;`;
     },
   };
 }
