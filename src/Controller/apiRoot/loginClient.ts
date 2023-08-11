@@ -8,7 +8,6 @@ import {
   createApiBuilderFromCtpClient,
   ApiRoot,
 } from '@commercetools/platform-sdk';
-
 import { User } from '../login/loginTypes';
 
 function store(initVal: string): TokenCache {
@@ -19,7 +18,9 @@ function store(initVal: string): TokenCache {
     },
     set: (val) => {
       value = val.token;
-      document.cookie = `accessToken=${val.token}; max-age=172000; path=/;`;
+      if (typeof window !== 'undefined') {
+        document.cookie = `accessToken=${val.token}; max-age=172000; path=/;`;
+      }
     },
   };
 }
@@ -50,15 +51,11 @@ const httpMiddlewareOptions: HttpMiddlewareOptions = {
   fetch,
 };
 
-// Export the ClientBuilder
-const ctpClient = function (user: User) {
-  return new ClientBuilder()
+export const getPasswordApiRoot: (user: User) => ApiRoot = (user: User) => {
+  const client = new ClientBuilder()
     .withPasswordFlow(passwordAuthMiddlewareOptions(user))
     .withHttpMiddleware(httpMiddlewareOptions)
     .withLoggerMiddleware()
     .build();
-};
-
-export const getPasswordApiRoot: (user: User) => ApiRoot = (user: User) => {
-  return createApiBuilderFromCtpClient(ctpClient(user));
+  return createApiBuilderFromCtpClient(client);
 };

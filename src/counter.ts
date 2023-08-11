@@ -1,6 +1,6 @@
 import { registration } from './Controller/registration/registerationClient';
 import { authentication } from './Controller/login/loginClient';
-import { tests } from './Controller/apiRoot/testInterractions/registerationClient';
+import { tests } from './Controller/apiRoot/testInterractions/testClient';
 export function setupCounter(element: HTMLButtonElement) {
   let counter = 0;
   const setCounter = (count: number) => {
@@ -30,7 +30,7 @@ export function authTest() {
   document.querySelector<HTMLButtonElement>('#counter')!.after(authButton);
   authButton.textContent = 'Sign in test5@gmail.com';
   authButton.addEventListener('click', async () => {
-    await authentication({ username: 'test5@gmail.com', password: '123456' }); // it returns some stuff but dont need it yet
+    await authentication({ username: 'test1@gmail.com', password: '123' }); // it returns some stuff but dont need it yet
   });
 }
 
