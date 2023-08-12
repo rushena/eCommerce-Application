@@ -1,0 +1,87 @@
+.registration-page__container {
+  width: 1230px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 30px;
+}
+
+.registration-form {
+  min-width: 599px;
+  font-size: 46px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-2column-block {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.form-2column-block__column {
+  min-width: 292px;
+}
+
+.password-label {
+  position: relative;
+}
+
+.password-label img{
+position: absolute;
+right: 5px;
+top: 50%;
+z-index: 5;
+}
+
+.form-3column-block {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.not-selected {
+  color: gray;
+}
+
+form-3column-block__column_width_big{
+  width: 223.5px;
+}
+
+form-3column-block__column_width_small{
+  width: 120px;
+}
+
+form h6 {
+  font-size: 16px;
+}
+
+.validation-message {
+  color:#FF4242;
+  font-size: 12px;
+  display: block;
+}
+
+button {
+  border: 1px solid;
+  border-radius: 4px;
+  height: 52px;
+  padding: 0px 15px;
+  width: 100%;
+  background-color: #17696A;
+  color: white;
+}
+
+.log-in-page-link {
+  color: #2DA819;
+}
+
+.switch-to-log-in-span{
+  color: #868686;
+}
+
+.create-an-account-button + div {
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+}
