@@ -73,14 +73,14 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label>
                 <sup>*</sup>First Name
-                <input type="text" placeholder="John" required>
+                <input type="text" class="first-name" placeholder="John" pattern="(?=.*[a-z]).{1,} required>
                 <span class="validation-message"></span>
               </label>
             </div>
             <div class="form-2column-block__column"> 
               <label>
-              Last Name
-                <input type="text" placeholder="Lis">
+              <sup>*</sup>Last Name
+                <input type="text" placeholder="Lis" class="last-name" required>
                 <span class="validation-message"></span>
               </label>
             </div>
