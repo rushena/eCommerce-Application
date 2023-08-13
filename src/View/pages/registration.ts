@@ -1,8 +1,40 @@
 import '../../assets/css/registration-page.css'
 
-function fillBirthdayDates(){
+//PUT OFF STEP FOR INDEXES
 
-}
+const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December','','','']
+
+function fillBirthdayDates(){
+  const birthdayDate = document.querySelector('.birthday-date') as HTMLSelectElement;
+  let options = ``;
+  for(let i=1; i<=31; i++) {
+    if(i<10){
+      options = options + `<option class="option_color_grey" value="${i}">0${i}</option>`;
+    } else {
+      options = options + `<option class="option_color_grey" value="${i}">${i}</option>`;
+    }
+  }
+  birthdayDate.insertAdjacentHTML('afterbegin', options);
+ }
+
+ function fillBirthdayMonths(){
+  const birthdayMonth = document.querySelector('.birthday-month') as HTMLSelectElement;
+  let options = ``;
+  for(let i=0; i<=11; i++) {
+    options = options + `<option class="option_color_grey" value="${months[i]}">${months[i]}</option>`;
+  }
+  birthdayMonth.insertAdjacentHTML('afterbegin', options);
+ }
+
+ function fillBirthdayYear(){
+  const birthdayYear = document.querySelector('.birthday-year') as HTMLSelectElement;
+  let options = ``;
+  for(let i=1940; i<=2022; i++) {
+    options = options + `<option class="option_color_grey" value="${i}">${i}</option>`;
+  }
+  options = options + `<option class="option_color_grey" value="2023" selected="true  ">2023</option>`;
+  birthdayYear.insertAdjacentHTML('afterbegin', options);
+ }
 
 export default function createRegistrationPage(){
   //заменить на после хеадера
@@ -10,12 +42,12 @@ document.body.insertAdjacentHTML('afterbegin',`
 <main class="registration-page">
       <div class="registration-page__container">
         <img src="./src/assets/img/Mask group.jpg">
-        <form class="registration-form">
+        <form class="form registration-form" novalidate>
           <h2>Create an Account</h2>
           <div class="form-1column-block"> 
             <label>
               <sup>*</sup>E-Mail
-              <input class="e-mail" type="e-mail" placeholder="alex@example.com">
+              <input class="e-mail" type="email" placeholder="alex@example.com" required>
               <span class="validation-message"></span>
             </label>      
           </div> 
@@ -23,7 +55,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label class="password-label">
                 <sup>*</sup>Password
-                <input type="password">
+                <input type="password" required>
                 <img src="./src/assets/img/solar_eye-broken.png">
                 <span class="validation-message"></span>
               </label>
@@ -31,7 +63,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label class="password-label">
                 <sup>*</sup>Repeat password
-                <input type="password">
+                <input type="password" required>
                 <img src="./src/assets/img/solar_eye-broken.png">
                 <span class="validation-message"></span>
               </label>
@@ -41,7 +73,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label>
                 <sup>*</sup>First Name
-                <input type="text" placeholder="John">
+                <input type="text" placeholder="John" required>
                 <span class="validation-message"></span>
               </label>
             </div>
@@ -58,7 +90,6 @@ document.body.insertAdjacentHTML('afterbegin',`
               <label>
                 <sup>*</sup>Birthday Date
                 <select class="birthday-date not-selected">
-                  <option class="option_color_grey" value="1">01</option>
                 </select>
               </label>
             </div>
@@ -66,7 +97,6 @@ document.body.insertAdjacentHTML('afterbegin',`
               <label>
                 <sup>*</sup>Birthday Month
                 <select class="birthday-month not-selected">
-                  <option class="option_color_grey" value="July">July</option>
                 </select>
               </label>
             </div>
@@ -74,7 +104,6 @@ document.body.insertAdjacentHTML('afterbegin',`
               <label>
                 <sup>*</sup>Birthday Year
                 <select class="birthday-year not-selected">
-                  <option class="option_color_grey" value="2023">2023</option>
                 </select>
               </label>
             </div>
@@ -100,14 +129,14 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="billing-index" type="number" placeholder="00-001">
+                  <input class="billing-index" type="number" placeholder="00-001" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
               <div class="form-3column-block__column_width_big">
                 <label>
                   <sup>*</sup>City
-                  <input class="billing-city" type="text" placeholder="Warsaw">
+                  <input class="billing-city" type="text" placeholder="Warsaw" required>
                   <span class="validation-message"></span>
                 </label>
               </div> 
@@ -115,7 +144,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-1column-block"> 
               <label>
                 <sup>*</sup>Address
-                <input class="billing-address" type="text">
+                <input class="billing-address" type="text" required>
                 <span class="validation-message"></span>
               </label>      
             </div>
@@ -143,14 +172,14 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="shipping-index" type="number" placeholder="00-001">
+                  <input class="shipping-index" type="number" placeholder="00-001" required>
                 </label>
                 <span class="validation-message"></span>
               </div>
               <div class="form-3column-block__column_width_big">
                 <label>
                   <sup>*</sup>City
-                  <input class="shipping-city" type="text" placeholder="Warsaw">
+                  <input class="shipping-city" type="text" placeholder="Warsaw" required>
                   <span class="validation-message"></span>
                 </label>
               </div> 
@@ -158,7 +187,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-1column-block"> 
               <label>
                 <sup>*</sup>Address
-                <input class="shipping-address" type="text">
+                <input class="shipping-address" type="text" required>
                 <span class="validation-message"></span>
               </label>      
             </div>
@@ -172,5 +201,7 @@ document.body.insertAdjacentHTML('afterbegin',`
     </main>
 `);
 
-fillBirthdayDates()
+fillBirthdayDates();
+fillBirthdayMonths();
+fillBirthdayYear();
 }
