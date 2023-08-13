@@ -16,6 +16,7 @@
 .form-2column-block {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   column-gap: 20px;
 }
 
@@ -30,7 +31,7 @@
 .password-label img{
 position: absolute;
 right: 5px;
-top: 50%;
+top: 35%;
 z-index: 5;
 }
 
@@ -60,6 +61,14 @@ form h6 {
   color:#FF4242;
   font-size: 12px;
   display: block;
+}
+
+.validation-message {
+  height: 12px;
+}
+
+.validation-message__password {
+  height: 35px;
 }
 
 button {

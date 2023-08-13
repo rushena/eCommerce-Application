@@ -55,17 +55,17 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label class="password-label">
                 <sup>*</sup>Password
-                <input type="password" required>
+                <input class="password1" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please, enter password that is minimum 8 characters long and contains at least one number, one lowercase and one uppercase characters" required>
                 <img src="./src/assets/img/solar_eye-broken.png">
-                <span class="validation-message"></span>
+                <span class="validation-message validation-message__password"></span>
               </label>
             </div>
             <div class="form-2column-block__column"> 
               <label class="password-label">
                 <sup>*</sup>Repeat password
-                <input type="password" required>
+                <input type="password" class="password2" required>
                 <img src="./src/assets/img/solar_eye-broken.png">
-                <span class="validation-message"></span>
+                <span class="validation-message validation-message__password"></span>
               </label>
             </div>
           </div>
@@ -79,7 +79,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             </div>
             <div class="form-2column-block__column"> 
               <label>
-                Last Name
+              Last Name
                 <input type="text" placeholder="Lis">
                 <span class="validation-message"></span>
               </label>
