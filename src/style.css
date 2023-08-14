@@ -30,15 +30,15 @@ label {
 }
 
 label sup {
-  color: #FF4242;
+  color: #ff4242;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="password"],
-input[type="email"],
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='email'],
 select {
-  border: 1px solid #D7DADD;
+  border: 1px solid #d7dadd;
   border-radius: 4px;
   height: 52px;
   padding: 0px 15px;
@@ -46,11 +46,11 @@ select {
 }
 
 input:focus,
-select:focus{
+select:focus {
   outline: none;
-  border: 1px solid #17696A66;
-  box-shadow: 0px 4px 4px -4px #1E212C08;
-  box-shadow: 0px 12px 10px -6px #17696A0A;
-  box-shadow: 0px 30px 24px -10px #17696A0D;
-  box-shadow: 0px 80px 80px -20px #17696A14;
+  border: 1px solid #17696a66;
+  box-shadow: 0px 4px 4px -4px #1e212c08;
+  box-shadow: 0px 12px 10px -6px #17696a0a;
+  box-shadow: 0px 30px 24px -10px #17696a0d;
+  box-shadow: 0px 80px 80px -20px #17696a14;
 }

@@ -6,7 +6,7 @@ body {
   width: 100%;
   position: absolute;
   top: 0;
-  background: #FFF;
+  background: #fff;
 }
 
 .header a {
@@ -15,7 +15,7 @@ body {
 }
 
 .header a:hover {
-  color: #17696A;
+  color: #17696a;
 }
 
 .header-container {
@@ -36,7 +36,7 @@ body {
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%
+  line-height: 100%;
 }
 
 .navigation__list {
@@ -65,7 +65,7 @@ body {
   gap: 32px;
 }
 
-.header__optional__account{
+.header__optional__account {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -81,21 +81,21 @@ body {
 }
 
 .account__actions {
-  color: #1F1F1F;
+  color: #1f1f1f;
   font-size: 14px;
   line-height: 150%;
 }
 
 .header__optional__toolbar {
   display: flex;
-  gap: 8px
+  gap: 8px;
 }
 
 .toolbar__cartCounter {
   padding: 1px 8px;
   border-radius: 4px;
-  background: #03CEA4;
-  color: #FFF;
+  background: #03cea4;
+  color: #fff;
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -103,6 +103,6 @@ body {
   font-weight: 900;
   line-height: 150%;
 }
-.toolbar__cartCounter__text{
+.toolbar__cartCounter__text {
   vertical-align: middle;
 }
