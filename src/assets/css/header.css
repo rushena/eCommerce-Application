@@ -1,0 +1,108 @@
+body {
+  height: 200vh;
+}
+
+.header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: #FFF;
+}
+
+.header a {
+  color: #000;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #17696A;
+}
+
+.header-container {
+  width: 1230px;
+  margin: 0 auto;
+  padding: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-shrink: 0;
+
+  color: #000;
+  font-family: Lato;
+}
+
+.header__logo {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%
+}
+
+.navigation__list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex: 1 0 0;
+}
+
+.navigation__list__item {
+  color: #424551;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.header__optional {
+  display: flex;
+  gap: 32px;
+}
+
+.header__optional__account{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.6;
+}
+
+.account__SVG {
+  height: 100%;
+}
+
+.account__SVG svg {
+  vertical-align: middle;
+}
+
+.account__actions {
+  color: #1F1F1F;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.header__optional__toolbar {
+  display: flex;
+  gap: 8px
+}
+
+.toolbar__cartCounter {
+  padding: 1px 8px;
+  border-radius: 4px;
+  background: #03CEA4;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 150%;
+}
+.toolbar__cartCounter__text{
+  vertical-align: middle;
+}
