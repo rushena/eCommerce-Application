@@ -91,6 +91,7 @@ document.body.insertAdjacentHTML('afterbegin',`
                 <sup>*</sup>Birthday Date
                 <select class="birthday-date not-selected">
                 </select>
+                <span class="validation-message"></span>
               </label>
             </div>
             <div class="form-3column-block__column_width_medium"> 
