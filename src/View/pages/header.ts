@@ -2,6 +2,7 @@ import './../../assets/css/header.css';
 import { cartSVG } from '../../assets/img/cart';
 import { logInSVG } from '../../assets/img/login';
 import { logOutSVG } from '../../assets/img/logout';
+import { userHandler } from '../../Controller/header/header';
 
 class Header {
   private static instance: Header;
@@ -29,28 +30,17 @@ class Header {
           ${this.loginElement}
         </div>
         <div class='header__optional__toolbar'>
-          <div class='toolbar__cartSVG'>
+          <a class='toolbar__cartSVG' href="/cart">
             ${cartSVG()}
-          </div>
+          </a>
           ${this.cartElement}
         </div>
       </div>
     </div>`;
-    document.body.prepend(header);
+    document.body.append(header);
     document
       .querySelector('.account__actions')!
-      .addEventListener('click', (event: Event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains('account__actions__logout')) {
-          this.loginElement = false;
-        }
-        if (
-          target.classList.contains('account__actions__login') ||
-          target.classList.contains('account__actions__register')
-        ) {
-          this.loginElement = true;
-        }
-      });
+      .addEventListener('click', (event: Event) => userHandler(event, this));
   }
   private loginElementSVG(): string {
     return this.isLogged ? logOutSVG() : logInSVG();
@@ -81,10 +71,11 @@ class Header {
     if (isLogged !== this.isLogged) {
       localStorage.setItem('check', `${isLogged}`);
       this.isLogged = isLogged;
-      document.querySelector('.account__SVG')!.innerHTML =
+      // have to comment for current test might be usefull if we will not refresh page on route change
+      /* document.querySelector('.account__SVG')!.innerHTML =
         this.loginElementSVG();
       document.querySelector('.account__actions')!.innerHTML =
-        this.loginElementActions();
+        this.loginElementActions(); */
     }
   }
   get cartElement(): string {

@@ -1,9 +1,10 @@
 body {
-  height: 200vh;
+  position: relative;
+  height: 1500px;
 }
 
 .header {
-  width: 100%;
+  width: calc(100%);
   position: absolute;
   top: 0;
   background: #fff;
@@ -19,9 +20,9 @@ body {
 }
 
 .header-container {
-  width: 1230px;
+  max-width: 1230px;
   margin: 0 auto;
-  padding: 16px 0;
+  padding: 16px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,7 +54,6 @@ body {
 
 .navigation__list__item {
   color: #424551;
-  font-family: Lato;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
