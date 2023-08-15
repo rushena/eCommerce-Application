@@ -1,11 +1,11 @@
 // First name: Must contain at least one character and no special characters or numbers
 // Last name: Must contain at least one character and no special characters or numbers
+import {checkIfContainsCharacters, checkPatternMatch} from "./Helpers";
+
 
 function showError(customerName:HTMLInputElement, nameError:HTMLSpanElement) {
-  if (customerName.validity.valueMissing) {
-    nameError.textContent = "Please, fill in the field";
-  } else if (customerName.validity.patternMismatch) {
-    nameError.textContent = "No special characters or numbers are allowed";
+  if(checkIfContainsCharacters(customerName, nameError)){
+    checkPatternMatch(customerName, nameError, 'no special characters or numbers');
   }
  }
 
@@ -31,13 +31,13 @@ export default function setNameValidityListener(){
   checkNameValidity(lastName, lastNameError)
 
   form.addEventListener('submit', (event)=> {
-    if ((!lastName.validity.valid) ||(!lastName.validity.valid) ){
+    if (!firstName.validity.valid){
       showError(firstName, firstNameError);
       event.preventDefault();
     }
-    if (!lastName.validity.valid) {
+    if (!lastName.validity.valid){
       showError(lastName, lastNameError);
       event.preventDefault();
     }
-  });
+  })
 }
