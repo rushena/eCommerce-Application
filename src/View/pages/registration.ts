@@ -130,14 +130,14 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="billing-index" type="number" placeholder="00-001" required>
+                  <input class="index billing-index" type="number" placeholder="00-001" pattern="[0-9]{2}[\-][0-9]{3}" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
               <div class="form-3column-block__column_width_big">
                 <label>
                   <sup>*</sup>City
-                  <input class="billing-city" type="text" placeholder="Warsaw" required>
+                  <input class="city billing-city" type="text" placeholder="Warsaw" pattern="(?=.*[a-z]).{1,}" required>
                   <span class="validation-message"></span>
                 </label>
               </div> 
@@ -145,7 +145,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-1column-block"> 
               <label>
                 <sup>*</sup>Address
-                <input class="billing-address" type="text" required>
+                <input class="address billing-address" type="text" required>
                 <span class="validation-message"></span>
               </label>      
             </div>
@@ -173,14 +173,14 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="shipping-index" type="number" placeholder="00-001" required>
+                  <input class="index shipping-index" type="number" placeholder="00-001" required>
+                  <span class="validation-message"></span>
                 </label>
-                <span class="validation-message"></span>
               </div>
               <div class="form-3column-block__column_width_big">
                 <label>
                   <sup>*</sup>City
-                  <input class="shipping-city" type="text" placeholder="Warsaw" required>
+                  <input class="city shipping-city" type="text" placeholder="Warsaw" pattern="(?=.*[a-z]).{1,}" required>
                   <span class="validation-message"></span>
                 </label>
               </div> 
@@ -188,7 +188,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-1column-block"> 
               <label>
                 <sup>*</sup>Address
-                <input class="shipping-address" type="text" required>
+                <input class="address shipping-address" type="text" required>
                 <span class="validation-message"></span>
               </label>      
             </div>
