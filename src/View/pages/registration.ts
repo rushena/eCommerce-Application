@@ -2,7 +2,7 @@ import '../../assets/css/registration-page.css'
 
 //PUT OFF STEP FOR INDEXES
 
-const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December','','','']
+const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December']
 
 function fillBirthdayDates(){
   const birthdayDate = document.querySelector('.birthday-date') as HTMLSelectElement;
