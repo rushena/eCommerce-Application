@@ -2,20 +2,30 @@ export function Router() {
     this.routes = {
         '/': {
             title: 'Main',
-            renderFn: alert
+            renderFn: window.alert
         },
         '/user/authorization': {
             title: 'Authorization',
-            renderFn: alert
+            renderFn: window.alert
         },
         '/user/registration': {
             title: 'Registration',
-            renderFn: alert
+            renderFn: window.alert
         },
     };
 
     this.get = function(url: string) {
-        console.log(url);
+        const routingPath = this.routes[url];
+
+        if (routingPath) {
+            this.simplePath(routingPath);
+            window.history.pushState({}, routingPath.title, url);
+        }
+    }
+
+    this.simplePath = function({title, renderFn}) {
+        document.title = title;
+        renderFn(title);
     }
 
     this.addRoute = function(path, title, cb) {
