@@ -25,48 +25,36 @@ function showError(password1:HTMLInputElement, password1Error:HTMLSpanElement) {
   })
  }
 
-export function setPasswordValidityListener(){
+export function setPasswordValidityListener(number: 1|2){
 
   const form = document.querySelector('.form') as HTMLFormElement;
-  const password1 = document.querySelector('.password1') as HTMLInputElement;
-  const password2 = document.querySelector('.password2') as HTMLInputElement;
-  const password1Error = document.querySelector(".password1 ~ span.validation-message") as HTMLSpanElement;
-  const password2Error = document.querySelector(".password2 ~ span.validation-message") as HTMLSpanElement;
+  const password = document.querySelector(`.password${number}`) as HTMLInputElement;
+  const passwordError = document.querySelector(`.password${number} ~ span.validation-message`) as HTMLSpanElement;
+  
 
-  password1.addEventListener('blur', () => {
-    if(password1.value.split(' ').length === 1){
-      if (password1.validity.valid) {
-        password1Error.textContent = '';
+  password.addEventListener('blur', () => {
+    if(password.value.split(' ').length === 1){
+      if (password.validity.valid) {
+        passwordError.textContent = '';
       } else {
-        showError(password1, password1Error);
+        showError(password, passwordError);
       }
     } else {
-      showError(password1, password1Error);
-    }
-  });
-
-  password2.addEventListener('blur', () => {
-    if(password2.value === password1.value){
-      password2Error.textContent = '';
-    } else{
-      password2Error.textContent = 'Password mismatch';
+      showError(password, passwordError);
     }
   });
 
   form.addEventListener('submit', (event)=> {
-    if (!password1.validity.valid) {
-      showError(password1, password1Error);
+    if (!password.validity.valid) {
+      showError(password, passwordError);
       event.preventDefault();
     }
   });
 }
 
-export function setPasswordVisibility(){
-  const eye1 = document.querySelector('.password1 + img') as HTMLImageElement;
-  const eye2 = document.querySelector('.password2 + img') as HTMLImageElement;
-  const password1 = document.querySelector('.password1') as HTMLInputElement;
-  const password2 = document.querySelector('.password2') as HTMLInputElement;
+export function setPasswordVisibility(number: 1|2){
+  const eye = document.querySelector(`.password${number} + img`) as HTMLImageElement;
+  const password = document.querySelector(`.password${number}`) as HTMLInputElement;
 
-  togglePasswordVisibility(eye1, password1);
-  togglePasswordVisibility(eye2, password2);
+  togglePasswordVisibility(eye, password);
 }
