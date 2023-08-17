@@ -1,36 +1,26 @@
-import {Route} from "../types/routing.types";
+import {View} from "../View/View";
 
 export class Routing {
     private routes = {
         '/': {
             title: 'Main',
-            renderFn: window.alert
+            renderFn: View.renderMainPage
         },
         '/user/authorization': {
             title: 'Authorization',
-            renderFn: window.alert
+            renderFn: View.renderLoginPage
         },
         '/user/registration': {
             title: 'Registration',
-            renderFn: window.alert
-        },
-        '/folder/{name}': {
-            title: 'Category',
-            renderFn: window.alert,
-            regEx: /^\/folder\/(\w+)$/g,
-        },
-        '/product/{name}': {
-            title: 'Product',
-            regEx: /^\/product\/(\w+)$/g,
-            renderFn: window.alert
+            renderFn: View.renderLoginPage
         },
         '/404': {
             title: 'Page Not Found',
-            renderFn: window.alert,
+            renderFn: View.render404Page
         }
     };
 
-    get(url: string): void {
+    static get(url: string): void {
         const routingPath = this.routes[url];
 
         if (routingPath) {
@@ -41,16 +31,24 @@ export class Routing {
         }
     }
 
+    static redirect(url: string): void {
+        Routing.get(url);
+    }
+
+    static redirect404(): void {
+        Routing.redirect('/404');
+    }
+
     staticPath({title, renderFn}) {
         document.title = title;
         renderFn(title);
     }
 
-    combinePath(url: string, key: string | number | null = null): void {
+    combinePath(url: string): void {
         const urlToArrSlice = url.split('/').slice(1);
 
         if (urlToArrSlice.length < 2) {
-            this.redirect404();
+            Routing.redirect404();
             return;
         }
 
@@ -62,19 +60,10 @@ export class Routing {
         });
 
         if (pathRoute === undefined) {
-            this.redirect404();
+            Routing.redirect404();
             return;
         }
 
-        pathRoute.renderFn(key);
-
-    }
-
-    static redirect(url: string): void {
-        this.get(url);
-    }
-
-    redirect404(): void {
-        Routing.redirect('/404');
+        pathRoute.renderFn();
     }
 }
