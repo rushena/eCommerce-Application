@@ -103,6 +103,7 @@ body {
   font-weight: 900;
   line-height: 150%;
 }
-.toolbar__cartCounter__text {
-  vertical-align: middle;
+
+.toolbar__cartSVG {
+  height: 100%;
 }

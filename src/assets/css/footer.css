@@ -11,6 +11,10 @@
   color: #ffffff99;
 }
 
+.footer a:hover {
+  color: #ffffff;
+}
+
 .footer ul {
   list-style-type: none;
 }
