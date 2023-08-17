@@ -1,4 +1,12 @@
-import '../../assets/css/registration-page.css'
+import '../../assets/css/registration-page.css';
+import setAddressValidity from '../components/AdressInput';
+import setBirthdayValidity from '../components/BirthdayInput';
+import setCityValidity from '../components/CityInput';
+import setEmailValidityListener from '../components/EmailInput';
+import setNameValidityListener from '../components/NameInput';
+import { setPasswordVisibility, setPasswordValidityListener} from '../components/PasswordInputs';
+import setIndexValidity from '../components/PostalCode';
+ 
 
 //PUT OFF STEP FOR INDEXES
 
@@ -130,7 +138,7 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="index billing-index" type="number" placeholder="00-001" pattern="[0-9]{2}[\-][0-9]{3}" required>
+                  <input class="index billing-index" type="text" placeholder="00-001" pattern="[0-9]{2}[\-][0-9]{3}" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
@@ -205,4 +213,14 @@ document.body.insertAdjacentHTML('afterbegin',`
 fillBirthdayDates();
 fillBirthdayMonths();
 fillBirthdayYear();
+setAddressValidity();
+setBirthdayValidity();
+setCityValidity();
+setEmailValidityListener();
+setIndexValidity();
+setNameValidityListener();
+setPasswordValidityListener(1);
+setPasswordVisibility(1);
+setPasswordValidityListener(2);
+setPasswordVisibility(2);
 }
