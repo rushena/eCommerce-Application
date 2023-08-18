@@ -2,7 +2,7 @@ import './../../assets/css/header.css';
 import { cartSVG } from '../../assets/img/cart';
 import { logInSVG } from '../../assets/img/login';
 import { logOutSVG } from '../../assets/img/logout';
-import { userHandler } from '../../Controller/header/header';
+import { userHandler, menuHandler } from '../../Controller/header/header';
 
 class Header {
   private static instance: Header;
@@ -36,14 +36,54 @@ class Header {
           ${this.cartElement}
         </div>
       </div>
+      <div class='headear__mobile-container'>
+        <div class='header__mobile__menu mobile-menu'>
+          <div class='mobile-menu__button'>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class='mobile-menu__main'>
+            <div class='mobile-menu__main-container'>
+              <nav class='mobile-menu__list'>
+                <div class='mobile-menu__list__item'><a href="/catalog">Catalog</a></div>
+                <div class='mobile-menu__list__item'><a href="/about">About us</a></div>
+                <div class='mobile-menu__list__item'><a href="/contacts">Contacts</a></div>
+                <div class='mobile-menu__list__item item-account'>
+                  ${this.mobileLoginElement}
+                </div>
+                <div class='mobile-menu__list__item item-cart'>
+                  ${this.mobileCartElement}
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>`;
     document.body.append(header);
     document
       .querySelector('.account__actions')!
       .addEventListener('click', (event: Event) => userHandler(event, this));
+    document
+      .querySelector('.mobile-menu__button')!
+      .addEventListener('click', (event: Event) => menuHandler(event));
   }
   private loginElementSVG(): string {
     return this.isLogged ? logOutSVG() : logInSVG();
+  }
+  private mobileLoginElementActions() {
+    if (this.isLogged) {
+      return `
+        <a class='item-account__logout' href='/logout'>Log out</a>
+        `;
+    }
+    return `
+      <a class='item-account__login' href='/login'>Log in</a>
+      /
+      <a class='item-account__register' href='/register'>Register</a>
+      `;
   }
   private loginElementActions() {
     if (this.isLogged) {
@@ -56,6 +96,11 @@ class Header {
       /
       <a class='account__actions__register' href='/register'>Register</a>
       `;
+  }
+  get mobileLoginElement(): string {
+    return `
+    ${this.mobileLoginElementActions()}
+    `;
   }
   get loginElement(): string {
     return `
@@ -71,12 +116,21 @@ class Header {
     if (isLogged !== this.isLogged) {
       localStorage.setItem('check', `${isLogged}`);
       this.isLogged = isLogged;
-      // have to comment for current test might be usefull if we will not refresh page on route change
-      /* document.querySelector('.account__SVG')!.innerHTML =
+      // have to comment for current test, might be usefull if we will not refresh page on route change
+      document.querySelector('.account__SVG')!.innerHTML =
         this.loginElementSVG();
       document.querySelector('.account__actions')!.innerHTML =
-        this.loginElementActions(); */
+        this.loginElementActions();
+      document.querySelector('.item-account')!.innerHTML =
+        this.mobileLoginElement;
     }
+  }
+  get mobileCartElement(): string {
+    return `
+    <a class='item-cart__text' href='/cart'>
+    Cart <span class='item-cart__text__counter'>${this.currentCartItems}</span>
+    </a>
+    `;
   }
   get cartElement(): string {
     return `
@@ -88,6 +142,8 @@ class Header {
   set cartElement(itemNumber: number) {
     this.currentCartItems = itemNumber;
     document.querySelector('.toolbar__cartCounter__text')!.textContent =
+      this.currentCartItems.toString();
+    document.querySelector('.item-cart__text__counter')!.textContent =
       this.currentCartItems.toString();
   }
   public static getInstance(options?: {

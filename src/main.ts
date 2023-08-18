@@ -11,8 +11,8 @@ if (check === null) {
 }
 const header = Header.getInstance(option);
 setTimeout(() => {
-  const header1 = Header.getInstance(option);
-  header1.cartElement = 10;
+  header.cartElement = 10;
+  header.loginElement = false;
 }, 4000);
 header.cartElement = 0;
 footer();
