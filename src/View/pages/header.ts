@@ -117,12 +117,12 @@ class Header {
       localStorage.setItem('check', `${isLogged}`);
       this.isLogged = isLogged;
       // have to comment for current test, might be usefull if we will not refresh page on route change
-      document.querySelector('.account__SVG')!.innerHTML =
+      /* document.querySelector('.account__SVG')!.innerHTML =
         this.loginElementSVG();
       document.querySelector('.account__actions')!.innerHTML =
         this.loginElementActions();
       document.querySelector('.item-account')!.innerHTML =
-        this.mobileLoginElement;
+        this.mobileLoginElement; */
     }
   }
   get mobileCartElement(): string {
