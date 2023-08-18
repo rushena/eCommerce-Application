@@ -2,12 +2,17 @@ import Header from '../../View/pages/header';
 
 export function userHandler(event: Event, header: Header) {
   const target = event.target as HTMLElement;
-  if (target.classList.contains('account__actions__logout')) {
+  if (
+    target.classList.contains('account__actions__logout') ||
+    target.classList.contains('item-accoun__logout')
+  ) {
     header.loginElement = false;
   }
   if (
     target.classList.contains('account__actions__login') ||
-    target.classList.contains('account__actions__register')
+    target.classList.contains('account__actions__register') ||
+    target.classList.contains('item-account__login') ||
+    target.classList.contains('item-account__register')
   ) {
     header.loginElement = true;
   }

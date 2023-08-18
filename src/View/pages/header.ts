@@ -67,6 +67,9 @@ class Header {
       .querySelector('.account__actions')!
       .addEventListener('click', (event: Event) => userHandler(event, this));
     document
+      .querySelector('.item-account')!
+      .addEventListener('click', (event: Event) => userHandler(event, this));
+    document
       .querySelector('.mobile-menu__button')!
       .addEventListener('click', (event: Event) => menuHandler(event));
   }
