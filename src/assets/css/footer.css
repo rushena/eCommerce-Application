@@ -31,16 +31,24 @@
   font-family: Lato;
 }
 
-.footer-sections,
+.footer-sections {
+  padding: 60px 15px 40px 15px;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .footer-bottom {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.footer-sections {
-  padding: 60px 15px 40px 15px;
-  margin: 0;
+.footer-sections__item {
+  padding: 3px;
 }
 
 .footer-sections__item__title {

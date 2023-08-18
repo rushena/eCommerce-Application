@@ -52,8 +52,7 @@ body {
 
   @media screen and (max-width: 650px) {
     display: none;
-  } 
-
+  }
 }
 
 .navigation__list__item {
