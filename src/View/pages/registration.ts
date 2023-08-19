@@ -12,6 +12,7 @@ import setIndexValidity from '../components/PostalCode';
 
 const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December']
 
+//fills options for birthday dates
 function fillBirthdayDates(){
   const birthdayDate = document.querySelector('.birthday-date') as HTMLSelectElement;
   let options = ``;
@@ -25,6 +26,7 @@ function fillBirthdayDates(){
   birthdayDate.insertAdjacentHTML('afterbegin', options);
  }
 
+ //fills options for birthday months
  function fillBirthdayMonths(){
   const birthdayMonth = document.querySelector('.birthday-month') as HTMLSelectElement;
   let options = ``;
@@ -34,6 +36,7 @@ function fillBirthdayDates(){
   birthdayMonth.insertAdjacentHTML('afterbegin', options);
  }
 
+ //fills options for birthday years
  function fillBirthdayYear(){
   const birthdayYear = document.querySelector('.birthday-year') as HTMLSelectElement;
   let options = ``;
@@ -52,6 +55,8 @@ document.body.insertAdjacentHTML('afterbegin',`
         <img src="./src/assets/img/Mask group.jpg">
         <form class="form registration-form" novalidate>
           <h2>Create an Account</h2>
+          <div class="form-1column-block api-error">
+          </div> 
           <div class="form-1column-block"> 
             <label>
               <sup>*</sup>E-Mail
@@ -160,14 +165,14 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block">
               <h6>Shipping address</h6>
               <label>
+                <input class="billing-same-shipping" type="checkbox">
+                  Same as Billing address
+              </label>
+              <label>
                 <input class="default-shipping-address" type="checkbox">
                 Default
               </label>
             </div>
-            <label>
-              <input class="billing-same-shipping" type="checkbox">
-              Same as Billing address
-            </label>
             <div class="form-3column-block">
               <div class="form-3column-block__column_width_big">
                 <label>
@@ -210,9 +215,12 @@ document.body.insertAdjacentHTML('afterbegin',`
     </main>
 `);
 
+//fills options to select for Birthday
 fillBirthdayDates();
 fillBirthdayMonths();
 fillBirthdayYear();
+
+//set checking for Validity
 setAddressValidity();
 setBirthdayValidity();
 setCityValidity();
