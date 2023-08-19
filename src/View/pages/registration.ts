@@ -130,7 +130,7 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="index billing-index" type="number" placeholder="00-001" pattern="[0-9]{2}[\-][0-9]{3}" required>
+                  <input class="index billing-index" type="number" placeholder="00-001" pattern="^[0-9]{2}-[0-9]{3}$" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
@@ -173,7 +173,7 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="index shipping-index" type="number" placeholder="00-001" required>
+                  <input class="index shipping-index" type="text" placeholder="00-001" pattern="^[0-9]{2}-[0-9]{3}$" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
