@@ -1,4 +1,12 @@
-import '../../assets/css/registration-page.css'
+import '../../assets/css/registration-page.css';
+import setAddressValidity from '../components/AdressInput';
+import setBirthdayValidity from '../components/BirthdayInput';
+import setCityValidity from '../components/CityInput';
+import setEmailValidityListener from '../components/EmailInput';
+import setNameValidityListener from '../components/NameInput';
+import { setPasswordVisibility, setPasswordValidityListener} from '../components/PasswordInputs';
+import setIndexValidity from '../components/PostalCode';
+ 
 
 //PUT OFF STEP FOR INDEXES
 
@@ -205,4 +213,14 @@ document.body.insertAdjacentHTML('afterbegin',`
 fillBirthdayDates();
 fillBirthdayMonths();
 fillBirthdayYear();
+setAddressValidity();
+setBirthdayValidity();
+setCityValidity();
+setEmailValidityListener();
+setIndexValidity();
+setNameValidityListener();
+setPasswordValidityListener(1);
+setPasswordVisibility(1);
+setPasswordValidityListener(2);
+setPasswordVisibility(2);
 }
