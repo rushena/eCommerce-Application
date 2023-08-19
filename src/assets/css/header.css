@@ -1,12 +1,9 @@
 body {
-  position: relative;
   height: 1500px;
 }
 
 .header {
   width: calc(100%);
-  position: absolute;
-  top: 0;
   background: #fff;
 }
 

@@ -1,6 +1,6 @@
 import './style.css';
-import Header from './View/pages/header.ts';
-import { footer } from './View/pages/footer.ts';
+import Header from './View/components/header.ts';
+import { createFooter } from './View/components/footer.ts';
 
 const check = localStorage.getItem('check') === 'true';
 let option: { isLogged: boolean; cartItems: number };
@@ -15,4 +15,4 @@ setTimeout(() => {
   header.loginElement = false;
 }, 4000);
 header.cartElement = 0;
-footer();
+createFooter();

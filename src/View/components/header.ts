@@ -73,10 +73,10 @@ class Header {
       .querySelector('.mobile-menu__button')!
       .addEventListener('click', (event: Event) => menuHandler(event));
   }
-  private loginElementSVG(): string {
+  private defineLoginElementSVG(): string {
     return this.isLogged ? logOutSVG() : logInSVG();
   }
-  private mobileLoginElementActions() {
+  private defineMobileLoginElementActions(): string {
     if (this.isLogged) {
       return `
         <a class='item-account__logout' href='/logout'>Log out</a>
@@ -88,7 +88,7 @@ class Header {
       <a class='item-account__register' href='/register'>Register</a>
       `;
   }
-  private loginElementActions() {
+  private defineLoginElementActions() {
     if (this.isLogged) {
       return `
         <a class='account__actions__logout' href='/logout'>Log out</a>
@@ -102,16 +102,16 @@ class Header {
   }
   get mobileLoginElement(): string {
     return `
-    ${this.mobileLoginElementActions()}
+    ${this.defineMobileLoginElementActions()}
     `;
   }
   get loginElement(): string {
     return `
     <div class='account__SVG'>
-      ${this.loginElementSVG()}
+      ${this.defineLoginElementSVG()}
     </div>
     <div class='account__actions'>
-      ${this.loginElementActions()}
+      ${this.defineLoginElementActions()}
     </div>
     `;
   }

@@ -1,7 +1,7 @@
 import { heartSVG } from '../../assets/img/heart';
 import './../../assets/css/footer.css';
 
-export function footer() {
+export function createFooter() {
   const footerElement = document.createElement('footer');
   footerElement.classList.add('footer');
   footerElement.innerHTML = `
