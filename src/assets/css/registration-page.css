@@ -1,16 +1,15 @@
 .registration-page__container {
-  width: 1230px;
+  max-width: 1230px;
   display: flex;
-  justify-content: space-between;
-  column-gap: 30px;
+  justify-content: center;
 }
 
 .registration-form {
-  min-width: 599px;
   font-size: 46px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 0px 30px;
 }
 
 .form-2column-block {
@@ -21,7 +20,7 @@
 }
 
 .form-2column-block__column {
-  min-width: 292px;
+  width: 290px;
 }
 
 .password-label {
@@ -46,7 +45,7 @@ z-index: 5;
 }
 
 form-3column-block__column_width_big{
-  width: 223.5px;
+  width: 220 px;
 }
 
 form-3column-block__column_width_small{
@@ -93,4 +92,36 @@ button {
   display: inline-block;
   font-size: 12px;
   text-align: center;
+}
+
+@media (max-width: 1200px) {
+
+  .registration-page-img {
+    display: none;
+  }
+
+}
+
+@media (max-width: 770px) {
+
+ .form-2column-block {
+  flex-wrap: wrap;
+ }
+
+ .form-3column-block {
+  flex-wrap: wrap;
+ }
+
+}
+
+@media (max-width: 695px) {
+
+  .form-2column-block {
+    flex-direction: column;
+  }
+
+  .form-3column-block {
+    flex-direction: column;
+  }
+
 }

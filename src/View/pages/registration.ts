@@ -4,13 +4,21 @@ import setBirthdayValidity from '../components/BirthdayInput';
 import setCityValidity from '../components/CityInput';
 import setEmailValidityListener from '../components/EmailInput';
 import setNameValidityListener from '../components/NameInput';
-import { setPasswordVisibility, setPasswordValidityListener} from '../components/PasswordInputs';
+import { setPasswordVisibility, setPasswordValidityListener, setPasswordMatchCheck} from '../components/PasswordInputs';
 import setIndexValidity from '../components/PostalCode';
+import { makeValid } from '../components/Helpers';
  
 
-//PUT OFF STEP FOR INDEXES
-
 const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December']
+
+//makes text black when customer clicks on the field
+function changeTextColorWhenChosen(selectedField: HTMLSelectElement){
+  selectedField.addEventListener('click',() => {
+    if (selectedField.classList.contains('not-selected')){
+      selectedField.classList.remove('not-selected');
+    }
+  })
+ }
 
 //fills options for birthday dates
 function fillBirthdayDates(){
@@ -24,9 +32,10 @@ function fillBirthdayDates(){
     }
   }
   birthdayDate.insertAdjacentHTML('afterbegin', options);
+  changeTextColorWhenChosen(birthdayDate);
  }
 
- //fills options for birthday months
+  //fills options for birthday months
  function fillBirthdayMonths(){
   const birthdayMonth = document.querySelector('.birthday-month') as HTMLSelectElement;
   let options = ``;
@@ -34,6 +43,7 @@ function fillBirthdayDates(){
     options = options + `<option class="option_color_grey" value="${months[i]}">${months[i]}</option>`;
   }
   birthdayMonth.insertAdjacentHTML('afterbegin', options);
+  changeTextColorWhenChosen(birthdayMonth);
  }
 
  //fills options for birthday years
@@ -45,6 +55,38 @@ function fillBirthdayDates(){
   }
   options = options + `<option class="option_color_grey" value="2023" selected="true  ">2023</option>`;
   birthdayYear.insertAdjacentHTML('afterbegin', options);
+  changeTextColorWhenChosen(birthdayYear);
+ }
+
+  function setSameAddressOption(){
+
+   const billingIndex = document.querySelector('.billing-index') as HTMLInputElement;
+   const billingCity = document.querySelector('.billing-city') as HTMLInputElement;
+   const billingAddress = document.querySelector('.billing-address') as HTMLInputElement;
+   const shippingIndex = document.querySelector('.shipping-index') as HTMLInputElement;
+   const shippingIndexError = document.querySelector(`.shipping-index ~  span.validation-message`) as HTMLSpanElement;
+   const shippingCity = document.querySelector('.shipping-city') as HTMLInputElement;
+   const shippingCityError = document.querySelector(`.shipping-city ~  span.validation-message`) as HTMLSpanElement;
+   const shippingAddress = document.querySelector('.shipping-address') as HTMLInputElement;
+   const shippingAddressError = document.querySelector(`.shipping-address ~  span.validation-message`) as HTMLSpanElement;
+
+
+   const checkbox = document.querySelector('.billing-same-shipping') as HTMLInputElement;
+   checkbox.addEventListener('click', ()=>{
+      checkbox.classList.toggle('checked');
+      if(checkbox.classList.contains('checked')){
+        shippingIndex.value = billingIndex.value;
+        makeValid(shippingIndex, shippingIndexError);
+        shippingCity.value = billingCity.value;
+        makeValid(shippingCity, shippingCityError);
+        shippingAddress.value = billingAddress.value;
+        makeValid(shippingAddress, shippingAddressError);
+      } else {
+        shippingIndex.value = '';
+        shippingCity.value = '';
+        shippingAddress.value = '';
+      }
+   })
  }
 
 export default function createRegistrationPage(){
@@ -52,7 +94,7 @@ export default function createRegistrationPage(){
 document.body.insertAdjacentHTML('afterbegin',`
 <main class="registration-page">
       <div class="registration-page__container">
-        <img src="./src/assets/img/Mask group.jpg">
+        <img src="./src/assets/img/Mask group.jpg" class="registration-page-img">
         <form class="form registration-form" novalidate>
           <h2>Create an Account</h2>
           <div class="form-1column-block api-error">
@@ -68,7 +110,7 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label class="password-label">
                 <sup>*</sup>Password
-                <input class="password1" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please, enter password that is minimum 8 characters long and contains at least one number, one lowercase and one uppercase characters" required>
+                <input class="password1" type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please, enter password that is minimum 8 characters long and contains at least one number, one lowercase and one uppercase characters" required>
                 <img src="./src/assets/img/solar_eye-broken.png">
                 <span class="validation-message validation-message__password"></span>
               </label>
@@ -86,14 +128,14 @@ document.body.insertAdjacentHTML('afterbegin',`
             <div class="form-2column-block__column"> 
               <label>
                 <sup>*</sup>First Name
-                <input type="text" class="first-name" placeholder="John" pattern="(?=.*[a-z]).{1,} required>
+                <input type="text" class="first-name" placeholder="John" pattern="(?=.*[a-z]).{1,}" required>
                 <span class="validation-message"></span>
               </label>
             </div>
             <div class="form-2column-block__column"> 
               <label>
               <sup>*</sup>Last Name
-                <input type="text" placeholder="Lis" class="last-name" required>
+                <input type="text" placeholder="Lis" class="last-name" pattern="(?=.*[a-z]).{1,}" required>
                 <span class="validation-message"></span>
               </label>
             </div>
@@ -143,7 +185,7 @@ document.body.insertAdjacentHTML('afterbegin',`
               <div class="form-3column-block__column_width_small">
                 <label>
                   <sup>*</sup>Postal code
-                  <input class="index billing-index" type="number" placeholder="00-001" pattern="^[0-9]{2}-[0-9]{3}$" required>
+                  <input class="index billing-index" type="text" placeholder="00-001" pattern="^[0-9]{2}-[0-9]{3}$" required>
                   <span class="validation-message"></span>
                 </label>
               </div>
@@ -227,8 +269,10 @@ setCityValidity();
 setEmailValidityListener();
 setIndexValidity();
 setNameValidityListener();
-setPasswordValidityListener(1);
+setPasswordValidityListener();
 setPasswordVisibility(1);
-setPasswordValidityListener(2);
 setPasswordVisibility(2);
+
+setPasswordMatchCheck();
+setSameAddressOption();
 }

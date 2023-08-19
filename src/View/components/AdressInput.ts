@@ -1,7 +1,7 @@
 
 // Street: Must contain at least one character
 
-import { checkIfContainsCharacters } from "./Helpers";
+import { checkIfContainsCharacters, applyStyleToInput, checkFullAddressValidity} from "./Helpers";
 
 function showError(address:HTMLInputElement, addressError:HTMLSpanElement) {
   checkIfContainsCharacters(address, addressError);
@@ -12,6 +12,8 @@ function checkAddressValidity(address: HTMLInputElement, addressError: HTMLSpanE
   address.addEventListener('blur', () => {
     if (address.validity.valid) {
       addressError.textContent = '';
+      applyStyleToInput(address, 'valid');
+      checkFullAddressValidity();
     } else {
       showError(address, addressError);
     }

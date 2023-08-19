@@ -1,6 +1,6 @@
 // Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)
 
-import { checkIfContainsCharacters, checkPatternMatch } from "./Helpers";
+import { checkIfContainsCharacters, checkPatternMatch, applyStyleToInput, checkFullAddressValidity } from "./Helpers";
 
 function showError(index:HTMLInputElement, indexError:HTMLSpanElement) {
   if(checkIfContainsCharacters(index, indexError)){
@@ -11,10 +11,13 @@ function showError(index:HTMLInputElement, indexError:HTMLSpanElement) {
 function checkIndexValidity(index: HTMLInputElement, indexError: HTMLSpanElement){
 
   index.addEventListener('blur', () => {
-    console.log(index, indexError)
+    const checkbox = document.querySelector('.billing-same-shipping') as HTMLInputElement;
     if (index.validity.valid) {
       indexError.textContent = '';
+      applyStyleToInput(index, 'valid');
+      checkFullAddressValidity();
     } else {
+      checkbox.setAttribute('disabled','');
       showError(index, indexError);
     }
   });

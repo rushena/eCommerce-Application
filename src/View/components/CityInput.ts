@@ -1,7 +1,7 @@
 // City: Must contain at least one character and no special characters or numbers
 
 
-import { checkIfContainsCharacters, checkPatternMatch } from "./Helpers";
+import { checkIfContainsCharacters, checkPatternMatch, applyStyleToInput, checkFullAddressValidity } from "./Helpers";
 
 function showError(city:HTMLInputElement, cityError:HTMLSpanElement) {
   if(checkIfContainsCharacters(city, cityError)){
@@ -15,6 +15,8 @@ function checkCityValidity(city: HTMLInputElement, cityError: HTMLSpanElement){
     console.log(city, cityError)
     if (city.validity.valid) {
       cityError.textContent = '';
+      applyStyleToInput(city, 'valid');
+      checkFullAddressValidity();
     } else {
       showError(city, cityError);
     }

@@ -5,12 +5,15 @@
 // (Optional) Password must contain at least one special character (e.g., !@#$%^&*).
 // Password must not contain leading or trailing whitespace.
 
+import { applyStyleToInput } from "./Helpers";
+
 function showError(password1:HTMLInputElement, password1Error:HTMLSpanElement) {
   if (password1.validity.valueMissing) {
     password1Error.textContent = "Please, enter your password";
+    applyStyleToInput(password1, 'invalid')
   } else if (password1.validity.patternMismatch) {
-    console.log('1')
     password1Error.textContent = "Password must be minimum 8 characters long and contain at least one number, one lowercase and one uppercase characters with no whitespace";
+    applyStyleToInput(password1, 'invalid')
   }
  }
 
@@ -25,17 +28,18 @@ function showError(password1:HTMLInputElement, password1Error:HTMLSpanElement) {
   })
  }
 
-export function setPasswordValidityListener(number: 1|2){
+export function setPasswordValidityListener(){
 
   const form = document.querySelector('.form') as HTMLFormElement;
-  const password = document.querySelector(`.password${number}`) as HTMLInputElement;
-  const passwordError = document.querySelector(`.password${number} ~ span.validation-message`) as HTMLSpanElement;
+  const password = document.querySelector(`.password1`) as HTMLInputElement;
+  const passwordError = document.querySelector(`.password1 ~ span.validation-message`) as HTMLSpanElement;
   
 
   password.addEventListener('blur', () => {
     if(password.value.split(' ').length === 1){
       if (password.validity.valid) {
         passwordError.textContent = '';
+        applyStyleToInput(password, 'valid');
       } else {
         showError(password, passwordError);
       }
@@ -58,3 +62,27 @@ export function setPasswordVisibility(number: 1|2){
 
   togglePasswordVisibility(eye, password);
 }
+
+export function setPasswordMatchCheck(){
+  const password1 = document.querySelector(`.password1`) as HTMLInputElement;
+  const password2 = document.querySelector(`.password2`) as HTMLInputElement;
+  const password2Error = document.querySelector(`.password2 ~ span.validation-message`) as HTMLSpanElement;
+
+  password2.addEventListener('blur', () => {
+    if(password1.value){
+      if(password1.value === password2.value){
+        password2Error.textContent = '';
+        applyStyleToInput(password2, 'valid');
+      } else {
+        password2Error.textContent = 'Password does not match';
+        applyStyleToInput(password2, 'invalid');
+      }
+    } else { 
+      if(password2.value){
+        password2Error.textContent = 'Please fill in all passwords';
+      }
+    }
+  })
+}
+
+

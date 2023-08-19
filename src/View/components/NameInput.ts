@@ -1,6 +1,6 @@
 // First name: Must contain at least one character and no special characters or numbers
 // Last name: Must contain at least one character and no special characters or numbers
-import {checkIfContainsCharacters, checkPatternMatch} from "./Helpers";
+import {checkIfContainsCharacters, checkPatternMatch, applyStyleToInput} from "./Helpers";
 
 
 function showError(customerName:HTMLInputElement, nameError:HTMLSpanElement) {
@@ -13,6 +13,7 @@ function checkNameValidity(customerName: HTMLInputElement, nameError: HTMLSpanEl
   customerName.addEventListener('blur', () => {
     if (customerName.validity.valid) {
       nameError.textContent = '';
+      applyStyleToInput(customerName, 'valid');
     } else {
       showError(customerName, nameError);
     }
