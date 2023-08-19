@@ -13,13 +13,15 @@ function getProject(user: User) {
   return request;
 }
 
-export async function authentication(user: User): Promise<AuthResponse> {
+export async function authentificateCustomer(
+  user: User
+): Promise<AuthResponse> {
   try {
     const project = await getProject(user);
-    if (project.statusCode! >= 400) return { succes: false };
-    return { succes: true, token: project.body.customer.id };
+    if (project.statusCode! >= 400) return { success: false };
+    return { success: true, token: project.body.customer.id };
   } catch (error) {
     console.error(error);
-    return { succes: false };
+    return { success: false };
   }
 }

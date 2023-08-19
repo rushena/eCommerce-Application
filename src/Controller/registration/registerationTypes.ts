@@ -1,16 +1,10 @@
 interface SuccesAuthResponse {
   // I'm not sure what kind of info we gonna need in succes response
-  succes: true;
-  firstName?: string;
-  lastName?: string;
-  token?: string;
+  success: true;
 }
 
 interface ErrorAuthResponse {
-  succes: false;
-  firstName?: string;
-  lastName?: string;
-  token?: string;
+  success: false;
 }
 
 export type AuthResponse = SuccesAuthResponse | ErrorAuthResponse;

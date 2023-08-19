@@ -24,14 +24,14 @@ function getProject(options: MyCustomerDraft) {
     .execute();
 }
 
-export async function registration(
+export async function registerNewCustomer(
   options: MyCustomerDraft
 ): Promise<AuthResponse> {
   try {
     const project = await getProject(options);
-    if (project.statusCode! >= 400) return { succes: false };
-    return { succes: true };
+    if (project.statusCode! >= 400) return { success: false };
+    return { success: true };
   } catch {
-    return { succes: false };
+    return { success: false };
   }
 }
