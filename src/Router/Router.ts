@@ -1,72 +1,79 @@
 import {View} from "../View/View";
+import {Route, Routes} from "../types/routing.types";
 
 export class Routing {
-    readonly routes = {
-        '/': {
-            title: 'Main',
-            renderFn: View.renderMainPage
-        },
-        '/user/authorization': {
-            title: 'Authorization',
-            renderFn: View.renderLoginPage
-        },
-        '/user/registration': {
-            title: 'Registration',
-            renderFn: View.renderRegistrationPage
-        },
-        '/404': {
-            title: 'Page Not Found',
-            renderFn: View.render404Page
-        }
-    };
+  private readonly routes: Routes;
 
-    constructor() {
-        window.addEventListener('popstate', () => {
-            console.log(window.history);
-            this.get(document.location.pathname, false);
-        })
+  constructor() {
+    this.routes = this.setRoutes();
+
+    window.addEventListener('popstate', (e: PopStateEvent): void => {
+      e.preventDefault();
+      this.get(document.location.pathname, false);
+    })
+  }
+
+  setRoutes(): Routes {
+    return {
+      '/': {
+        title: 'Main',
+        renderFn: View.renderMainPage
+      },
+      '/user/authorization': {
+        title: 'Authorization',
+        renderFn: View.renderLoginPage
+      },
+      '/user/registration': {
+        title: 'Registration',
+        renderFn: View.renderRegistrationPage
+      }
+    } as Routes;
+  }
+
+  get(url: string, writeInHistory: boolean = true): void {
+    console.log(window.history);
+    const routingPath = this.routes[url];
+
+    if (routingPath) {
+      this.staticPath(routingPath);
+    } else {
+      this.combinePath(url)
     }
 
-    get(url: string, writeInHistory = true): void {
-        const routingPath = this.routes[url];
+    if (writeInHistory) {
+      window.history.pushState({}, '', url);
+    }
+  }
 
-        if (routingPath) {
-            this.staticPath(routingPath);
+  staticPath({title, renderFn}: Route): void {
+    document.title = title;
+    renderFn(title);
+  }
 
-        } else {
-            this.combinePath(url)
-        }
+  combinePath(url: string): void {
+    const urlToArrSlice = url.split('/').slice(1);
 
-        if (writeInHistory) {
-            window.history.pushState({}, '', url);
-        }
+    if (urlToArrSlice.length < 2) {
+      this.render404();
+      return;
     }
 
-    staticPath({title, renderFn}) {
-        document.title = title;
-        renderFn(title);
+    const pathRoute = Object.values(this.routes).find((value) => {
+      if (value.regEx) {
+        return url.match(value.regEx) === url;
+      }
+      return false;
+    });
+
+    if (pathRoute === undefined) {
+      this.render404();
+      return;
     }
 
-    combinePath(url: string): void {
-        const urlToArrSlice = url.split('/').slice(1);
+    pathRoute.renderFn();
+  }
 
-        if (urlToArrSlice.length < 2) {
-            this.get('/404');
-            return;
-        }
-
-        const pathRoute = Object.values(this.routes).find((value) => {
-            if (value.regEx) {
-                return url.match(value.regEx) === url;
-            }
-            return false;
-        });
-
-        if (pathRoute === undefined) {
-            this.get('/404');
-            return;
-        }
-
-        pathRoute.renderFn();
-    }
+  render404(): void {
+    View.render404Page();
+  }
 }
