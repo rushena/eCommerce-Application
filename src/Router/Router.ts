@@ -1,7 +1,7 @@
 import {View} from "../View/View";
 
 export class Routing {
-    private routes = {
+    readonly routes = {
         '/': {
             title: 'Main',
             renderFn: View.renderMainPage
@@ -12,7 +12,7 @@ export class Routing {
         },
         '/user/registration': {
             title: 'Registration',
-            renderFn: View.renderLoginPage
+            renderFn: View.renderRegistrationPage
         },
         '/404': {
             title: 'Page Not Found',
@@ -20,23 +20,26 @@ export class Routing {
         }
     };
 
-    static get(url: string): void {
+    constructor() {
+        window.addEventListener('popstate', () => {
+            console.log(window.history);
+            this.get(document.location.pathname, false);
+        })
+    }
+
+    get(url: string, writeInHistory = true): void {
         const routingPath = this.routes[url];
 
         if (routingPath) {
             this.staticPath(routingPath);
-            window.history.pushState({}, routingPath.title, document.location.href);
+
         } else {
             this.combinePath(url)
         }
-    }
 
-    static redirect(url: string): void {
-        Routing.get(url);
-    }
-
-    static redirect404(): void {
-        Routing.redirect('/404');
+        if (writeInHistory) {
+            window.history.pushState({}, '', url);
+        }
     }
 
     staticPath({title, renderFn}) {
@@ -48,7 +51,7 @@ export class Routing {
         const urlToArrSlice = url.split('/').slice(1);
 
         if (urlToArrSlice.length < 2) {
-            Routing.redirect404();
+            this.get('/404');
             return;
         }
 
@@ -60,7 +63,7 @@ export class Routing {
         });
 
         if (pathRoute === undefined) {
-            Routing.redirect404();
+            this.get('/404');
             return;
         }
 
