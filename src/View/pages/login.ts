@@ -10,6 +10,8 @@ export default function createLoginPage(){
         <img src="./src/assets/img/sign-in.jpg">
         <form class="form login-form" novalidate>
           <h2>Sign In</h2>
+          <div class="form-1column-block api-error">
+          </div> 
           <div class="form-1column-block">
             <label>
               <sup>*</sup>E-Mail
