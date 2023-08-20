@@ -3,7 +3,7 @@ import pageImage from '../../assets/img/notFoundPageImage'
 import {Router} from "../../Router/Router";
 
 export class PageNotFound {
-    private pageWrap: HTMLElement;
+    private readonly pageWrap: HTMLElement;
 
     constructor() {
         this.pageWrap = this.createWrap();
@@ -27,7 +27,8 @@ export class PageNotFound {
         `;
 
         document.addEventListener('click', function (e: Event) {
-            const $button: HTMLElement | null = e.target.closest('.not-found__button');
+            const target: HTMLElement = e.target as HTMLElement;
+            const $button: HTMLElement | null = target.closest('.not-found__button');
             if ($button !== null) {
                 e.preventDefault();
                 Router.get('/')
