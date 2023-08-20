@@ -9,10 +9,16 @@ if (check === null) {
 } else {
   option = { isLogged: check, cartItems: 0 };
 }
+
+// Example of how to add/change/render header
 const header = Header.getInstance(option);
+console.log(header.element);
+header.addListeners(); // renders header if there is none present and add listeners
 setTimeout(() => {
   header.cartElement = 10;
   header.loginElement = false;
 }, 4000);
 header.cartElement = 0;
-createFooter();
+// Example of how to get footer
+const footerElement = createFooter();
+document.body.append(footerElement);

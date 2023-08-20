@@ -1,7 +1,7 @@
 import { heartSVG } from '../../assets/img/heart';
 import './../../assets/css/footer.css';
 
-export function createFooter() {
+export function createFooter(): HTMLElement {
   const footerElement = document.createElement('footer');
   footerElement.classList.add('footer');
   footerElement.innerHTML = `
@@ -46,5 +46,5 @@ export function createFooter() {
     </div>
   </div>
   `;
-  document.body.append(footerElement);
+  return footerElement;
 }

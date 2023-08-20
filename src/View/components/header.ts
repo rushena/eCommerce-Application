@@ -8,6 +8,7 @@ class Header {
   private static instance: Header;
   private isLogged = false;
   private currentCartItems = 0;
+  public element: HTMLElement;
   constructor(options = { isLogged: false, cartItems: 0 }) {
     this.isLogged = options.isLogged;
     this.currentCartItems = options.cartItems;
@@ -62,16 +63,7 @@ class Header {
         </div>
       </div>
     </div>`;
-    document.body.append(header);
-    document
-      .querySelector('.account__actions')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
-    document
-      .querySelector('.item-account')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
-    document
-      .querySelector('.mobile-menu__button')!
-      .addEventListener('click', (event: Event) => menuHandler(event));
+    this.element = header;
   }
   private defineLoginElementSVG(): string {
     return this.isLogged ? logOutSVG() : logInSVG();
@@ -149,6 +141,22 @@ class Header {
     document.querySelector('.item-cart__text__counter')!.textContent =
       this.currentCartItems.toString();
   }
+
+  public addListeners(): void {
+    if (!document.body.contains(this.element)) {
+      document.body.append(this.element);
+    }
+    document
+      .querySelector('.account__actions')!
+      .addEventListener('click', (event: Event) => userHandler(event, this));
+    document
+      .querySelector('.item-account')!
+      .addEventListener('click', (event: Event) => userHandler(event, this));
+    document
+      .querySelector('.mobile-menu__button')!
+      .addEventListener('click', (event: Event) => menuHandler(event));
+  }
+
   public static getInstance(options?: {
     isLogged: boolean;
     cartItems: number;
