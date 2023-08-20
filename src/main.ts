@@ -1,5 +1,7 @@
 import './style.css';
 import './assets/css/login-page.css'
-import createLoginPage from './View/pages/login';
+// import createLoginPage from './View/pages/login';
 
-createLoginPage();
+// const loginPage = createLoginPage();
+
+// document.body.appendChild(loginPage);

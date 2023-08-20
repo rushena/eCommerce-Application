@@ -32,14 +32,14 @@ function checkAge(birthdayDate: HTMLSelectElement, birthdayMonth: HTMLSelectElem
   }  
 }
 
- export default function setBirthdayValidity() {
-  const form = document.querySelector('.form') as HTMLFormElement;
+ export default function setBirthdayValidity(element: HTMLElement) {
+  const form = element.querySelector('.form') as HTMLFormElement;
 
   form.addEventListener('submit', (event)=> {
-    const birthdayDate = document.querySelector('.birthday-date') as HTMLSelectElement;
-    const birthdayMonth = document.querySelector('.birthday-month') as HTMLSelectElement;
-    const birthdayYear = document.querySelector('.birthday-year') as HTMLSelectElement;
-    const birthdayError = document.querySelector(".birthday-date ~ span.validation-message") as HTMLSpanElement;
+    const birthdayDate = element.querySelector('.birthday-date') as HTMLSelectElement;
+    const birthdayMonth = element.querySelector('.birthday-month') as HTMLSelectElement;
+    const birthdayYear = element.querySelector('.birthday-year') as HTMLSelectElement;
+    const birthdayError = element.querySelector(".birthday-date ~ span.validation-message") as HTMLSpanElement;
 
   birthdayError.textContent = '';
 

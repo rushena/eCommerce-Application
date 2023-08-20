@@ -30,11 +30,11 @@ export function applyStyleToInput(element: HTMLInputElement | HTMLSelectElement,
   }
 }
 
-export function checkFullAddressValidity(){
-  const billingIndex = document.querySelector('.billing-index') as HTMLInputElement;
-  const billingAddress = document.querySelector('.billing-address') as HTMLInputElement;
-  const billingCity = document.querySelector('.billing-city') as HTMLInputElement;
-  const checkbox = document.querySelector('.billing-same-shipping') as HTMLInputElement;
+export function checkFullAddressValidity(element: HTMLElement){
+  const billingIndex = element.querySelector('.billing-index') as HTMLInputElement;
+  const billingAddress = element.querySelector('.billing-address') as HTMLInputElement;
+  const billingCity = element.querySelector('.billing-city') as HTMLInputElement;
+  const checkbox = element.querySelector('.billing-same-shipping') as HTMLInputElement;
 
   if(billingAddress.validity.valid && billingIndex.validity.valid && billingCity.validity.valid){
     if(checkbox.hasAttribute('disabled')){

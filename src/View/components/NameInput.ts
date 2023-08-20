@@ -20,13 +20,13 @@ function checkNameValidity(customerName: HTMLInputElement, nameError: HTMLSpanEl
   });
 }
 
-export default function setNameValidityListener(){
+export default function setNameValidityListener(element: HTMLElement){
 
-  const form = document.querySelector('.form') as HTMLFormElement;
-  const firstName = document.querySelector('.first-name') as HTMLInputElement;
-  const lastName = document.querySelector('.last-name') as HTMLInputElement;
-  const firstNameError = document.querySelector(".first-name ~ span.validation-message") as HTMLSpanElement;
-  const lastNameError = document.querySelector(".last-name ~ span.validation-message") as HTMLSpanElement;
+  const form = element.querySelector('.form') as HTMLFormElement;
+  const firstName = element.querySelector('.first-name') as HTMLInputElement;
+  const lastName = element.querySelector('.last-name') as HTMLInputElement;
+  const firstNameError = element.querySelector(".first-name ~ span.validation-message") as HTMLSpanElement;
+  const lastNameError = element.querySelector(".last-name ~ span.validation-message") as HTMLSpanElement;
 
   checkNameValidity(firstName, firstNameError);
   checkNameValidity(lastName, lastNameError)
