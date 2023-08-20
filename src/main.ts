@@ -1,6 +1,6 @@
 import './style.css';
-import {Router} from "./Router/Router";
+import {App} from "./App";
 
-const router: Router = new Router();
+const app: App = new App();
 
-router.get(document.location.pathname);
+app.start();
