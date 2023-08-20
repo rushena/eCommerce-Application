@@ -1,7 +1,7 @@
 .login-page__container {
-  width: 1230px;
+  max-width: 1230px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-height: 372px;
-  padding: 0px 32px;
+  padding: 0px 30px;
 }
 
 .password-label {
@@ -71,4 +71,20 @@ button {
   font-size: 12px;
   text-align: center;
   align-self: center ;
+}
+
+@media (max-width: 1200px) {
+
+  .login-page-img {
+    display: none;
+  }
+
+}
+
+@media (max-width: 607px) {
+
+  .login-form {
+    min-width: 300px;
+  }
+
 }
