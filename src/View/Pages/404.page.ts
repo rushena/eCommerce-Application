@@ -1,8 +1,14 @@
 import '../../assets/css/404.css';
 import pageImage from '../../assets/img/notFoundPageImage'
-import {Router} from "../../Router/Router";
 
-export class PageNotFound {
+interface IPageNotFound {
+    pageWrap: HTMLElement,
+    createWrap: () => HTMLElement,
+    setDOMStructure: () => void,
+    getPageCode: () =>HTMLElement
+}
+
+export class PageNotFound implements IPageNotFound {
     private readonly pageWrap: HTMLElement;
 
     constructor() {
@@ -10,7 +16,7 @@ export class PageNotFound {
     }
 
     private createWrap = (): HTMLElement => {
-        const $page = document.createElement('div');
+        const $page: HTMLElement = document.createElement('div');
         $page.classList.add('not-found');
 
         return $page;
@@ -25,18 +31,9 @@ export class PageNotFound {
                 <a href="/" class="not-found__button">Back to homepage</a>
             </div>
         `;
-
-        document.addEventListener('click', function (e: Event) {
-            const target: HTMLElement = e.target as HTMLElement;
-            const $button: HTMLElement | null = target.closest('.not-found__button');
-            if ($button !== null) {
-                e.preventDefault();
-                Router.get('/')
-            }
-        });
     }
 
-    getPageCode() {
+    getPageCode(): HTMLElement {
         this.setDOMStructure();
         return this.pageWrap;
     }
