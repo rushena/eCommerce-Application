@@ -16,11 +16,11 @@ function showError(email:HTMLInputElement, emailError:HTMLSpanElement) {
   }
  }
 
-export default function setEmailValidityListener(){
+export default function setEmailValidityListener(element: HTMLElement){
 
-  const form = document.querySelector('.form') as HTMLFormElement;
-  const email = document.querySelector('.e-mail') as HTMLInputElement;
-  const emailError = document.querySelector(".e-mail + span.validation-message") as HTMLSpanElement;
+  const form = element.querySelector('.form') as HTMLFormElement;
+  const email = element.querySelector('.e-mail') as HTMLInputElement;
+  const emailError = element.querySelector(".e-mail + span.validation-message") as HTMLSpanElement;
 
   email.addEventListener('blur', () => {
     if (email.validity.valid) {

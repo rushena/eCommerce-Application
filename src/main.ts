@@ -1,4 +1,7 @@
 import './style.css';
-// import createRegistrationPage from './View/pages/registration';
+import createRegistrationPage from './View/pages/registration';
 
-// createRegistrationPage();
+
+
+const registrationMain = createRegistrationPage();
+document.body.appendChild(registrationMain);

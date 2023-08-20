@@ -9,31 +9,31 @@ function showError(city:HTMLInputElement, cityError:HTMLSpanElement) {
   }
  }
 
-function checkCityValidity(city: HTMLInputElement, cityError: HTMLSpanElement){
+function checkCityValidity(city: HTMLInputElement, cityError: HTMLSpanElement, element: HTMLElement){
 
   city.addEventListener('blur', () => {
     console.log(city, cityError)
     if (city.validity.valid) {
       cityError.textContent = '';
       applyStyleToInput(city, 'valid');
-      checkFullAddressValidity();
+      checkFullAddressValidity(element);
     } else {
       showError(city, cityError);
     }
   });
 }
 
-export default function setCityValidity() {
+export default function setCityValidity(element: HTMLElement) {
 
-  const form = document.querySelector('.form') as HTMLFormElement;
-  const billingCity = document.querySelector('.billing-city') as HTMLInputElement;
-  const shippingCity = document.querySelector('.shipping-city') as HTMLInputElement;
+  const form = element.querySelector('.form') as HTMLFormElement;
+  const billingCity = element.querySelector('.billing-city') as HTMLInputElement;
+  const shippingCity = element.querySelector('.shipping-city') as HTMLInputElement;
   
-  const billingCityError = document.querySelector('.billing-city ~ span.validation-message') as HTMLSpanElement;
-  const shippingCityError = document.querySelector('.shipping-city ~ span.validation-message') as HTMLSpanElement;
+  const billingCityError = element.querySelector('.billing-city ~ span.validation-message') as HTMLSpanElement;
+  const shippingCityError = element.querySelector('.shipping-city ~ span.validation-message') as HTMLSpanElement;
 
-  checkCityValidity(billingCity, billingCityError);
-  checkCityValidity(shippingCity, shippingCityError);
+  checkCityValidity(billingCity, billingCityError, element);
+  checkCityValidity(shippingCity, shippingCityError, element);
 
   form.addEventListener('submit', (event) => {
     if (!billingCity.validity.valid){

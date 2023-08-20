@@ -8,14 +8,14 @@ function showError(index:HTMLInputElement, indexError:HTMLSpanElement) {
   }
  }
 
-function checkIndexValidity(index: HTMLInputElement, indexError: HTMLSpanElement){
+function checkIndexValidity(index: HTMLInputElement, indexError: HTMLSpanElement, element: HTMLElement){
 
   index.addEventListener('blur', () => {
-    const checkbox = document.querySelector('.billing-same-shipping') as HTMLInputElement;
+    const checkbox = element.querySelector('.billing-same-shipping') as HTMLInputElement;
     if (index.validity.valid) {
       indexError.textContent = '';
       applyStyleToInput(index, 'valid');
-      checkFullAddressValidity();
+      checkFullAddressValidity(element);
     } else {
       checkbox.setAttribute('disabled','');
       showError(index, indexError);
@@ -23,16 +23,16 @@ function checkIndexValidity(index: HTMLInputElement, indexError: HTMLSpanElement
   });
 }
 
-export default function setIndexValidity(){
+export default function setIndexValidity(element: HTMLElement){
 
-  const form = document.querySelector('.form') as HTMLFormElement;
-  const billingIndex = document.querySelector('.billing-index') as HTMLInputElement;
-  const shippingIndex = document.querySelector('.shipping-index') as HTMLInputElement;
-  const billingIndexError = document.querySelector('.billing-index ~ span.validation-message') as HTMLSpanElement;
-  const shippingIndexError = document.querySelector('.shipping-index ~ span.validation-message') as HTMLSpanElement;  
+  const form = element.querySelector('.form') as HTMLFormElement;
+  const billingIndex = element.querySelector('.billing-index') as HTMLInputElement;
+  const shippingIndex = element.querySelector('.shipping-index') as HTMLInputElement;
+  const billingIndexError = element.querySelector('.billing-index ~ span.validation-message') as HTMLSpanElement;
+  const shippingIndexError = element.querySelector('.shipping-index ~ span.validation-message') as HTMLSpanElement;  
 
-  checkIndexValidity(billingIndex, billingIndexError);
-  checkIndexValidity(shippingIndex, shippingIndexError);
+  checkIndexValidity(billingIndex, billingIndexError, element);
+  checkIndexValidity(shippingIndex, shippingIndexError, element);
 
   form.addEventListener('submit', (event)=> {
     if ((!shippingIndex.validity.valid)){

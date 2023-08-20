@@ -28,11 +28,11 @@ function showError(password1:HTMLInputElement, password1Error:HTMLSpanElement) {
   })
  }
 
-export function setPasswordValidityListener(){
+export function setPasswordValidityListener(element: HTMLElement){
 
-  const form = document.querySelector('.form') as HTMLFormElement;
-  const password = document.querySelector(`.password1`) as HTMLInputElement;
-  const passwordError = document.querySelector(`.password1 ~ span.validation-message`) as HTMLSpanElement;
+  const form = element.querySelector('.form') as HTMLFormElement;
+  const password = element.querySelector(`.password1`) as HTMLInputElement;
+  const passwordError = element.querySelector(`.password1 ~ span.validation-message`) as HTMLSpanElement;
   
 
   password.addEventListener('blur', () => {
@@ -56,17 +56,17 @@ export function setPasswordValidityListener(){
   });
 }
 
-export function setPasswordVisibility(number: 1|2){
-  const eye = document.querySelector(`.password${number} + img`) as HTMLImageElement;
-  const password = document.querySelector(`.password${number}`) as HTMLInputElement;
+export function setPasswordVisibility(number: 1|2, element: HTMLElement){
+  const eye = element.querySelector(`.password${number} + img`) as HTMLImageElement;
+  const password = element.querySelector(`.password${number}`) as HTMLInputElement;
 
   togglePasswordVisibility(eye, password);
 }
 
-export function setPasswordMatchCheck(){
-  const password1 = document.querySelector(`.password1`) as HTMLInputElement;
-  const password2 = document.querySelector(`.password2`) as HTMLInputElement;
-  const password2Error = document.querySelector(`.password2 ~ span.validation-message`) as HTMLSpanElement;
+export function setPasswordMatchCheck(element: HTMLElement){
+  const password1 = element.querySelector(`.password1`) as HTMLInputElement;
+  const password2 = element.querySelector(`.password2`) as HTMLInputElement;
+  const password2Error = element.querySelector(`.password2 ~ span.validation-message`) as HTMLSpanElement;
 
   password2.addEventListener('blur', () => {
     if(password1.value){
