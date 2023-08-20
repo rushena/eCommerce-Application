@@ -38,6 +38,6 @@ export default function createLoginPage(){
   `)
 
   setEmailValidityListener();
-  setPasswordValidityListener(1);
+  setPasswordValidityListener();
   setPasswordVisibility(1);
 }
