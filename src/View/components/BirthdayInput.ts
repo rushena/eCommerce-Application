@@ -1,5 +1,4 @@
 //Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)
-import { applyStyleToInput } from "./Helpers";
 
 function showError(birthdayError: HTMLSpanElement, errorType: 'not valid date of birth' | 'age under 16') {
   if(errorType === 'age under 16'){
