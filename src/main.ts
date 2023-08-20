@@ -1,4 +1,5 @@
 import './style.css';
-// import createLoginPage from './View/pages/login';
+import './assets/css/login-page.css'
+import createLoginPage from './View/pages/login';
 
-// createLoginPage();
+createLoginPage();
