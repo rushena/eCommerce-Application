@@ -4,98 +4,146 @@ import setBirthdayValidity from '../components/BirthdayInput';
 import setCityValidity from '../components/CityInput';
 import setEmailValidityListener from '../components/EmailInput';
 import setNameValidityListener from '../components/NameInput';
-import { setPasswordVisibility, setPasswordValidityListener, setPasswordMatchCheck} from '../components/PasswordInputs';
+import {
+  setPasswordVisibility,
+  setPasswordValidityListener,
+  setPasswordMatchCheck,
+} from '../components/PasswordInputs';
 import setIndexValidity from '../components/PostalCode';
 import { makeValid } from '../components/Helpers';
- 
 
-const months = ['January', 'February', 'March','April','May','June','July','August','September','October','November','December']
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 //makes text black when customer clicks on the field
-function changeTextColorWhenChosen(selectedField: HTMLSelectElement){
-  selectedField.addEventListener('click',() => {
-    if (selectedField.classList.contains('not-selected')){
+function changeTextColorWhenChosen(selectedField: HTMLSelectElement) {
+  selectedField.addEventListener('click', () => {
+    if (selectedField.classList.contains('not-selected')) {
       selectedField.classList.remove('not-selected');
     }
-  })
- }
+  });
+}
 
 //fills options for birthday dates
-function fillBirthdayDates(element: HTMLElement){
-  const birthdayDate = element.querySelector('.birthday-date') as HTMLSelectElement;
+function fillBirthdayDates(element: HTMLElement) {
+  const birthdayDate = element.querySelector(
+    '.birthday-date'
+  ) as HTMLSelectElement;
   let options = ``;
-  for(let i=1; i<=31; i++) {
-    if(i<10){
-      options = options + `<option class="option_color_grey" value="${i}">0${i}</option>`;
+  for (let i = 1; i <= 31; i++) {
+    if (i < 10) {
+      options =
+        options +
+        `<option class="option_color_grey" value="${i}">0${i}</option>`;
     } else {
-      options = options + `<option class="option_color_grey" value="${i}">${i}</option>`;
+      options =
+        options +
+        `<option class="option_color_grey" value="${i}">${i}</option>`;
     }
   }
   birthdayDate.insertAdjacentHTML('afterbegin', options);
   changeTextColorWhenChosen(birthdayDate);
- }
+}
 
-  //fills options for birthday months
- function fillBirthdayMonths(element: HTMLElement){
-  const birthdayMonth = element.querySelector('.birthday-month') as HTMLSelectElement;
+//fills options for birthday months
+function fillBirthdayMonths(element: HTMLElement) {
+  const birthdayMonth = element.querySelector(
+    '.birthday-month'
+  ) as HTMLSelectElement;
   let options = ``;
-  for(let i=0; i<=11; i++) {
-    options = options + `<option class="option_color_grey" value="${months[i]}">${months[i]}</option>`;
+  for (let i = 0; i <= 11; i++) {
+    options =
+      options +
+      `<option class="option_color_grey" value="${months[i]}">${months[i]}</option>`;
   }
   birthdayMonth.insertAdjacentHTML('afterbegin', options);
   changeTextColorWhenChosen(birthdayMonth);
- }
+}
 
- //fills options for birthday years
- function fillBirthdayYear(element: HTMLElement){
-  const birthdayYear = element.querySelector('.birthday-year') as HTMLSelectElement;
+//fills options for birthday years
+function fillBirthdayYear(element: HTMLElement) {
+  const birthdayYear = element.querySelector(
+    '.birthday-year'
+  ) as HTMLSelectElement;
   let options = ``;
-  for(let i=1940; i<=2022; i++) {
-    options = options + `<option class="option_color_grey" value="${i}">${i}</option>`;
+  for (let i = 1940; i <= 2022; i++) {
+    options =
+      options + `<option class="option_color_grey" value="${i}">${i}</option>`;
   }
-  options = options + `<option class="option_color_grey" value="2023" selected="true  ">2023</option>`;
+  options =
+    options +
+    `<option class="option_color_grey" value="2023" selected="true  ">2023</option>`;
   birthdayYear.insertAdjacentHTML('afterbegin', options);
   changeTextColorWhenChosen(birthdayYear);
- }
+}
 
-  function setSameAddressOption(element: HTMLElement){
+function setSameAddressOption(element: HTMLElement) {
+  const billingIndex = element.querySelector(
+    '.billing-index'
+  ) as HTMLInputElement;
+  const billingCity = element.querySelector(
+    '.billing-city'
+  ) as HTMLInputElement;
+  const billingAddress = element.querySelector(
+    '.billing-address'
+  ) as HTMLInputElement;
+  const shippingIndex = element.querySelector(
+    '.shipping-index'
+  ) as HTMLInputElement;
+  const shippingIndexError = element.querySelector(
+    `.shipping-index ~  span.validation-message`
+  ) as HTMLSpanElement;
+  const shippingCity = element.querySelector(
+    '.shipping-city'
+  ) as HTMLInputElement;
+  const shippingCityError = element.querySelector(
+    `.shipping-city ~  span.validation-message`
+  ) as HTMLSpanElement;
+  const shippingAddress = element.querySelector(
+    '.shipping-address'
+  ) as HTMLInputElement;
+  const shippingAddressError = element.querySelector(
+    `.shipping-address ~  span.validation-message`
+  ) as HTMLSpanElement;
 
-   const billingIndex = element.querySelector('.billing-index') as HTMLInputElement;
-   const billingCity = element.querySelector('.billing-city') as HTMLInputElement;
-   const billingAddress = element.querySelector('.billing-address') as HTMLInputElement;
-   const shippingIndex = element.querySelector('.shipping-index') as HTMLInputElement;
-   const shippingIndexError = element.querySelector(`.shipping-index ~  span.validation-message`) as HTMLSpanElement;
-   const shippingCity = element.querySelector('.shipping-city') as HTMLInputElement;
-   const shippingCityError = element.querySelector(`.shipping-city ~  span.validation-message`) as HTMLSpanElement;
-   const shippingAddress = element.querySelector('.shipping-address') as HTMLInputElement;
-   const shippingAddressError = element.querySelector(`.shipping-address ~  span.validation-message`) as HTMLSpanElement;
+  const checkbox = element.querySelector(
+    '.billing-same-shipping'
+  ) as HTMLInputElement;
+  checkbox.addEventListener('click', () => {
+    checkbox.classList.toggle('checked');
+    if (checkbox.classList.contains('checked')) {
+      shippingIndex.value = billingIndex.value;
+      makeValid(shippingIndex, shippingIndexError);
+      shippingCity.value = billingCity.value;
+      makeValid(shippingCity, shippingCityError);
+      shippingAddress.value = billingAddress.value;
+      makeValid(shippingAddress, shippingAddressError);
+    } else {
+      shippingIndex.value = '';
+      shippingCity.value = '';
+      shippingAddress.value = '';
+    }
+  });
+}
 
-
-   const checkbox = element.querySelector('.billing-same-shipping') as HTMLInputElement;
-   checkbox.addEventListener('click', ()=>{
-      checkbox.classList.toggle('checked');
-      if(checkbox.classList.contains('checked')){
-        shippingIndex.value = billingIndex.value;
-        makeValid(shippingIndex, shippingIndexError);
-        shippingCity.value = billingCity.value;
-        makeValid(shippingCity, shippingCityError);
-        shippingAddress.value = billingAddress.value;
-        makeValid(shippingAddress, shippingAddressError);
-      } else {
-        shippingIndex.value = '';
-        shippingCity.value = '';
-        shippingAddress.value = '';
-      }
-   })
- }
-
-export default function createRegistrationPage(): HTMLElement{
+export default function createRegistrationPage(): HTMLElement {
   //заменить на после хеадера
 
   const registrationMain = document.createElement('main');
   registrationMain.className = 'registration-page';
-  registrationMain.innerHTML =
-      `<div class="registration-page__container">
+  registrationMain.innerHTML = `<div class="registration-page__container">
         <img src="./src/assets/img/Mask group.jpg" class="registration-page-img">
         <form class="form registration-form" novalidate>
           <h2>Create an Account</h2>
@@ -258,24 +306,24 @@ export default function createRegistrationPage(): HTMLElement{
       </div>
 `;
 
-//fills options to select for Birthday
-fillBirthdayDates(registrationMain);
-fillBirthdayMonths(registrationMain);
-fillBirthdayYear(registrationMain);
+  //fills options to select for Birthday
+  fillBirthdayDates(registrationMain);
+  fillBirthdayMonths(registrationMain);
+  fillBirthdayYear(registrationMain);
 
-//set checking for Validity
-setAddressValidity(registrationMain);
-setBirthdayValidity(registrationMain);
-setCityValidity(registrationMain);
-setEmailValidityListener(registrationMain);
-setIndexValidity(registrationMain);
-setNameValidityListener(registrationMain);
-setPasswordValidityListener(registrationMain);
-setPasswordVisibility(1, registrationMain);
-setPasswordVisibility(2, registrationMain);
+  //set checking for Validity
+  setAddressValidity(registrationMain);
+  setBirthdayValidity(registrationMain);
+  setCityValidity(registrationMain);
+  setEmailValidityListener(registrationMain);
+  setIndexValidity(registrationMain);
+  setNameValidityListener(registrationMain);
+  setPasswordValidityListener(registrationMain);
+  setPasswordVisibility(1, registrationMain);
+  setPasswordVisibility(2, registrationMain);
 
-setPasswordMatchCheck(registrationMain);
-setSameAddressOption(registrationMain);
+  setPasswordMatchCheck(registrationMain);
+  setSameAddressOption(registrationMain);
 
-return registrationMain;
+  return registrationMain;
 }

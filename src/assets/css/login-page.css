@@ -19,11 +19,11 @@
   position: relative;
 }
 
-.password-label img{
-position: absolute;
-right: 5px;
-top: 35%;
-z-index: 5;
+.password-label img {
+  position: absolute;
+  right: 5px;
+  top: 35%;
+  z-index: 5;
 }
 
 form h2 {
@@ -35,7 +35,7 @@ form h6 {
 }
 
 .validation-message {
-  color:#FF4242;
+  color: #ff4242;
   font-size: 12px;
   display: block;
 }
@@ -54,15 +54,15 @@ button {
   height: 52px;
   padding: 0px 15px;
   width: 100%;
-  background-color: #17696A;
+  background-color: #17696a;
   color: white;
 }
 
 .log-in-page-link {
-  color: #2DA819;
+  color: #2da819;
 }
 
-.switch-to-log-in-span{
+.switch-to-log-in-span {
   color: #868686;
 }
 
@@ -70,21 +70,17 @@ button {
   display: inline-block;
   font-size: 12px;
   text-align: center;
-  align-self: center ;
+  align-self: center;
 }
 
 @media (max-width: 1200px) {
-
   .login-page-img {
     display: none;
   }
-
 }
 
 @media (max-width: 607px) {
-
   .login-form {
     min-width: 300px;
   }
-
 }

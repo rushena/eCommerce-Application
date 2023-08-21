@@ -1,11 +1,12 @@
-import setEmailValidityListener from "../components/EmailInput";
-import { setPasswordValidityListener, setPasswordVisibility } from "../components/PasswordInputs";
-
+import setEmailValidityListener from '../components/EmailInput';
+import {
+  setPasswordValidityListener,
+  setPasswordVisibility,
+} from '../components/PasswordInputs';
 
 export default function createLoginPage(): HTMLElement {
-
   const loginPage = document.createElement('main') as HTMLElement;
-  loginPage.className = "login-page";
+  loginPage.className = 'login-page';
   loginPage.innerHTML = `
       <div class="login-page__container">
         <img class="login-page-img" src="./src/assets/img/sign-in.jpg">
