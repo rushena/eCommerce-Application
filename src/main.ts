@@ -1,9 +1,13 @@
 import './style.css';
+import createRegistrationPage from './View/pages/registration';
 import Header from './View/components/header.ts';
 import { createFooter } from './View/components/footer.ts';
 import typescriptLogo from './typescript.svg';
 import viteLogo from '/vite.svg';
 import { registrationTest, authTest, loggedInterractions } from './counter.ts';
+
+const registrationMain = createRegistrationPage();
+document.body.appendChild(registrationMain);
 
 const check = localStorage.getItem('check') === 'true';
 let option: { isLogged: boolean; cartItems: number };
