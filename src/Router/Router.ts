@@ -60,7 +60,7 @@ export class Routing {
 
     const pathRoute = Object.values(this.routes).find((value) => {
       if (value.regEx) {
-        return url.match(value.regEx) === url;
+        return value.regEx.test(url);
       }
       return false;
     });
