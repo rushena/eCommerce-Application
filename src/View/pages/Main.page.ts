@@ -4,7 +4,7 @@ export class MainPage {
   private $main: HTMLElement = document.createElement('main');
 
   private renderPromo(): HTMLElement {
-    const $mainPromo = document.createElement('div');
+    const $mainPromo: HTMLElement = document.createElement('div');
     $mainPromo.classList.add('main-promo');
 
     $mainPromo.innerHTML = `
@@ -22,7 +22,7 @@ export class MainPage {
     return $mainPromo;
   }
 
-  initSlider(block: HTMLElement) {
+  initSlider(block: HTMLElement): void {
     const slides = block.querySelectorAll('.main-promo__slider-item');
     console.log(slides)
     let currentIndex = 0;
@@ -45,7 +45,7 @@ export class MainPage {
   }
 
   private renderCatalog(): HTMLElement {
-    const $mainCatalog = document.createElement('div');
+    const $mainCatalog: HTMLElement = document.createElement('div');
     $mainCatalog.classList.add('main-catalog');
 
     $mainCatalog.innerHTML = `
@@ -83,7 +83,7 @@ export class MainPage {
   }
 
   private renderAdvantages(): HTMLElement {
-    const $mainBlog = document.createElement('div');
+    const $mainBlog: HTMLElement = document.createElement('div');
     $mainBlog.classList.add('main-advantages');
 
     $mainBlog.innerHTML = `
@@ -117,7 +117,7 @@ export class MainPage {
   }
 
   private renderAppBlock(): HTMLElement {
-    const $mainBlog = document.createElement('div');
+    const $mainBlog: HTMLElement = document.createElement('div');
     $mainBlog.classList.add('main-app');
 
     $mainBlog.innerHTML = `
@@ -136,7 +136,7 @@ export class MainPage {
   }
 
   private renderBlog(): HTMLElement {
-    const $mainBlog = document.createElement('div');
+    const $mainBlog: HTMLElement = document.createElement('div');
     $mainBlog.classList.add('main-blog');
 
     $mainBlog.innerHTML = `
@@ -173,7 +173,7 @@ export class MainPage {
   }
 
   private renderBottomForm(): HTMLElement {
-    const $mainBottomForm = document.createElement('div');
+    const $mainBottomForm: HTMLElement = document.createElement('div');
     $mainBottomForm.classList.add('main-bottom-form');
 
     $mainBottomForm.innerHTML = `
@@ -201,7 +201,7 @@ export class MainPage {
   }
 
   private setPageStructure(): void {
-    const promoBlock = this.renderPromo();
+    const promoBlock: HTMLElement = this.renderPromo();
     this.$main.append(
       promoBlock,
       this.renderCatalog(),
