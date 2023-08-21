@@ -1,12 +1,14 @@
 import './style.css';
 import './assets/css/login-page.css';
+import { App } from './App';
+import './assets/css/login-page.css'
 import createLoginPage from './View/pages/login';
 import createRegistrationPage from './View/pages/registration';
 import Header from './View/components/header.ts';
 import { createFooter } from './View/components/footer.ts';
 import { registrationTest, authTest, loggedInterractions } from './counter.ts';
 
-const registrationMain = createRegistrationPage();
+/*const registrationMain = createRegistrationPage();
 document.body.appendChild(registrationMain);
 
 const check = localStorage.getItem('check') === 'true';
@@ -34,4 +36,8 @@ registrationTest();
 authTest();
 loggedInterractions();
 const loginPage = createLoginPage();
-document.body.appendChild(loginPage);
+document.body.appendChild(loginPage);*/
+
+const app: App = new App();
+
+app.start();
