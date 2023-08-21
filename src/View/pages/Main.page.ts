@@ -93,8 +93,14 @@ export class MainPage {
     $mainBlog.classList.add('main-app');
 
     $mainBlog.innerHTML = `
-      <div class="main-blog__inner">
-      dfdsf
+      <div class="main-app__inner block-inner">
+        <div class="main-app__image">
+          <img src="./src/assets/img/main-app-image.png" alt="Enjoy mobile shopping with our CozyHome Store App!">
+        </div>
+        <div class="main-app__text">
+          <h2 class="main-app__title">Enjoy mobile shopping with our CozyHome Store App!</h2>
+          <img src="./src/assets/img/main-app-logos.png" alt="Store App logos">
+        </div>
       </div>
     `;
 
