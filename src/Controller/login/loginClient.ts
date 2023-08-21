@@ -21,7 +21,6 @@ export async function authentificateCustomer(
     if (project.statusCode! >= 400) return { success: false };
     return { success: true, token: project.body.customer.id };
   } catch (error) {
-    console.error(error);
     return { success: false };
   }
 }

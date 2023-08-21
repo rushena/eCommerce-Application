@@ -7,7 +7,11 @@ import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  test: {},
+  test: {
+    coverage: {
+      all: true,
+    },
+  },
   resolve: {
     alias: {
       stream: 'rollup-plugin-node-polyfills/polyfills/stream',

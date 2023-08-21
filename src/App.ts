@@ -26,7 +26,7 @@ export class App implements IApp {
 
     document.addEventListener('click', (e: Event): void => {
       const $link: HTMLElement | null = (e.target as HTMLElement).closest('a');
-      if (!$link) return;
+      if ($link === null) return;
 
       e.preventDefault();
 
