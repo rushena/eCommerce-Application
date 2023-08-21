@@ -1,25 +1,30 @@
 import './style.css';
+import Header from './View/components/header.ts';
+import { createFooter } from './View/components/footer.ts';
 import typescriptLogo from './typescript.svg';
 import viteLogo from '/vite.svg';
 import { registrationTest, authTest, loggedInterractions } from './counter.ts';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`;
+const check = localStorage.getItem('check') === 'true';
+let option: { isLogged: boolean; cartItems: number };
+if (check === null) {
+  option = { isLogged: true, cartItems: 0 };
+} else {
+  option = { isLogged: check, cartItems: 0 };
+}
+
+// Example of how to add/change/render header
+const header = Header.getInstance(option);
+console.log(header.element);
+header.addListeners(); // renders header if there is none present and add listeners
+setTimeout(() => {
+  header.cartElement = 10;
+  header.loginElement = false;
+}, 4000);
+header.cartElement = 0;
+// Example of how to get footer
+const footerElement = createFooter();
+document.body.append(footerElement);
 
 registrationTest();
 authTest();
