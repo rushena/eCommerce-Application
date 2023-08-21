@@ -13,9 +13,6 @@ interface IView {
 
 export class View implements IView {
   private readonly $footer = createFooter();
-  private header = Header.getInstance({ isLogged: false, cartItems: 0 });
-  private readonly $header = this.header.element;
-
   static readonly $mainContent: HTMLElement = document.createElement('div');
   static readonly $notFound = new PageNotFound().getPageCode();
   static readonly $mainPage = new MainPage().getElement();
@@ -23,8 +20,17 @@ export class View implements IView {
   static readonly $RegistrationPage = createRegistrationPage();
 
   renderStartElements(): void {
-    document.body.append(this.$header, View.$mainContent, this.$footer);
-    this.header.addListeners();
+    const check = localStorage.getItem('check') === 'true';
+    let option: { isLogged: boolean; cartItems: number };
+    if (check === null) {
+      option = { isLogged: true, cartItems: 0 };
+    } else {
+      option = { isLogged: check, cartItems: 0 };
+    }
+    const header = Header.getInstance(option);
+
+    document.body.append(header.element, View.$mainContent, this.$footer);
+    header.addListeners();
   }
 
   static renderMainPage() {

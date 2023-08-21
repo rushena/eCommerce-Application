@@ -1,5 +1,6 @@
 import { getElementValue } from '../../Utility/submitForm';
 import { authentificateCustomer } from './loginClient';
+import Header from '../../View/components/header';
 
 export async function doOnAuthSubmit(event: SubmitEvent) {
   console.log(321);
@@ -13,7 +14,9 @@ export async function doOnAuthSubmit(event: SubmitEvent) {
     password: password,
   });
   if (response.success === true) {
+    const header = Header.getInstance();
     const anchor = document.createElement('a');
+    header.loginElement = true;
     anchor.setAttribute('href', '/');
     anchor.click();
   } else {

@@ -83,7 +83,7 @@ class Header {
   private defineLoginElementActions() {
     if (this.isLogged) {
       return `
-        <a class='account__actions__logout' href='/logout'>Log out</a>
+        <a class='account__actions__logout' href=''>Log out</a>
         `;
     }
     return `
@@ -111,13 +111,12 @@ class Header {
     if (isLogged !== this.isLogged) {
       localStorage.setItem('check', `${isLogged}`);
       this.isLogged = isLogged;
-      // have to comment for current test, might be usefull if we will not refresh page on route change
-      /* document.querySelector('.account__SVG')!.innerHTML =
-        this.loginElementSVG();
+      document.querySelector('.account__SVG')!.innerHTML =
+        this.defineLoginElementSVG();
       document.querySelector('.account__actions')!.innerHTML =
-        this.loginElementActions();
+        this.defineLoginElementActions();
       document.querySelector('.item-account')!.innerHTML =
-        this.mobileLoginElement; */
+        this.mobileLoginElement;
     }
   }
   get mobileCartElement(): string {
