@@ -1,4 +1,4 @@
-import Header from '../../View/pages/header';
+import Header from '../../View/components/header';
 
 export function userHandler(event: Event, header: Header) {
   const target = event.target as HTMLElement;

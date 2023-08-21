@@ -2,7 +2,7 @@ import './../../assets/css/header.css';
 import { cartSVG } from '../../assets/img/cart';
 import { logInSVG } from '../../assets/img/login';
 import { logOutSVG } from '../../assets/img/logout';
-import { userHandler, menuHandler } from '../../Controller/header/header';
+import { menuHandler } from '../../Controller/header/header';
 
 class Header {
   private static instance: Header;
@@ -111,13 +111,12 @@ class Header {
     if (isLogged !== this.isLogged) {
       localStorage.setItem('check', `${isLogged}`);
       this.isLogged = isLogged;
-      // have to comment for current test, might be usefull if we will not refresh page on route change
-      /* document.querySelector('.account__SVG')!.innerHTML =
-        this.loginElementSVG();
+      document.querySelector('.account__SVG')!.innerHTML =
+        this.defineLoginElementSVG();
       document.querySelector('.account__actions')!.innerHTML =
-        this.loginElementActions();
+        this.defineLoginElementActions();
       document.querySelector('.item-account')!.innerHTML =
-        this.mobileLoginElement; */
+        this.mobileLoginElement;
     }
   }
   get mobileCartElement(): string {
@@ -146,12 +145,6 @@ class Header {
     if (!document.body.contains(this.element)) {
       document.body.append(this.element);
     }
-    document
-      .querySelector('.account__actions')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
-    document
-      .querySelector('.item-account')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
     document
       .querySelector('.mobile-menu__button')!
       .addEventListener('click', (event: Event) => menuHandler(event));

@@ -18,10 +18,14 @@ export async function authentificateCustomer(
 ): Promise<AuthResponse> {
   try {
     const project = await getProject(user);
-    if (project.statusCode! >= 400) return { success: false };
+    if (project.statusCode! >= 400) {
+      return { success: false, errorMessage: '' };
+    }
     return { success: true, token: project.body.customer.id };
   } catch (error) {
-    console.error(error);
-    return { success: false };
+    return {
+      success: false,
+      errorMessage: 'Customer account with the given credentials not found.',
+    };
   }
 }
