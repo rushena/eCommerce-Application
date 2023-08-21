@@ -13,7 +13,15 @@
     "format": "npx prettier . --write",
     "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
+  "dependencies": {
+    "@commercetools/platform-sdk": "^4.2.0",
+    "@commercetools/sdk-client-v2": "^2.1.0",
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "rollup-plugin-node-polyfills": "^0.2.1"
+  },
   "devDependencies": {
+    "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "@vitest/coverage-v8": "^0.34.1",
@@ -21,10 +29,13 @@
     "jsdom": "^22.1.0",
     "eslint-config-prettier": "^8.9.0",
     "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
+    "node-fetch": "^2.6.12",
     "prettier": "3.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.5",
+    "vite": "^3.2.7",
     "vitest": "^0.34.1"
   },
   "lint-staged": {

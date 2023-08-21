@@ -27,6 +27,10 @@ export class Routing {
         title: 'Registration',
         renderFn: View.renderRegistrationPage,
       },
+      '/logout': {
+        title: 'Registration',
+        renderFn: View.renderLogout,
+      },
     } as Routes;
   }
 
@@ -60,7 +64,7 @@ export class Routing {
 
     const pathRoute = Object.values(this.routes).find((value) => {
       if (value.regEx) {
-        return url.match(value.regEx) === url;
+        return value.regEx.test(url);
       }
       return false;
     });
