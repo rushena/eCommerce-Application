@@ -59,8 +59,29 @@ export class MainPage {
     $mainBlog.classList.add('main-advantages');
 
     $mainBlog.innerHTML = `
-      <div class="main-blog__inner">
-      dfdsf
+      <div class="main-advantages__inner block-inner">
+        <div class="main-advantages__list">
+          <div class="main-advantages__item">
+            <div class="main-advantages__item-ico"><img src="./src/assets/img/main-advantages-ico1.png" alt="Fast Worldwide Shipping<"></div>
+            <div class="main-advantages__item-title">Fast Worldwide Shipping</div>
+            <div class="main-advantages__item-subtitle">Get free shipping over $250</div>
+          </div>
+          <div class="main-advantages__item">
+            <div class="main-advantages__item-ico"><img src="./src/assets/img/main-advantages-ico2.png" alt="Fast Worldwide Shipping<"></div>
+            <div class="main-advantages__item-title">Fast Worldwide Shipping</div>
+            <div class="main-advantages__item-subtitle">Get free shipping over $250</div>
+          </div>
+          <div class="main-advantages__item">
+            <div class="main-advantages__item-ico"><img src="./src/assets/img/main-advantages-ico3.png" alt="Fast Worldwide Shipping<"></div>
+            <div class="main-advantages__item-title">Fast Worldwide Shipping</div>
+            <div class="main-advantages__item-subtitle">Get free shipping over $250</div>
+          </div>
+          <div class="main-advantages__item">
+            <div class="main-advantages__item-ico"><img src="./src/assets/img/main-advantages-ico4.png" alt="Fast Worldwide Shipping<"></div>
+            <div class="main-advantages__item-title">Fast Worldwide Shipping</div>
+            <div class="main-advantages__item-subtitle">Get free shipping over $250</div>
+          </div>
+        </div>
       </div>
     `;
 

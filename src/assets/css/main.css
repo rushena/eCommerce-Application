@@ -40,6 +40,57 @@ body {
     line-height: 1.5; 
 }
 
+.main-advantages {
+    padding-bottom: 32px;
+}
+
+.main-advantages__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 24px;
+    text-align: center;
+}
+
+.main-advantages__item {
+    position: relative;
+}
+
+.main-advantages__item:nth-child(2n - 1):before {
+    position: absolute;
+    content: "";
+    background: linear-gradient(315deg, rgba(218, 219, 221, 0.00) 0%, rgba(218, 219, 221, 0.50) 12.33%, #DADBDD 51.91%, rgba(218, 219, 221, 0.50) 87.85%, rgba(218, 219, 221, 0.00) 100%);
+    top: 0;
+    bottom: 0;
+    right: -8px;
+    width: 1px;
+}
+
+.main-advantages__item-ico {
+    font-size: 0px;
+    line-height: 0;
+    margin-bottom: 8px;
+}
+
+.main-advantages__item-title {
+    color: #1E212C;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.main-advantages__item-subtitle {
+    color: #787A80;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
 .main-bottom-form {
     background: #F4F5F6;
     padding: 32px 0;
@@ -93,15 +144,29 @@ body {
         font-size: 18px;
         margin-top: 16px;
     }
+
+    .main-advantages {
+        padding-bottom: 48px;
+    }
+
+    .main-advantages__list {
+        grid-column-gap: 24px;
+        grid-row-gap: 32px;
+    }
+    
+    .main-advantages__item-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
 }
 
-@media all and (min-width: 9600px) {
+@media all and (min-width: 960px) {
     .block-inner {
         padding: 0 32px;
     }
 
     .main-catalog {
-        padding: 64px 0 ;
+        padding: 80px 0 ;
     }
     
     .main-catalog__list {
@@ -110,5 +175,29 @@ body {
     
     .main-catalog__item-text {
         font-size: 20px;
+    }
+
+    .main-advantages {
+        padding-bottom: 64px;
+    }
+
+    .main-advantages__list {
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 32px;
+    }
+    
+    .main-advantages__item-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .main-advantages__item:not(:last-child):before {
+        position: absolute;
+        content: "";
+        background: linear-gradient(315deg, rgba(218, 219, 221, 0.00) 0%, rgba(218, 219, 221, 0.50) 12.33%, #DADBDD 51.91%, rgba(218, 219, 221, 0.50) 87.85%, rgba(218, 219, 221, 0.00) 100%);
+        top: 0;
+        bottom: 0;
+        right: -8px;
+        width: 1px;
     }
 }
