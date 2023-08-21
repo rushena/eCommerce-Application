@@ -4,8 +4,8 @@ import { authentificateCustomer } from '../src/Controller/login/loginClient';
 describe('login tests', () => {
   it('right credentials', async () => {
     const response = await authentificateCustomer({
-      username: 'test23@gmail.cmo',
-      password: 'Qwerty1',
+      username: 'test321@gmail.com',
+      password: 'QwertY321',
     });
     expect(response.success).toBe(true);
   });

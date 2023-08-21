@@ -29,9 +29,13 @@ export async function registerNewCustomer(
 ): Promise<AuthResponse> {
   try {
     const project = await getProject(options);
-    if (project.statusCode! >= 400) return { success: false };
+    if (project.statusCode! >= 400) return { success: false, errorMessage: '' };
     return { success: true };
   } catch {
-    return { success: false };
+    return {
+      success: false,
+      errorMessage:
+        'There is already an existing customer with the provided email.',
+    };
   }
 }

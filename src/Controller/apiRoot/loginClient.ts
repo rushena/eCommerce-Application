@@ -33,8 +33,8 @@ const passwordAuthMiddlewareOptions = function (
     host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'new-ecommerce-app',
     credentials: {
-      clientId: import.meta.env.VITE_CTP_CLIENT_ID || '',
-      clientSecret: import.meta.env.VITE_CTP_CLIENT_SECRET || '',
+      clientId: import.meta.env.VITE_CLIENT_ID || '',
+      clientSecret: import.meta.env.VITE_CLIENT_SECRET || '',
       user: user,
     },
     scopes: [

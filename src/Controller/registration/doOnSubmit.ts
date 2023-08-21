@@ -79,8 +79,12 @@ export async function doOnRegistrationSubmit(event: SubmitEvent) {
     defaultShippingAddress: 1,
   });
   if (response.success === true) {
-    // redirect have to be here
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', '/');
+    anchor.click();
   } else {
-    // error dislay have to be here
+    const errorrDiv = document.querySelector('.api-error')!;
+    errorrDiv.textContent = response.errorMessage;
+    errorrDiv.classList.add('api-error_color_red');
   }
 }

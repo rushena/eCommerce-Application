@@ -63,6 +63,9 @@ input.input-invalid {
 
 .api-error {
   height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .api-error_color_red {

@@ -5,6 +5,7 @@ interface SuccesAuthResponse {
 
 interface ErrorAuthResponse {
   success: false;
+  errorMessage: string;
 }
 
 export type AuthResponse = SuccesAuthResponse | ErrorAuthResponse;

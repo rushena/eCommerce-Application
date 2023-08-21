@@ -2,6 +2,7 @@ import { getElementValue } from '../../Utility/submitForm';
 import { authentificateCustomer } from './loginClient';
 
 export async function doOnAuthSubmit(event: SubmitEvent) {
+  console.log(321);
   const form = event.target as HTMLFormElement;
   if (!form.reportValidity()) return;
   event.preventDefault();
@@ -12,8 +13,13 @@ export async function doOnAuthSubmit(event: SubmitEvent) {
     password: password,
   });
   if (response.success === true) {
-    // redirect have to be here
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', '/');
+    anchor.click();
   } else {
-    // error dislay have to be here
+    // console.log('error');
+    const errorrDiv = document.querySelector('.api-error')!;
+    errorrDiv.textContent = response.errorMessage;
+    errorrDiv.classList.add('api-error_color_red');
   }
 }
