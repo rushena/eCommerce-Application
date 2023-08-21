@@ -32,6 +32,7 @@ export class View implements IView {
   }
 
   static renderRegistrationPage() {
+    View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$RegistrationPage);
     const formToSend = document.querySelector(
       '.registration-form'
@@ -42,6 +43,7 @@ export class View implements IView {
   }
 
   static renderLoginPage() {
+    View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$loginPage);
     const formToSend = document.querySelector(
       '.login-form'

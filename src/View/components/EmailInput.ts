@@ -41,6 +41,5 @@ export default function setEmailValidityListener(element: HTMLElement) {
       showError(email, emailError);
       event.preventDefault();
     }
-    console.log('valid');
   });
 }
