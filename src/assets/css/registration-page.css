@@ -27,11 +27,11 @@
   position: relative;
 }
 
-.password-label img{
-position: absolute;
-right: 5px;
-top: 35%;
-z-index: 5;
+.password-label img {
+  position: absolute;
+  right: 5px;
+  top: 35%;
+  z-index: 5;
 }
 
 .form-3column-block {
@@ -44,11 +44,11 @@ z-index: 5;
   color: gray;
 }
 
-form-3column-block__column_width_big{
+form-3column-block__column_width_big {
   width: 220 px;
 }
 
-form-3column-block__column_width_small{
+form-3column-block__column_width_small {
   width: 120px;
 }
 
@@ -57,7 +57,7 @@ form h6 {
 }
 
 .validation-message {
-  color:#FF4242;
+  color: #ff4242;
   font-size: 12px;
   display: block;
 }
@@ -76,15 +76,15 @@ button {
   height: 52px;
   padding: 0px 15px;
   width: 100%;
-  background-color: #17696A;
+  background-color: #17696a;
   color: white;
 }
 
 .log-in-page-link {
-  color: #2DA819;
+  color: #2da819;
 }
 
-.switch-to-log-in-span{
+.switch-to-log-in-span {
   color: #868686;
 }
 
@@ -95,27 +95,22 @@ button {
 }
 
 @media (max-width: 1200px) {
-
   .registration-page-img {
     display: none;
   }
-
 }
 
 @media (max-width: 770px) {
+  .form-2column-block {
+    flex-wrap: wrap;
+  }
 
- .form-2column-block {
-  flex-wrap: wrap;
- }
-
- .form-3column-block {
-  flex-wrap: wrap;
- }
-
+  .form-3column-block {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 695px) {
-
   .form-2column-block {
     flex-direction: column;
   }
@@ -123,5 +118,4 @@ button {
   .form-3column-block {
     flex-direction: column;
   }
-
 }
