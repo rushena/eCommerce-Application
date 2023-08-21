@@ -1,3 +1,4 @@
+window.global ||= window;
 import './style.css';
 import './assets/css/login-page.css';
 import { App } from './App';

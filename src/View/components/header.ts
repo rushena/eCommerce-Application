@@ -2,7 +2,7 @@ import './../../assets/css/header.css';
 import { cartSVG } from '../../assets/img/cart';
 import { logInSVG } from '../../assets/img/login';
 import { logOutSVG } from '../../assets/img/logout';
-import { userHandler, menuHandler } from '../../Controller/header/header';
+import { menuHandler } from '../../Controller/header/header';
 
 class Header {
   private static instance: Header;
@@ -83,7 +83,7 @@ class Header {
   private defineLoginElementActions() {
     if (this.isLogged) {
       return `
-        <a class='account__actions__logout' href=''>Log out</a>
+        <a class='account__actions__logout' href='/logout'>Log out</a>
         `;
     }
     return `
@@ -145,12 +145,6 @@ class Header {
     if (!document.body.contains(this.element)) {
       document.body.append(this.element);
     }
-    document
-      .querySelector('.account__actions')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
-    document
-      .querySelector('.item-account')!
-      .addEventListener('click', (event: Event) => userHandler(event, this));
     document
       .querySelector('.mobile-menu__button')!
       .addEventListener('click', (event: Event) => menuHandler(event));

@@ -59,6 +59,12 @@ export class View implements IView {
     );
   }
 
+  static renderLogout() {
+    const header = Header.getInstance();
+    header.loginElement = false;
+    View.$mainContent.innerHTML = View.$mainPage;
+  }
+
   static render404Page() {
     View.$mainContent.innerHTML = View.$notFound.outerHTML;
   }

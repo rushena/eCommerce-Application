@@ -27,6 +27,10 @@ export class Routing {
         title: 'Registration',
         renderFn: View.renderRegistrationPage,
       },
+      '/logout': {
+        title: 'Registration',
+        renderFn: View.renderLogout,
+      },
     } as Routes;
   }
 
