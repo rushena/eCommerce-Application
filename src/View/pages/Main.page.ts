@@ -1,4 +1,4 @@
-import '../../assets/css/main.css'
+import '../../assets/css/main.css';
 
 export class MainPage {
   private $main: HTMLElement = document.createElement('main');
@@ -8,12 +8,40 @@ export class MainPage {
     $mainPromo.classList.add('main-promo');
 
     $mainPromo.innerHTML = `
-      <div class="main-promo__inner">
-      dfdsf
+      <div class="main-promo__inner block-inner">
+        <div class="main-promo__text">Unleash Your Productivity with Our Remote <br />Work Solutions</div>
+        <div class="main-promo__slider">
+          <div class="main-promo__slider-item active"><img src="./src/assets/img/main-promo-slide1.png" alt="Slide 1"></div>
+          <div class="main-promo__slider-item"><img src="./src/assets/img/main-promo-slide2.png" alt="Slide 2"></div>
+          <div class="main-promo__slider-item"><img src="./src/assets/img/main-promo-slide3.png" alt="Slide 3"></div>
+          <div class="main-promo__slider-item"><img src="./src/assets/img/main-promo-slide4.png" alt="Slide 4"></div>
+        </div>
       </div>
     `;
 
     return $mainPromo;
+  }
+
+  initSlider(block: HTMLElement) {
+    const slides = block.querySelectorAll('.main-promo__slider-item');
+    console.log(slides)
+    let currentIndex = 0;
+    const getNewCurentAndPrevIndex = () => {
+      return [currentIndex, currentIndex === slides.length - 1 ? 0 : currentIndex + 1];
+    }
+
+    setInterval(() => {
+      const [prevIndex, newIndex] = getNewCurentAndPrevIndex();
+      slides[prevIndex].classList.remove('active');
+      slides[prevIndex].classList.add('prev');
+      slides[newIndex].classList.add('active');
+
+      setTimeout(() => {
+        slides[prevIndex].classList.remove('prev');
+        currentIndex = newIndex;
+      }, 1500);
+
+    }, 4000);
   }
 
   private renderCatalog(): HTMLElement {
@@ -149,8 +177,9 @@ export class MainPage {
   }
 
   private setPageStructure(): void {
+    const promoBlock = this.renderPromo();
     this.$main.append(
-      this.renderPromo(),
+      promoBlock,
       this.renderCatalog(),
       this.renderAdvantages(),
       this.renderAppBlock(),
@@ -158,7 +187,6 @@ export class MainPage {
       this.renderBottomForm()
     );
   }
-
 
   getElement(): HTMLElement {
     this.setPageStructure();
