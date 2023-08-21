@@ -1,10 +1,8 @@
 # E-Commerce Application
 
-This platform replicates real-world shopping experiences in a digital environment. 
+This platform replicates real-world shopping experiences in a digital environment.
 
 Users can browse through a vast range of products, view detailed descriptions, add their favorite items to the basket, and proceed to checkout. It includes features such as user registration and login, product search, product categorization, and sorting to make the shopping experience more streamlined and convenient.
-
-
 
 ## Technologies
 
