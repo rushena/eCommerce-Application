@@ -34,7 +34,8 @@ export class View implements IView {
   }
 
   static renderMainPage() {
-    View.$mainContent.innerHTML = View.$mainPage;
+    View.$mainContent.innerHTML = ''
+    View.$mainContent.append(View.$mainPage);
   }
 
   static renderRegistrationPage() {
