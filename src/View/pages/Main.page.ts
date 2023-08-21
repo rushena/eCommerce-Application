@@ -1,7 +1,11 @@
 export class MainPage {
-  getElement(): HTMLElement {
-    const $wrap = document.createElement('div');
-    $wrap.innerText = 'Тут будет код главной';
+  getElement(): string {
+    const $wrap = `
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>`;
     return $wrap;
   }
 }

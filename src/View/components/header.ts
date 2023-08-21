@@ -75,9 +75,9 @@ class Header {
         `;
     }
     return `
-      <a class='item-account__login' href='/login'>Log in</a>
+      <a class='item-account__login' href='/user/authorization'>Log in</a>
       /
-      <a class='item-account__register' href='/register'>Register</a>
+      <a class='item-account__register' href='/user/registration'>Register</a>
       `;
   }
   private defineLoginElementActions() {
@@ -87,9 +87,9 @@ class Header {
         `;
     }
     return `
-      <a class='account__actions__login' href='/login'>Log in</a>
+      <a class='account__actions__login' href='/user/authorization'>Log in</a>
       /
-      <a class='account__actions__register' href='/register'>Register</a>
+      <a class='account__actions__register' href='/user/registration'>Register</a>
       `;
   }
   get mobileLoginElement(): string {
