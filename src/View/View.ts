@@ -34,7 +34,7 @@ export class View implements IView {
   }
 
   static renderMainPage() {
-    View.$mainContent.innerHTML = ''
+    View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
   }
 
@@ -63,7 +63,8 @@ export class View implements IView {
   static renderLogout() {
     const header = Header.getInstance();
     header.loginElement = false;
-    View.$mainContent.innerHTML = View.$mainPage;
+    View.$mainContent.innerHTML = '';
+    View.$mainContent.append(View.$mainPage);
   }
 
   static render404Page() {
