@@ -13,6 +13,8 @@ p {
 body {
   margin: 0;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -76,6 +78,4 @@ input.input-invalid {
   h2 {
    font-size: 36px; 
   }
-
 }
-
