@@ -183,8 +183,8 @@ export class MainPage {
           <div class="main-bottom-form__subtitle">Subscribe for exclusive early sale access and new arrivals.</div>
           <form class="main-bottom-form__form">
             <div class="main-bottom-form__form-field">
-              <label for="">Email</label>
-              <input type="text" placeholder="Your working email">
+              <label class="main-bottom-form__form-label" for="form-bottom-input">Email</label>
+              <input type="text" class="main-bottom-form__form-input" name="Email" id="form-bottom-input" placeholder="Your working email">
             </div>
             <div class="main-bottom-form__form-field">
               <button class="main-bottom-form__form-button">Subscribe</button>

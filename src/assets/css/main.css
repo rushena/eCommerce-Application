@@ -261,6 +261,68 @@ body {
     text-align: center;
 }
 
+.main-bottom-form__form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    max-width: 495px;
+    margin: 0 auto;
+}
+
+.main-bottom-form__form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-bottom-form__form-label {
+    color: var(--gray-800, #424551);
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 160%;
+    margin-bottom: 8px;
+}
+
+.main-bottom-form__form-button {
+    color: var(--white, #FFF);
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 52px; /* 325% */
+    letter-spacing: 0.5px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
+    background: #17696A;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.main-bottom-form__form-button:hover {
+    background: #145C5D;
+}
+
+.main-bottom-form__form-button:active {
+    background: #145C5D;
+}
+
+.main-bottom-form__form-input {
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #D7DADD;
+    background: #FFF;
+    height: 52px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.main-bottom-form__form-input:hover, .main-bottom-form__form-input:focus {
+    border: 1px solid rgba(23, 105, 106, 0.40);
+    box-shadow: 0px 4px 4px -4px rgba(30, 33, 44, 0.03), 0px 12px 10px -6px rgba(23, 105, 106, 0.04), 0px 30px 24px -10px rgba(23, 105, 106, 0.05), 0px 80px 80px -20px rgba(23, 105, 106, 0.08);
+}
+
 @media all and (min-width: 640px) {
     .block-inner {
         padding: 0 24px;
@@ -345,6 +407,24 @@ body {
         grid-template-columns: repeat(3, 1fr);
         grid-row-gap: 32px;
         margin-top: 48px;
+    }
+
+    .main-bottom-form {
+        padding: 48px 0;
+    }
+    
+    .main-bottom-form__title {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+    
+    .main-bottom-form__subtitle {
+        margin-bottom: 32px;
+        font-size: 18px;
+    }
+    
+    .main-bottom-form__form-button {
+        padding: 0 40px;
     }
 }
 
@@ -459,6 +539,35 @@ body {
     .main-blog__vendors {
         grid-template-columns: repeat(6, 1fr);
         margin-top: 64px;
+    }
+
+    .main-bottom-form {
+        padding: 58px 0 72px;
+    }
+
+    .main-bottom-form__inner {
+        position: relative;
+    }
+    
+    .main-bottom-form__title {
+        font-size: 46px;
+        text-align: left;
+    }
+    
+    .main-bottom-form__subtitle {
+        margin-bottom: 22px;
+        font-size: 20px;
+        text-align: left;
+    }
+
+    .main-bottom-form__form {margin-left: 0;}
+
+    .main-bottom-form__right {
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: -63px;
+        margin-left: 72px;
     }
 }
 
