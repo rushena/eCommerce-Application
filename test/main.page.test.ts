@@ -2,7 +2,6 @@
 import { MainPage } from '../src/View/pages/Main.page';
 import { describe, expect, it } from 'vitest';
 
-
 describe('404 Page', function (): void {
   const instance = new MainPage();
 

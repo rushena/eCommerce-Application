@@ -26,11 +26,14 @@ export class MainPage {
 
   initSlider(block: HTMLElement): void {
     const slides = block.querySelectorAll('.main-promo__slider-item');
-    console.log(slides)
+    console.log(slides);
     let currentIndex = 0;
     const getNewCurentAndPrevIndex = () => {
-      return [currentIndex, currentIndex === slides.length - 1 ? 0 : currentIndex + 1];
-    }
+      return [
+        currentIndex,
+        currentIndex === slides.length - 1 ? 0 : currentIndex + 1,
+      ];
+    };
 
     setInterval(() => {
       const [prevIndex, newIndex] = getNewCurentAndPrevIndex();
@@ -42,7 +45,6 @@ export class MainPage {
         slides[prevIndex].classList.remove('prev');
         currentIndex = newIndex;
       }, 1500);
-
     }, 4000);
   }
 
