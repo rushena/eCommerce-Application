@@ -1,9 +1,9 @@
 import { createFooter } from './components/footer';
-import { Header } from './components/header';
-import { PageNotFound } from './pages/404.page';
-import { MainPage } from './pages/Main.page';
-import createLoginPage from './pages/login';
-import createRegistrationPage from './pages/registration';
+import Header from './components/header';
+import { PageNotFound } from './Pages/404.page';
+import { MainPage } from './Pages/Main.page';
+import createLoginPage from './Pages/login';
+import createRegistrationPage from './Pages/registration';
 
 interface IView {
   renderStartElements: () => void;
@@ -24,7 +24,8 @@ export class View implements IView {
   }
 
   static renderMainPage() {
-    View.$mainContent.innerHTML = View.$mainContent.outerHTML;
+    View.$mainContent.innerHTML = ''
+    View.$mainContent.append(View.$mainPage);
   }
 
   static renderRegistrationPage() {

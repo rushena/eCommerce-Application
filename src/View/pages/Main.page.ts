@@ -19,6 +19,8 @@ export class MainPage {
       </div>
     `;
 
+    this.initSlider($mainPromo);
+
     return $mainPromo;
   }
 
