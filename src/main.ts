@@ -1,4 +1,6 @@
 import './style.css';
+import './assets/css/login-page.css'
+import createLoginPage from './View/pages/login';
 import createRegistrationPage from './View/pages/registration';
 import Header from './View/components/header.ts';
 import { createFooter } from './View/components/footer.ts';
@@ -33,3 +35,5 @@ document.body.append(footerElement);
 registrationTest();
 authTest();
 loggedInterractions();
+const loginPage = createLoginPage();
+document.body.appendChild(loginPage);
