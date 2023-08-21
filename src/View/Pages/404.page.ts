@@ -1,11 +1,11 @@
 import '../../assets/css/404.css';
-import pageImage from '../../assets/img/notFoundPageImage'
+import pageImage from '../../assets/img/notFoundPageImage';
 
 interface IPageNotFound {
-  createWrap: () => HTMLElement,
-  setDOMStructure: () => void,
-  getPageCode: () => HTMLElement,
-  getWrap: () => HTMLElement
+  createWrap: () => HTMLElement;
+  setDOMStructure: () => void;
+  getPageCode: () => HTMLElement;
+  getWrap: () => HTMLElement;
 }
 
 export class PageNotFound implements IPageNotFound {
