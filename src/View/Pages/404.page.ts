@@ -2,10 +2,10 @@ import '../../assets/css/404.css';
 import pageImage from '../../assets/img/notFoundPageImage'
 
 interface IPageNotFound {
-  pageWrap: HTMLElement,
   createWrap: () => HTMLElement,
   setDOMStructure: () => void,
-  getPageCode: () => HTMLElement
+  getPageCode: () => HTMLElement,
+  getWrap: () => HTMLElement
 }
 
 export class PageNotFound implements IPageNotFound {
@@ -15,14 +15,18 @@ export class PageNotFound implements IPageNotFound {
     this.pageWrap = this.createWrap();
   }
 
-  private createWrap = (): HTMLElement => {
+  getWrap(): HTMLElement {
+    return this.pageWrap;
+  }
+
+  protected createWrap = (): HTMLElement => {
     const $page: HTMLElement = document.createElement('div');
     $page.classList.add('not-found');
 
     return $page;
   };
 
-  private setDOMStructure(): void {
+  protected setDOMStructure(): void {
     this.pageWrap.innerHTML = `
 			<div class="not-found__inner">
         <div class="not-found__image">${pageImage()}</div>
