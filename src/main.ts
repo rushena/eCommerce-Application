@@ -1,6 +1,9 @@
 import './style.css';
 import Header from './View/components/header.ts';
 import { createFooter } from './View/components/footer.ts';
+import typescriptLogo from './typescript.svg';
+import viteLogo from '/vite.svg';
+import { registrationTest, authTest, loggedInterractions } from './counter.ts';
 
 const check = localStorage.getItem('check') === 'true';
 let option: { isLogged: boolean; cartItems: number };
@@ -22,3 +25,7 @@ header.cartElement = 0;
 // Example of how to get footer
 const footerElement = createFooter();
 document.body.append(footerElement);
+
+registrationTest();
+authTest();
+loggedInterractions();
