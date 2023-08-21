@@ -140,8 +140,32 @@ export class MainPage {
     $mainBlog.classList.add('main-blog');
 
     $mainBlog.innerHTML = `
-      <div class="main-blog__inner">
-      dfdsf
+      <div class="main-blog__inner block-inner">
+        <div class="main-blog__title">Our Blog</div>
+        <div class="main-blog__list">
+          <div class="main-blog__list-item blog-item">
+            <div class="blog-item__image"><img src="./src/assets/img/main-blog-image1.png" alt="Bag Trends"></div>
+            <div class="blog-item__text-wrapper">
+              <div class="blog-item__title">Bag Trends</div>
+              <div class="blog-item__text">Ipsum aliquet nisi, hendrerit rhoncus quam tortor, maecenas faucibus. Tincidunt aliquet sit vel, venenatis nulla. Integer bibendum turpis convallis...</div>
+            </div>
+          </div>
+          <div class="main-blog__list-item blog-item">
+            <div class="blog-item__image"><img src="./src/assets/img/main-blog-image2.png" alt="Top 10 of This Season’s Hottest Sneakers"></div>
+            <div class="blog-item__text-wrapper">
+              <div class="blog-item__title">Top 10 of This Season’s Hottest Sneakers</div>
+              <div class="blog-item__text">Porta habitant vitae quam interdum. Leo viverra non volutpat rhoncus placerat vitae scelerisque. Rhoncus augue faucibus maecenas lacus...</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-blog__vendors">
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-1.png" alt="Vendor Name 1"></div>
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-2.png" alt="Vendor Name 1"></div>
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-3.png" alt="Vendor Name 1"></div>
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-4.png" alt="Vendor Name 1"></div>
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-5.png" alt="Vendor Name 1"></div>
+          <div class="main-blog__vendor"><img src="./src/assets/img/main-vendor-logo-6.png" alt="Vendor Name 1"></div>
+        </div>
       </div>
     `;
 
@@ -153,7 +177,7 @@ export class MainPage {
     $mainBottomForm.classList.add('main-bottom-form');
 
     $mainBottomForm.innerHTML = `
-      <div class="main-bottom-form__inner">
+      <div class="main-bottom-form__inner block-inner">
         <div class="main-bottom-form__left">
           <div class="main-bottom-form__title">Subscribe for updates</div>
           <div class="main-bottom-form__subtitle">Subscribe for exclusive early sale access and new arrivals.</div>
