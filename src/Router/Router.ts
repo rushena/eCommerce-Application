@@ -1,5 +1,5 @@
-import {View} from "../View/View";
-import {Route, Routes} from "../types/routing.types";
+import { View } from '../View/View';
+import { Route, Routes } from '../types/routing.types';
 
 export class Routing {
   private readonly routes: Routes;
@@ -10,23 +10,23 @@ export class Routing {
     window.addEventListener('popstate', (e: PopStateEvent): void => {
       e.preventDefault();
       this.get(document.location.pathname, false);
-    })
+    });
   }
 
   setRoutes(): Routes {
     return {
       '/': {
         title: 'Main',
-        renderFn: View.renderMainPage
+        renderFn: View.renderMainPage,
       },
       '/user/authorization': {
         title: 'Authorization',
-        renderFn: View.renderLoginPage
+        renderFn: View.renderLoginPage,
       },
       '/user/registration': {
         title: 'Registration',
-        renderFn: View.renderRegistrationPage
-      }
+        renderFn: View.renderRegistrationPage,
+      },
     } as Routes;
   }
 
@@ -37,7 +37,7 @@ export class Routing {
     if (routingPath) {
       this.staticPath(routingPath);
     } else {
-      this.combinePath(url)
+      this.combinePath(url);
     }
 
     if (writeInHistory) {
@@ -45,7 +45,7 @@ export class Routing {
     }
   }
 
-  staticPath({title, renderFn}: Route): void {
+  staticPath({ title, renderFn }: Route): void {
     document.title = title;
     renderFn(title);
   }

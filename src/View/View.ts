@@ -1,49 +1,41 @@
-import {Routing} from "../Router/Router";
-import {createFooter} from './components/footer';
-import {Header} from './components/header';
-import {PageNotFound} from './pages/404.page';
-import {MainPage} from "./pages/Main.page";
-import createLoginPage from "./pages/login";
-import createRegistrationPage from "./pages/registration";
+import { createFooter } from './components/footer';
+import { Header } from './components/header';
+import { PageNotFound } from './pages/404.page';
+import { MainPage } from './pages/Main.page';
+import createLoginPage from './pages/login';
+import createRegistrationPage from './pages/registration';
 
 interface IView {
-  routing: Routing,
-  setRouting: (Routing) => void,
-  renderStartElements: () => void
+  renderStartElements: () => void;
 }
 
 export class View implements IView {
-
-  static readonly $mainContent: HTMLElement = document.createElement('div');
-  private routing!;
   private readonly $footer = createFooter();
   private readonly $header = new Header().element;
-  private readonly $notFound = new PageNotFound().getPageCode();
-  private readonly $mainPage = new MainPage().getElement();
-  private readonly $loginPage = createLoginPage();
-  private readonly $RegistrationPage = createRegistrationPage();
 
-  setRouting(routing: Routing) {
-    this.routing = routing;
-  }
+  static readonly $mainContent: HTMLElement = document.createElement('div');
+  static readonly $notFound = new PageNotFound().getPageCode();
+  static readonly $mainPage = new MainPage().getElement();
+  static readonly $loginPage = createLoginPage();
+  static readonly $RegistrationPage = createRegistrationPage();
 
   renderStartElements(): void {
-      document.body.append(this.$header, View.$mainContent, this.$footer);
+    document.body.append(this.$header, View.$mainContent, this.$footer);
   }
 
   static renderMainPage() {
-    View.$mainContent.innerHTML = this.$mainPage;
+    View.$mainContent.innerHTML = View.$mainContent.outerHTML;
   }
 
   static renderRegistrationPage() {
-    View.$mainContent.innerHTML = this.$RegistrationPage;
+    View.$mainContent.innerHTML = View.$RegistrationPage.outerHTML;
   }
 
   static renderLoginPage() {
-    View.$mainContent.innerHTML = this.$loginPage;
+    View.$mainContent.innerHTML = View.$loginPage.outerHTML;
   }
 
   static render404Page() {
-    View.$mainContent.innerHTML = this.$notFound;
+    View.$mainContent.innerHTML = View.$notFound.outerHTML;
   }
 }

@@ -1,18 +1,25 @@
-import {View} from "./View/View";
-import {Routing} from "./Router/Router";
+import { View } from './View/View';
+import { Routing } from './Router/Router';
 
 interface IApp {
-  routing: Routing,
-  view: View,
-  start: () => void
+  routing: Routing;
+  view: View;
+  start: () => void;
 }
 
 export class App implements IApp {
-  private readonly routing: Routing = new Routing();
-  private readonly view: View = new View();
+  private readonly _routing: Routing = new Routing();
+  private readonly _view: View = new View();
+
+  get routing(): Routing {
+    return this._routing;
+  }
+
+  get view(): View {
+    return this._view;
+  }
 
   start(): void {
-    this.view.setRouting(this.routing);
     this.view.renderStartElements();
 
     this.routing.get(document.location.pathname);
@@ -23,11 +30,11 @@ export class App implements IApp {
 
       e.preventDefault();
 
-      const url: string = $link.getAttribute('href');
+      const url: string | null = $link.getAttribute('href');
 
       if (url === '#' || !url) return;
 
       this.routing.get(url);
-    })
+    });
   }
 }
