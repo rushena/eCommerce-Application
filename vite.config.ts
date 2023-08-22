@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -64,7 +65,17 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      plugins: [rollupNodePolyFill()],
+      plugins: [rollupNodePolyFill],
     },
   },
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/img',
+          dest: 'src/assets/'
+        }
+      ]
+    })
+  ]
 });
