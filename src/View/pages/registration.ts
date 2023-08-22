@@ -144,7 +144,7 @@ export default function createRegistrationPage(): HTMLElement {
   const registrationMain = document.createElement('main');
   registrationMain.className = 'registration-page';
   registrationMain.innerHTML = `<div class="registration-page__container">
-        <img src="/src/assets/img/Mask group.jpg" class="registration-page-img" alt='Registration image'>
+        <img src="./src/assets/img/Mask group.jpg" class="registration-page-img" alt='Registration image'>
         <form class="form registration-form" novalidate>
           <h2>Create an Account</h2>
           <div class="form-1column-block api-error">
@@ -161,7 +161,7 @@ export default function createRegistrationPage(): HTMLElement {
               <label class="password-label">
                 <sup>*</sup>Password
                 <input class="password1" type="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please, enter password that is minimum 8 characters long and contains at least one number, one lowercase and one uppercase characters" required>
-                <img src="/src/assets/img/solar_eye-broken.png" alt='eye'>
+                <img src="./src/assets/img/solar_eye-broken.png" alt='eye'>
                 <span class="validation-message validation-message__password"></span>
               </label>
             </div>
@@ -169,7 +169,7 @@ export default function createRegistrationPage(): HTMLElement {
               <label class="password-label">
                 <sup>*</sup>Repeat password
                 <input type="password" class="password2" required>
-                <img src="/src/assets/img/solar_eye-broken.png" alt='eye'>
+                <img src="./src/assets/img/solar_eye-broken.png" alt='eye'>
                 <span class="validation-message validation-message__password"></span>
               </label>
             </div>
