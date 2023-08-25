@@ -6,6 +6,7 @@ import createLoginPage from './Pages/login';
 import createRegistrationPage from './Pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
+import { returnProducts } from '../Controller/products/returnProducts';
 
 interface IView {
   renderStartElements: () => void;
@@ -65,6 +66,10 @@ export class View implements IView {
     header.loginElement = false;
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
+  }
+
+  static renderCatalog() {
+    returnProducts();
   }
 
   static render404Page() {
