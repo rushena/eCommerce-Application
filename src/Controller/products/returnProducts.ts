@@ -1,6 +1,7 @@
 import { getProducts } from './getProducts';
 
-export async function returnProducts() {
+export default async function () {
   const response = await getProducts();
-  console.log(response);
+  if (response.body === null) return null;
+  return response.body.results;
 }

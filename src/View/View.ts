@@ -6,7 +6,7 @@ import createLoginPage from './Pages/login';
 import createRegistrationPage from './Pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
-import { returnProducts } from '../Controller/products/returnProducts';
+import { Catalog } from './Pages/catalog';
 
 interface IView {
   renderStartElements: () => void;
@@ -19,6 +19,7 @@ export class View implements IView {
   static readonly $mainPage = new MainPage().getElement();
   static readonly $loginPage = createLoginPage();
   static readonly $RegistrationPage = createRegistrationPage();
+  static $catalogPage = new Catalog();
 
   renderStartElements(): void {
     const check = localStorage.getItem('check') === 'true';
@@ -69,7 +70,8 @@ export class View implements IView {
   }
 
   static renderCatalog() {
-    returnProducts();
+    View.$mainContent.innerHTML = '';
+    View.$mainContent.append(View.$catalogPage.getElement());
   }
 
   static render404Page() {
