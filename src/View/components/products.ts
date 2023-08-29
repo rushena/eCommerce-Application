@@ -1,5 +1,7 @@
 import returnProducts from '../../Controller/products/returnProducts';
 import { ProductProjection } from '@commercetools/platform-sdk';
+import { getOptions } from '../../Controller/products/products.type';
+import '../../assets/css/products.css';
 
 export default class Products {
   private products = document.createElement('div');
@@ -14,23 +16,25 @@ export default class Products {
     ) {
       imageElement = document.createElement('img');
       imageElement.src = product.masterVariant.images[0].url;
-      imageElement.onload = () => card.append(imageElement);
+      imageElement.onload = () => card.prepend(imageElement);
     }
     card.innerHTML = `
     <div class='products-list__card__description'>
       ${product.name['en-US'] ? product.name['en-US'] : product.name['en']}
     </div>
     <div class='products-list__card__price'>
-      ${product.masterVariant.prices![0].value.centAmount}
+      <span>$${product.masterVariant.prices![0].value.centAmount}</span>
+      <span class='old'>
+      $${product.masterVariant.prices![0].value.centAmount}
+      </span>
     </div>
     `;
     target.append(card);
   }
-
-  public fillProducts() {
+  public fillProducts(options?: getOptions) {
     this.products.innerHTML = `Wait fo list to load`;
     const errorMessage = 'Error occurred';
-    returnProducts()
+    returnProducts(options) // enter your parameters
       .then((productList) => {
         this.products.innerHTML = ``;
         console.log(productList);

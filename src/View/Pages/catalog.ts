@@ -1,26 +1,53 @@
 import Products from '../components/products';
+import SideBar from '../components/sidebar';
+import Perpage from '../components/perpage';
+import Sorting from '../components/sorting';
+import Paging from '../components/paging';
+import '../../assets/css/catalog.css';
+import '../../assets/css/topbar.css';
 
 export class Catalog {
   private catalog = document.createElement('main');
 
-  private renderTopToolbar(): HTMLElement {
+  private renderSorting(): HTMLElement {
+    const sorting = new Sorting();
+    return sorting.getElement();
+  }
+
+  private renderPerpage(): HTMLElement {
+    const perPage = new Perpage();
+    return perPage.getElement();
+  }
+
+  private renderPaging(product: Products): HTMLElement {
+    const paging = new Paging(4, product);
+    return paging.getElement();
+  }
+
+  private renderTopToolbar(product: Products): HTMLElement {
     const topbar = document.createElement('div');
     topbar.classList.add('catalog__topbar');
     topbar.innerHTML = `
     <div class='catalog__topbar__filters-toggle'>
       Hide filters
     </div>
-    <div class='catalog__topbar__sorting'>
-    </div>
-    <div class='catalog__topbar__pagination'>
-    </div>
     `;
+    topbar.append(
+      this.renderSorting(),
+      this.renderPerpage(),
+      this.renderPaging(product)
+    );
     return topbar;
   }
 
-  private renderProducts(): HTMLElement {
+  private renderSideBar(): HTMLElement {
+    const sideBar = new SideBar();
+    return sideBar.getElement();
+  }
+
+  private getProducts(): Products {
     const products = new Products();
-    return products.getElement();
+    return products;
   }
 
   private renderBotToolbar(): HTMLElement {
@@ -37,9 +64,13 @@ export class Catalog {
 
   private addAllBlocks() {
     this.catalog.classList.add('main');
+    const middleSection = document.createElement('div');
+    middleSection.classList.add('catalog__middle');
+    const products = this.getProducts();
+    middleSection.append(this.renderSideBar(), products.getElement());
     this.catalog.append(
-      this.renderTopToolbar(),
-      this.renderProducts(),
+      this.renderTopToolbar(products),
+      middleSection,
       this.renderBotToolbar()
     );
   }

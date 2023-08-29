@@ -1,18 +1,19 @@
 import { getApiRoot } from '../apiRoot/generalClient.ts';
+import { getOptions } from './products.type.ts';
 
-function getSimpleProject() {
+function getSimpleProject(options?: getOptions) {
   return getApiRoot()
     .withProjectKey({
       projectKey: 'new-ecommerce-app',
     })
     .productProjections()
-    .get()
+    .get(options)
     .execute();
 }
 
-export async function getProducts() {
+export async function getProducts(options?: getOptions) {
   try {
-    const project = await getSimpleProject();
+    const project = await getSimpleProject(options);
     if (project.statusCode! >= 400) {
       return { body: null };
     } else {
