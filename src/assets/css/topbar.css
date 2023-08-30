@@ -1,0 +1,36 @@
+.catalog__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.catalog__topbar__filters-toggle {
+  border: 1px solid;
+  border-radius: 4px;
+  height: 52px;
+  padding: 0px 15px;
+  background-color: #17696a;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.catalog__topbar__sorting {
+  display: flex;
+}
+
+.sorting-menu {
+  display: none;
+}
+
+.sorting-menu_active {
+  display: block;
+}
+
+.catalog__topbar__perpage {
+  display: flex;
+}
+
+.catalog__topbar__pagination {
+  display: flex;
+}

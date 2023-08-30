@@ -39,7 +39,6 @@ export class Routing {
   }
 
   get(url: string, writeInHistory: boolean = true): void {
-    console.log(window.history);
     const routingPath = this.routes[url];
 
     if (routingPath) {

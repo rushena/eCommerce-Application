@@ -5,12 +5,15 @@ export default class Sorting {
 
   public fillProducts() {
     this.sorting.innerHTML = `
-    <button class='catalog__topbar__sorting__current'>Price asc </button>
-    <div class='class='catalog__topbar__sorting__menu sorting-menu'>
-      <button class='sorting-menu__item'>Price asc</button>
-      <button class='sorting-menu__item'>Price des</button>
-      <button class='sorting-menu__item'>Name A to Z</button>
-      <button class='sorting-menu__item'>Name Z to A</button>
+    <div class='catalog__topbar__sorting__description'>Sort by</div>
+    <div class='catalog__topbar__sorting__input'>
+      <div class='catalog__topbar__sorting__current'>Price asc </div>
+      <div class='catalog__topbar__sorting__menu sorting-menu'>
+        <div class='sorting-menu__item'>Price asc</div>
+        <div class='sorting-menu__item'>Price des</div>
+        <div class='sorting-menu__item'>Name A to Z</div>
+        <div class='sorting-menu__item'>Name Z to A</div>
+      </div>
     </div>
     `;
   }

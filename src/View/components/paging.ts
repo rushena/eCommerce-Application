@@ -8,24 +8,33 @@ export default class Paging {
   private length;
   private current;
   private products;
+  private perpage;
 
-  constructor(length: number, products: Products, current = 1) {
-    this.length = length;
+  constructor(products: Products, current = 1) {
     this.current = current;
     this.products = products;
+    this.perpage = products.perPage;
+    this.length = Math.ceil(products.total / this.perpage);
   }
 
-  public setLength(length: number) {
-    this.length = length;
-    this.fillPaging();
+  public setPerPage(perpage: number) {
+    this.perpage = perpage;
+    this.length = Math.ceil(this.products.total / this.perpage);
   }
 
   public setCurrent(current: number) {
     this.current = current;
     this.products.fillProducts({
-      queryArgs: { limit: 10, offset: (current - 1) * 10 },
+      queryArgs: {
+        limit: this.perpage,
+        offset: (current - 1) * this.perpage,
+      },
     });
     this.fillPaging();
+  }
+
+  public getCurrent() {
+    return this.current;
   }
 
   private getPagingList(): string[] {

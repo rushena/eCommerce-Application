@@ -5,6 +5,9 @@ import '../../assets/css/products.css';
 
 export default class Products {
   private products = document.createElement('div');
+  public options: getOptions;
+  public perPage = 15;
+  public total = 0;
 
   private async addCard(target: HTMLElement, product: ProductProjection) {
     const card = document.createElement('div');
@@ -32,17 +35,20 @@ export default class Products {
     target.append(card);
   }
   public fillProducts(options?: getOptions) {
+    if (options) {
+      this.options = options;
+    }
     this.products.innerHTML = `Wait fo list to load`;
     const errorMessage = 'Error occurred';
-    returnProducts(options) // enter your parameters
+    returnProducts(this.options) // enter your parameters
       .then((productList) => {
+        this.total = productList!.total!;
         this.products.innerHTML = ``;
-        console.log(productList);
         if (productList === null) {
           console.log('inner catch');
           this.products.innerHTML = errorMessage;
         } else {
-          productList.forEach((product) => {
+          productList.list.forEach((product) => {
             this.addCard(this.products, product);
           });
         }
@@ -50,8 +56,11 @@ export default class Products {
       .catch(() => {});
   }
 
-  public getElement() {
-    this.fillProducts();
+  public getElement(options?: getOptions) {
+    if (options) {
+      this.options = options;
+    }
+    this.fillProducts(this.options);
     this.products.classList.add('catalog__products');
     this.products.classList.add('products-list');
     return this.products;

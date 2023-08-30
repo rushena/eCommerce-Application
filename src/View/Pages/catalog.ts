@@ -14,28 +14,31 @@ export class Catalog {
     return sorting.getElement();
   }
 
-  private renderPerpage(): HTMLElement {
-    const perPage = new Perpage();
-    return perPage.getElement();
+  private getPerpage(product: Products, paging: Paging): Perpage {
+    const perPage = new Perpage(product, paging);
+    return perPage;
   }
 
-  private renderPaging(product: Products): HTMLElement {
-    const paging = new Paging(4, product);
-    return paging.getElement();
+  private getPaging(product: Products): Paging {
+    const paging = new Paging(product);
+    paging.setPerPage(product.perPage);
+    return paging;
   }
 
   private renderTopToolbar(product: Products): HTMLElement {
+    const paging = this.getPaging(product);
+    const perpage = this.getPerpage(product, paging);
     const topbar = document.createElement('div');
     topbar.classList.add('catalog__topbar');
     topbar.innerHTML = `
     <div class='catalog__topbar__filters-toggle'>
-      Hide filters
+      <span>Hide filters</span>
     </div>
     `;
     topbar.append(
       this.renderSorting(),
-      this.renderPerpage(),
-      this.renderPaging(product)
+      perpage.getElement(),
+      paging.getElement()
     );
     return topbar;
   }
@@ -67,7 +70,12 @@ export class Catalog {
     const middleSection = document.createElement('div');
     middleSection.classList.add('catalog__middle');
     const products = this.getProducts();
-    middleSection.append(this.renderSideBar(), products.getElement());
+    middleSection.append(
+      this.renderSideBar(),
+      products.getElement({
+        queryArgs: { limit: products.perPage, offset: 0 },
+      })
+    );
     this.catalog.append(
       this.renderTopToolbar(products),
       middleSection,
