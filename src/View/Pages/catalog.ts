@@ -9,8 +9,8 @@ import '../../assets/css/topbar.css';
 export class Catalog {
   private catalog = document.createElement('main');
 
-  private renderSorting(): HTMLElement {
-    const sorting = new Sorting();
+  private renderSorting(product: Products): HTMLElement {
+    const sorting = new Sorting(product);
     return sorting.getElement();
   }
 
@@ -37,7 +37,7 @@ export class Catalog {
     </div>
     `;
     topbar.append(
-      this.renderSorting(),
+      this.renderSorting(product),
       perpage.getElement(),
       paging.getElement()
     );
@@ -75,7 +75,7 @@ export class Catalog {
       queryArgs: {
         limit: products.perPage,
         offset: 0,
-        sort: ['price asc'],
+        sort: 'price asc',
       },
     });
     middleSection.append(this.renderSideBar(), productsElement);
