@@ -7,6 +7,7 @@ function getSimpleProject(options?: getOptions) {
       projectKey: 'new-ecommerce-app',
     })
     .productProjections()
+    .search()
     .get(options)
     .execute();
 }

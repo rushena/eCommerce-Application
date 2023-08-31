@@ -12,7 +12,7 @@ export default class Perpage {
     this.paging = paging;
   }
 
-  public fillProducts() {
+  public fillPerpage() {
     this.perpage.innerHTML = `
     <div class='catalog__topbar__perpage__submit'>
       <input type="submit" value="Show" />
@@ -34,8 +34,14 @@ export default class Perpage {
         const inputElement = this.perpage.querySelector(
           '.catalog__topbar__perpage__input'
         ) as HTMLInputElement;
-        if (Number.parseInt(inputElement.value) !== this.products.perPage) {
-          this.products.perPage = Number.parseInt(inputElement.value);
+        let value;
+        if (!inputElement.value) {
+          value = Number.parseInt(inputElement.placeholder);
+        } else {
+          value = Number.parseInt(inputElement.value);
+        }
+        if (value !== this.products.perPage) {
+          this.products.perPage = value;
           this.paging.setPerPage(this.products.perPage);
           this.paging.setCurrent(1);
           const newOptions: typeof this.products.options = {
@@ -51,7 +57,7 @@ export default class Perpage {
   }
 
   public getElement() {
-    this.fillProducts();
+    this.fillPerpage();
     this.perpage.classList.add('catalog__topbar__perpage');
     return this.perpage;
   }

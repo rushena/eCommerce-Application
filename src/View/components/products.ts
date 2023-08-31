@@ -34,33 +34,34 @@ export default class Products {
     `;
     target.append(card);
   }
-  public fillProducts(options?: getOptions) {
+  public async fillProducts(options?: getOptions) {
     if (options) {
       this.options = options;
     }
     this.products.innerHTML = `Wait fo list to load`;
     const errorMessage = 'Error occurred';
-    returnProducts(this.options) // enter your parameters
-      .then((productList) => {
-        this.total = productList!.total!;
-        this.products.innerHTML = ``;
-        if (productList === null) {
-          console.log('inner catch');
-          this.products.innerHTML = errorMessage;
-        } else {
-          productList.list.forEach((product) => {
-            this.addCard(this.products, product);
-          });
-        }
-      })
-      .catch(() => {});
+    try {
+      const productList = await returnProducts(this.options); // enter your parameters
+      this.total = productList!.total!;
+      this.products.innerHTML = ``;
+      if (productList === null) {
+        console.log('inner catch');
+        this.products.innerHTML = errorMessage;
+      } else {
+        productList.list.forEach((product) => {
+          this.addCard(this.products, product);
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  public getElement(options?: getOptions) {
+  public async getElement(options?: getOptions) {
     if (options) {
       this.options = options;
     }
-    this.fillProducts(this.options);
+    await this.fillProducts(this.options);
     this.products.classList.add('catalog__products');
     this.products.classList.add('products-list');
     return this.products;

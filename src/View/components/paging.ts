@@ -15,6 +15,7 @@ export default class Paging {
     this.products = products;
     this.perpage = products.perPage;
     this.length = Math.ceil(products.total / this.perpage);
+    console.log(this.length);
   }
 
   public setPerPage(perpage: number) {
@@ -24,12 +25,14 @@ export default class Paging {
 
   public setCurrent(current: number) {
     this.current = current;
-    this.products.fillProducts({
+    const newOptions: typeof this.products.options = {
       queryArgs: {
+        ...this.products.options?.queryArgs,
         limit: this.perpage,
         offset: (current - 1) * this.perpage,
       },
-    });
+    };
+    this.products.fillProducts(newOptions);
     this.fillPaging();
   }
 
@@ -48,6 +51,7 @@ export default class Paging {
         itemArray = ['1', '2', '3', '>'];
       }
     } else if (this.current === this.length) {
+      console.log(this.length);
       if (this.length >= 5) {
         itemArray = [
           '<',

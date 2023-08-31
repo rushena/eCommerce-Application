@@ -26,6 +26,7 @@ export class Catalog {
   }
 
   private renderTopToolbar(product: Products): HTMLElement {
+    console.log(product.total);
     const paging = this.getPaging(product);
     const perpage = this.getPerpage(product, paging);
     const topbar = document.createElement('div');
@@ -65,17 +66,19 @@ export class Catalog {
     return botbar;
   }
 
-  private addAllBlocks() {
+  private async addAllBlocks() {
     this.catalog.classList.add('main');
     const middleSection = document.createElement('div');
     middleSection.classList.add('catalog__middle');
     const products = this.getProducts();
-    middleSection.append(
-      this.renderSideBar(),
-      products.getElement({
-        queryArgs: { limit: products.perPage, offset: 0 },
-      })
-    );
+    const productsElement = await products.getElement({
+      queryArgs: {
+        limit: products.perPage,
+        offset: 0,
+        sort: ['price asc'],
+      },
+    });
+    middleSection.append(this.renderSideBar(), productsElement);
     this.catalog.append(
       this.renderTopToolbar(products),
       middleSection,
