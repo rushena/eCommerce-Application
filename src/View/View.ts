@@ -1,11 +1,12 @@
 import { createFooter } from './components/footer';
 import Header from './components/header';
-import { PageNotFound } from './Pages/404.page';
-import { MainPage } from './Pages/Main.page';
-import createLoginPage from './Pages/login';
-import createRegistrationPage from './Pages/registration';
+import { PageNotFound } from './pages/404.page';
+import { MainPage } from './pages/Main.page';
+import createLoginPage from './pages/login';
+import createRegistrationPage from './pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
+import { ProfilePageView } from './pages/Profile.page';
 
 interface IView {
   renderStartElements: () => void;
@@ -36,6 +37,21 @@ export class View implements IView {
   static renderMainPage() {
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
+  }
+
+  static renderProfilePage() {
+    const isAuthCustomer: boolean = Boolean(window.localStorage.getItem('check'));
+
+    if (!isAuthCustomer) {
+      const link = document.createElement('a');
+      link.setAttribute('href', '/user/authorization');
+      link.click();
+    } else {
+      const $page = new ProfilePageView();
+
+      View.$mainContent.innerHTML = '';
+      View.$mainContent.append($page.getElement());
+    }
   }
 
   static renderRegistrationPage() {

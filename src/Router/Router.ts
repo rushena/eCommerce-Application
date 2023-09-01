@@ -31,6 +31,10 @@ export class Routing {
         title: 'Registration',
         renderFn: View.renderLogout,
       },
+      '/user': {
+        title: 'Account Information',
+        renderFn: View.renderProfilePage,
+      },
     } as Routes;
   }
 
