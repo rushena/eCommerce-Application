@@ -1,4 +1,105 @@
 .catalog__sidebar {
   max-width: 255px;
   min-width: 200px;
+  padding: 15px;
+}
+
+.sidebar-container__types-toggle {
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-container__title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.sidebar-container__types-toggle .plus div {
+  width: 16px;
+  border-radius: 1px;
+  border: 1px solid #17696A;
+  transition: 300ms ease-in-out;
+}
+
+.sidebar-container__types-toggle .plus div:nth-child(2)
+{
+  transform: translateY(-1px) rotateZ(90deg);
+}
+
+.sidebar-container__types-toggle .plus.plus_active div:nth-child(2)
+{
+  transform: translateY(-2px);
+}
+
+.sidebar-container__types-menu {
+  display: none;
+}
+
+.sidebar-container__types-menu_active {
+  display: block;
+}
+
+.type-menu__item {
+  display: flex;
+  position: relative;
+  padding: 0;
+  margin: 0 0 8px 0;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+  align-items: center;
+
+  font-family: Lato;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.type-menu__item div {
+  margin: 0 0 0 12px;
+}
+
+.type-menu__item input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  height: 16px;
+  width: 16px;
+  border: 2px solid #B3B7BC;
+  border-radius: 4px;
+}
+
+.type-menu__item:hover input ~ .checkmark {
+  background-color: #B3B7BC;
+}
+
+.type-menu__item input:checked ~ .checkmark {
+  border: none;
+  background-color: #17696A;
+}
+
+.checkmark:before {
+  content: "";
+  display: none;
+}
+
+.type-menu__item input:checked ~ .checkmark:before {
+  display: block;
+}
+
+.type-menu__item .checkmark:before {
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-radius: 1px;
+  border-width: 0 2px 2px 0;
+  transform: translateX(5px) translateY(1px) rotate(45deg);
 }

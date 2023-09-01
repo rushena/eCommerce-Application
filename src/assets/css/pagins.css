@@ -11,3 +11,7 @@
 .catalog__topbar__pagination > * {
   margin: 0 10px;
 }
+
+.catalog__topbar__pagination__item {
+  cursor: pointer;
+}

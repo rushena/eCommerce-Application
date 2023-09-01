@@ -73,9 +73,14 @@ export class Catalog {
     const products = this.getProducts();
     const productsElement = await products.getElement({
       queryArgs: {
+        filter: [
+          'variants.price.centAmount:range (0 to 10000)',
+          `categories.id:"1b4b0d67-f091-4d64-ba7c-86a65db9ca17"`,
+        ],
         limit: products.perPage,
         offset: 0,
         sort: 'price asc',
+        ['text.en-us']: 'Sample',
       },
     });
     middleSection.append(this.renderSideBar(), productsElement);

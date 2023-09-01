@@ -42,13 +42,17 @@ export default class Paging {
 
   private getPagingList(): string[] {
     let itemArray: string[] = [];
-    if (this.current === 1) {
+    if (this.length === 1) {
+      itemArray = ['1'];
+    } else if (this.current === 1) {
       if (this.length >= 5) {
         itemArray = ['1', '2', '3', '...', `${this.length}`, '>'];
       } else if (this.length === 4) {
         itemArray = ['1', '2', '3', '4', '>'];
+      } else if (this.length === 3) {
+        itemArray = ['1', `2`, `3`, '>'];
       } else {
-        itemArray = ['1', '2', '3', '>'];
+        itemArray = ['1', `2`, '>'];
       }
     } else if (this.current === this.length) {
       console.log(this.length);
@@ -63,8 +67,10 @@ export default class Paging {
         ];
       } else if (this.length === 4) {
         itemArray = ['<', '1', `2`, `3`, `4`];
-      } else {
+      } else if (this.length === 3) {
         itemArray = ['<', '1', `2`, `3`];
+      } else {
+        itemArray = ['<', '1', `2`];
       }
     } else {
       if (this.length >= 5) {
@@ -96,8 +102,10 @@ export default class Paging {
         }
       } else if (this.length === 4) {
         itemArray = ['<', '1', `2`, `3`, `4`, '>'];
-      } else {
+      } else if (this.length === 3) {
         itemArray = ['<', '1', `2`, `3`, '>'];
+      } else {
+        itemArray = ['<', '1', `2`, '>'];
       }
     }
     return itemArray;

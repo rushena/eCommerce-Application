@@ -26,6 +26,7 @@
   line-height: 150%;
   border: 1px solid #d7dadd;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .catalog__topbar__sorting__current__image {
@@ -57,6 +58,10 @@
   box-shadow: rgba(30, 31, 33, 0.12) 0px 5px 25px;
   border: 1px solid #d7dadd;
   border-radius: 4px;
+}
+
+.sorting-menu__item {
+  cursor: pointer;  
 }
 
 .sorting-menu_active {
