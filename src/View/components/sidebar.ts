@@ -16,7 +16,7 @@ function categoryHandler(event: Event, products: Products) {
   if (!newFilter || !Array.isArray(newFilter)) return;
   if (products.currentCategories.includes(categoryText)) {
     const index = products.currentCategories.indexOf(categoryText);
-    newFilter.splice(index + 1, 1);
+    newFilter.splice(index, 1);
     products.currentCategories.splice(index, 1);
   } else {
     products.currentCategories.push(categoryText);

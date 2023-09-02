@@ -3,6 +3,7 @@ import SideBar from '../components/sidebar';
 import Perpage from '../components/perpage';
 import Sorting from '../components/sorting';
 import Paging from '../components/paging';
+import Toggle from '../components/filterToggle';
 import '../../assets/css/catalog.css';
 import '../../assets/css/topbar.css';
 
@@ -12,6 +13,11 @@ export class Catalog {
   private renderSorting(product: Products): HTMLElement {
     const sorting = new Sorting(product);
     return sorting.getElement();
+  }
+
+  private renderToggle(): HTMLElement {
+    const toggle = new Toggle();
+    return toggle.getElement();
   }
 
   private getPerpage(product: Products, paging: Paging): Perpage {
@@ -31,12 +37,8 @@ export class Catalog {
     const perpage = this.getPerpage(product, paging);
     const topbar = document.createElement('div');
     topbar.classList.add('catalog__topbar');
-    topbar.innerHTML = `
-    <div class='catalog__topbar__filters-toggle'>
-      <span>Hide filters</span>
-    </div>
-    `;
     topbar.append(
+      this.renderToggle(),
       this.renderSorting(product),
       perpage.getElement(),
       paging.getElement()

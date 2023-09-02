@@ -1,7 +1,11 @@
 .catalog__sidebar {
-  max-width: 255px;
   min-width: 200px;
   padding: 15px;
+  display: none;
+}
+
+.catalog__sidebar_active {
+  display: block
 }
 
 .sidebar-container__types-toggle {
