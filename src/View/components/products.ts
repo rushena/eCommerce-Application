@@ -1,11 +1,19 @@
 import returnProducts from '../../Controller/products/returnProducts';
 import { ProductProjection } from '@commercetools/platform-sdk';
 import { getOptions } from '../../Controller/products/products.type';
+import { getCategories } from '../../Controller/products/getCategorie';
 import '../../assets/css/products.css';
 
+interface Category {
+  id: string;
+  name?: string;
+  parent: null | Category;
+}
 export default class Products {
   private products = document.createElement('div');
   public options: getOptions;
+  public categories: Category[] = [];
+  public currentCategories: string[] = [];
   public perPage = 15;
   public total = 0;
 
@@ -38,16 +46,25 @@ export default class Products {
     if (options) {
       this.options = options;
     }
-    this.products.innerHTML = `Wait fo list to load`;
+    this.products.innerHTML = `Wait for the list to load`;
     const errorMessage = 'Error occurred';
     try {
-      const productList = await returnProducts(this.options); // enter your parameters
+      const productList = await returnProducts(this.options);
+      const categorie = await getCategories();
       this.total = productList!.total!;
       this.products.innerHTML = ``;
-      if (productList === null) {
-        console.log('inner catch');
+      if (productList === null || categorie === null) {
         this.products.innerHTML = errorMessage;
       } else {
+        this.categories = categorie.body.results.map((value) => {
+          if (value.parent)
+            return {
+              id: value.id,
+              name: value.name['en-US'],
+              parent: { id: value.parent.id, parent: null },
+            };
+          return { id: value.id, name: value.name['en-US'], parent: null };
+        });
         productList.list.forEach((product) => {
           this.addCard(this.products, product);
         });

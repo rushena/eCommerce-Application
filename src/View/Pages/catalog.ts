@@ -44,8 +44,8 @@ export class Catalog {
     return topbar;
   }
 
-  private renderSideBar(): HTMLElement {
-    const sideBar = new SideBar();
+  private getSideBar(products: Products): HTMLElement {
+    const sideBar = new SideBar(products);
     return sideBar.getElement();
   }
 
@@ -73,17 +73,13 @@ export class Catalog {
     const products = this.getProducts();
     const productsElement = await products.getElement({
       queryArgs: {
-        filter: [
-          'variants.price.centAmount:range (0 to 10000)',
-          `categories.id:"1b4b0d67-f091-4d64-ba7c-86a65db9ca17"`,
-        ],
+        filter: [],
         limit: products.perPage,
         offset: 0,
         sort: 'price asc',
-        ['text.en-us']: 'Sample',
       },
     });
-    middleSection.append(this.renderSideBar(), productsElement);
+    middleSection.append(this.getSideBar(products), productsElement);
     this.catalog.append(
       this.renderTopToolbar(products),
       middleSection,

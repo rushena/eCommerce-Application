@@ -4,6 +4,63 @@ import Products from './products';
 // import { PriceSlider } from './priceSliders';
 // import { createDOMElement } from '../../Utility/createElement';
 
+function categoryHandler(event: Event, products: Products) {
+  const target = event.target as HTMLElement;
+  const parent = target.closest('.type-menu__item');
+  const categoryText = parent?.children[2].textContent;
+  if (!categoryText) return;
+  const categoryID = products.categories.find((value) => {
+    if (value.name === categoryText) return true;
+  })?.id;
+  const newFilter = products.options?.queryArgs?.filter;
+  if (!newFilter || !Array.isArray(newFilter)) return;
+  if (products.currentCategories.includes(categoryText)) {
+    const index = products.currentCategories.indexOf(categoryText);
+    newFilter.splice(index + 1, 1);
+    products.currentCategories.splice(index, 1);
+  } else {
+    products.currentCategories.push(categoryText);
+    newFilter.push(`categories.id:"${categoryID}"`);
+  }
+  const newOptions: typeof products.options = {
+    queryArgs: {
+      ...products.options?.queryArgs,
+      filter: newFilter,
+    },
+  };
+  products.fillProducts(newOptions);
+}
+
+function priceHandle(
+  firstInput: HTMLInputElement,
+  secondInput: HTMLInputElement,
+  products: Products
+) {
+  const newFilter = products.options?.queryArgs?.filter;
+  if (!newFilter || !Array.isArray(newFilter)) return;
+  if (!products.currentCategories.includes('Price')) {
+    products.currentCategories.push('Price');
+  } else {
+    const index = products.currentCategories.indexOf('Price');
+    newFilter.splice(index, 1);
+  }
+  newFilter.push(
+    `variants.price.centAmount:range (${
+      firstInput.value === '' ? firstInput.placeholder : firstInput.value
+    } to ${
+      secondInput.value === '' ? secondInput.placeholder : secondInput.value
+    })`
+  );
+  console.log(products.currentCategories);
+  console.log(newFilter);
+  const newOptions: typeof products.options = {
+    queryArgs: {
+      ...products.options?.queryArgs,
+      filter: newFilter,
+    },
+  };
+  products.fillProducts(newOptions);
+}
 export default class SideBar {
   private sideBar = document.createElement('div');
   private products: Products;
@@ -67,6 +124,10 @@ export default class SideBar {
       menu?.classList.toggle('sidebar-container__types-menu_active');
       plus?.classList.toggle('plus_active');
     });
+
+    menu?.addEventListener('change', (event) =>
+      categoryHandler(event, this.products)
+    );
     return types;
   }
 
@@ -78,16 +139,18 @@ export default class SideBar {
     <div class='sidebar-container__price-container'>
       <input
       type='number'
-      step="0.5"
-      min="0"
-      default='0'
+      step="10"
+      min="10"
+      default='10'
+      placeholder='10'
       class='sidebar-container__price-range'>
       <span class='sidebar-container__title'>-</span>
       <input
       type='number'
-      step="0.5"
-      min="0"
-      default='1000'
+      step="10"
+      min="20"
+      default='20'
+      placeholder='20'
       class='sidebar-container__price-range'>
     </input>
     `;
@@ -105,6 +168,7 @@ export default class SideBar {
         target.value = secondInput.value;
         secondInput.value = val;
       }
+      priceHandle(firstInput, secondInput, this.products);
     });
 
     secondInput?.addEventListener('change', (event) => {
@@ -114,6 +178,7 @@ export default class SideBar {
         target.value = firstInput.value;
         firstInput.value = val;
       }
+      priceHandle(firstInput, secondInput, this.products);
     });
 
     return sliderElement;
@@ -128,6 +193,19 @@ export default class SideBar {
     `;
     this.sideBar.append(this.getCategories());
     this.sideBar.append(this.getPrices());
+
+    const searchBox = this.sideBar.querySelector('.sidebar-container__search')
+      ?.children[0] as HTMLElement;
+    searchBox.addEventListener('change', (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const newOptions: typeof this.products.options = {
+        queryArgs: {
+          ...this.products.options?.queryArgs,
+          ['text.en-us']: target.value,
+        },
+      };
+      this.products.fillProducts(newOptions);
+    });
   }
 
   public getElement() {

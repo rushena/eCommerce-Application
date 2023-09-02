@@ -20,17 +20,15 @@
 .sidebar-container__types-toggle .plus div {
   width: 16px;
   border-radius: 1px;
-  border: 1px solid #17696A;
+  border: 1px solid #17696a;
   transition: 300ms ease-in-out;
 }
 
-.sidebar-container__types-toggle .plus div:nth-child(2)
-{
+.sidebar-container__types-toggle .plus div:nth-child(2) {
   transform: translateY(-1px) rotateZ(90deg);
 }
 
-.sidebar-container__types-toggle .plus.plus_active div:nth-child(2)
-{
+.sidebar-container__types-toggle .plus.plus_active div:nth-child(2) {
   transform: translateY(-2px);
 }
 
@@ -73,21 +71,21 @@
 .checkmark {
   height: 16px;
   width: 16px;
-  border: 2px solid #B3B7BC;
+  border: 2px solid #b3b7bc;
   border-radius: 4px;
 }
 
 .type-menu__item:hover input ~ .checkmark {
-  background-color: #B3B7BC;
+  background-color: #b3b7bc;
 }
 
 .type-menu__item input:checked ~ .checkmark {
   border: none;
-  background-color: #17696A;
+  background-color: #17696a;
 }
 
 .checkmark:before {
-  content: "";
+  content: '';
   display: none;
 }
 
