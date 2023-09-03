@@ -1,72 +1,27 @@
 import '../../assets/css/sidebar.css';
 import '../../assets/css/slider.css';
 import Products from './products';
+import Paging from './paging';
+import Navigation from './topBarNavigation';
+import {
+  categoryHandler,
+  priceHandle,
+  subCategoryHandler,
+} from '../../Controller/products/sideBarHandlers';
+import { Category } from '../../types/product.type';
 // import { PriceSlider } from './priceSliders';
 // import { createDOMElement } from '../../Utility/createElement';
 
-function categoryHandler(event: Event, products: Products) {
-  const target = event.target as HTMLElement;
-  const parent = target.closest('.type-menu__item');
-  const categoryText = parent?.children[2].textContent;
-  if (!categoryText) return;
-  const categoryID = products.categories.find((value) => {
-    if (value.name === categoryText) return true;
-  })?.id;
-  const newFilter = products.options?.queryArgs?.filter;
-  if (!newFilter || !Array.isArray(newFilter)) return;
-  if (products.currentCategories.includes(categoryText)) {
-    const index = products.currentCategories.indexOf(categoryText);
-    newFilter.splice(index, 1);
-    products.currentCategories.splice(index, 1);
-  } else {
-    products.currentCategories.push(categoryText);
-    newFilter.push(`categories.id:"${categoryID}"`);
-  }
-  const newOptions: typeof products.options = {
-    queryArgs: {
-      ...products.options?.queryArgs,
-      filter: newFilter,
-    },
-  };
-  products.fillProducts(newOptions);
-}
-
-function priceHandle(
-  firstInput: HTMLInputElement,
-  secondInput: HTMLInputElement,
-  products: Products
-) {
-  const newFilter = products.options?.queryArgs?.filter;
-  if (!newFilter || !Array.isArray(newFilter)) return;
-  if (!products.currentCategories.includes('Price')) {
-    products.currentCategories.push('Price');
-  } else {
-    const index = products.currentCategories.indexOf('Price');
-    newFilter.splice(index, 1);
-  }
-  newFilter.push(
-    `variants.price.centAmount:range (${
-      firstInput.value === '' ? firstInput.placeholder : firstInput.value
-    } to ${
-      secondInput.value === '' ? secondInput.placeholder : secondInput.value
-    })`
-  );
-  console.log(products.currentCategories);
-  console.log(newFilter);
-  const newOptions: typeof products.options = {
-    queryArgs: {
-      ...products.options?.queryArgs,
-      filter: newFilter,
-    },
-  };
-  products.fillProducts(newOptions);
-}
 export default class SideBar {
   private sideBar = document.createElement('div');
   private products: Products;
+  private paging: Paging;
+  private navigation: Navigation;
 
-  constructor(products: Products) {
+  constructor(products: Products, paging: Paging, navigation: Navigation) {
     this.products = products;
+    this.paging = paging;
+    this.navigation = navigation;
   }
 
   private getCategories() {
@@ -80,55 +35,96 @@ export default class SideBar {
         <div></div>
       </div>
     </div>
-    <div class='sidebar-container__types-menu'>
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Furniture</div>
-      </label>
-
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Clothes</div>
-      </label>
-
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Stationery</div>
-      </label>
-
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Electronics</div>
-      </label>
-
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Hobby</div>
-      </label>
-
-      <label class="type-menu__item">
-        <input type="checkbox">
-        <span class="checkmark"></span>
-        <div>Other</div>
-      </label>
-    </div>
     `;
-    const menu = types.querySelector('.sidebar-container__types-menu');
+    const categoiesMenuElement = document.createElement('div');
+    categoiesMenuElement.classList.add('sidebar-container__types-menu');
+    const parents = this.products.categories.filter((value) => {
+      if (value.parent === null) return true;
+      return false;
+    });
+    parents.forEach((item) => {
+      const categoryElement = document.createElement('label');
+      categoryElement.classList.add('type-menu__item');
+      categoryElement.innerHTML = `
+      <input type="radio" name="radio">
+      <span class="checkmark"></span>
+      <div>${item.name}</div>
+      `;
+      categoiesMenuElement.append(categoryElement);
+    });
+    types.append(categoiesMenuElement);
+
     const plus = types.querySelector('.plus');
     types.addEventListener('click', () => {
-      menu?.classList.toggle('sidebar-container__types-menu_active');
+      categoiesMenuElement?.classList.toggle(
+        'sidebar-container__types-menu_active'
+      );
+      plus?.classList.toggle('plus_active');
+    });
+    const bindedGetSubCategories = this.getSubCategories.bind(this);
+    categoiesMenuElement?.addEventListener('click', (event) =>
+      categoryHandler(
+        event,
+        this.products,
+        this.paging,
+        this.navigation,
+        bindedGetSubCategories,
+        types as HTMLDivElement
+      )
+    );
+    return types;
+  }
+
+  private getSubCategories(categoryList: Category[]) {
+    let subCategory = document.querySelector(
+      '.sidebar-container__sub-category-container'
+    ) as HTMLDivElement | null;
+    if (subCategory === null) {
+      subCategory = document.createElement('div');
+      subCategory.classList.add('sidebar-container__sub-category-container');
+    }
+    subCategory.innerHTML = `
+    <div class='sidebar-container__sub-category-toggle'>
+      <span class='sidebar-container__title'>Sub categories</span>
+      <div class='plus'>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    `;
+    const categoiesMenuElement = document.createElement('div');
+    categoiesMenuElement.classList.add('sidebar-container__sub-category-menu');
+    categoryList.forEach((item) => {
+      const categoryElement = document.createElement('label');
+      categoryElement.classList.add('sub-category-menu__item');
+      categoryElement.innerHTML = `
+      <input type="checkbox" name="radio">
+      <span class="checkmark"></span>
+      <div>${item.name}</div>
+      `;
+      categoiesMenuElement.append(categoryElement);
+    });
+    subCategory.append(categoiesMenuElement);
+
+    const plus = subCategory.querySelector('.plus');
+    subCategory.addEventListener('click', () => {
+      categoiesMenuElement?.classList.toggle(
+        'sidebar-container__sub-category-menu_active'
+      );
       plus?.classList.toggle('plus_active');
     });
 
-    menu?.addEventListener('change', (event) =>
-      categoryHandler(event, this.products)
+    categoiesMenuElement?.addEventListener('click', (event) =>
+      subCategoryHandler.call(
+        this,
+        event,
+        this.products,
+        this.paging,
+        this.navigation,
+        categoryList
+      )
     );
-    return types;
+    return subCategory;
   }
 
   private getPrices() {
@@ -149,8 +145,8 @@ export default class SideBar {
       type='number'
       step="10"
       min="20"
-      default='20'
-      placeholder='20'
+      defaultValue='1000'
+      placeholder='1000'
       class='sidebar-container__price-range'>
     </input>
     `;
@@ -168,7 +164,7 @@ export default class SideBar {
         target.value = secondInput.value;
         secondInput.value = val;
       }
-      priceHandle(firstInput, secondInput, this.products);
+      priceHandle(firstInput, secondInput, this.products, this.paging);
     });
 
     secondInput?.addEventListener('change', (event) => {
@@ -178,7 +174,7 @@ export default class SideBar {
         target.value = firstInput.value;
         firstInput.value = val;
       }
-      priceHandle(firstInput, secondInput, this.products);
+      priceHandle(firstInput, secondInput, this.products, this.paging);
     });
 
     return sliderElement;
@@ -196,7 +192,7 @@ export default class SideBar {
 
     const searchBox = this.sideBar.querySelector('.sidebar-container__search')
       ?.children[0] as HTMLElement;
-    searchBox.addEventListener('change', (event: Event) => {
+    searchBox.addEventListener('change', async (event: Event) => {
       const target = event.target as HTMLInputElement;
       const newOptions: typeof this.products.options = {
         queryArgs: {
@@ -204,7 +200,8 @@ export default class SideBar {
           ['text.en-us']: target.value,
         },
       };
-      this.products.fillProducts(newOptions);
+      await this.products.fillProducts(newOptions);
+      this.paging.setLength(this.products.total);
     });
   }
 

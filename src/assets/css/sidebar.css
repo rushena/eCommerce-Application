@@ -1,14 +1,16 @@
 .catalog__sidebar {
   min-width: 200px;
+  max-width: 300px;
   padding: 15px;
   display: none;
 }
 
 .catalog__sidebar_active {
-  display: block
+  display: block;
 }
 
-.sidebar-container__types-toggle {
+.sidebar-container__types-toggle,
+.sidebar-container__sub-category-toggle {
   margin: 16px 0;
   display: flex;
   justify-content: space-between;
@@ -21,30 +23,36 @@
   line-height: 160%;
 }
 
-.sidebar-container__types-toggle .plus div {
+.sidebar-container__types-toggle .plus div,
+.sidebar-container__sub-category-toggle .plus div {
   width: 16px;
   border-radius: 1px;
   border: 1px solid #17696a;
   transition: 300ms ease-in-out;
 }
 
-.sidebar-container__types-toggle .plus div:nth-child(2) {
+.sidebar-container__types-toggle .plus div:nth-child(2), 
+.sidebar-container__sub-category-toggle .plus div:nth-child(2) {
   transform: translateY(-1px) rotateZ(90deg);
 }
 
-.sidebar-container__types-toggle .plus.plus_active div:nth-child(2) {
+.sidebar-container__types-toggle .plus.plus_active div:nth-child(2),
+.sidebar-container__sub-category-toggle .plus.plus_active div:nth-child(2) {
   transform: translateY(-2px);
 }
 
-.sidebar-container__types-menu {
+.sidebar-container__types-menu,
+.sidebar-container__sub-category-menu {
   display: none;
 }
 
-.sidebar-container__types-menu_active {
+.sidebar-container__types-menu_active,
+.sidebar-container__sub-category-menu_active {
   display: block;
 }
 
-.type-menu__item {
+.type-menu__item,
+.sub-category-menu__item {
   display: flex;
   position: relative;
   padding: 0;
@@ -60,11 +68,13 @@
   line-height: 150%;
 }
 
-.type-menu__item div {
+.type-menu__item div,
+.sub-category-menu__item div {
   margin: 0 0 0 12px;
 }
 
-.type-menu__item input {
+.type-menu__item input,
+.sub-category-menu__item input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -79,29 +89,33 @@
   border-radius: 4px;
 }
 
-.type-menu__item:hover input ~ .checkmark {
+.type-menu__item:hover input ~ .checkmark,
+.sub-category-menu__item:hover input ~ .checkmark {
   background-color: #b3b7bc;
 }
 
-.type-menu__item input:checked ~ .checkmark {
+.type-menu__item input:checked ~ .checkmark,
+.sub-category-menu__item input:checked ~ .checkmark {
   border: none;
   background-color: #17696a;
 }
 
-.checkmark:before {
+.checkmark:after {
   content: '';
   display: none;
 }
 
-.type-menu__item input:checked ~ .checkmark:before {
+.type-menu__item input:checked ~ .checkmark:after,
+.sub-category-menu__item input:checked ~ .checkmark:after{
   display: block;
 }
 
-.type-menu__item .checkmark:before {
+.type-menu__item .checkmark:after,
+.sub-category-menu__item .checkmark:after{
   width: 4px;
   height: 9px;
   border: solid white;
   border-radius: 1px;
   border-width: 0 2px 2px 0;
-  transform: translateX(5px) translateY(1px) rotate(45deg);
+  transform: translateX(5px) translateY(2px) rotate(45deg);
 }

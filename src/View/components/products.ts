@@ -2,18 +2,15 @@ import returnProducts from '../../Controller/products/returnProducts';
 import { ProductProjection } from '@commercetools/platform-sdk';
 import { getOptions } from '../../Controller/products/products.type';
 import { getCategories } from '../../Controller/products/getCategorie';
+import { cartSVG } from '../../assets/img/cart';
 import '../../assets/css/products.css';
+import { Category, CurrentCategory } from '../../types/product.type';
 
-interface Category {
-  id: string;
-  name?: string;
-  parent: null | Category;
-}
 export default class Products {
-  private products = document.createElement('div');
+  private productsElement = document.createElement('div');
   public options: getOptions;
   public categories: Category[] = [];
-  public currentCategories: string[] = [];
+  public currentCategories: CurrentCategory[] = [];
   public perPage = 15;
   public total = 0;
 
@@ -39,6 +36,12 @@ export default class Products {
       $${product.masterVariant.prices![0].value.centAmount}
       </span>
     </div>
+    <div class='products-list__card__add-to-cart'>
+    <a class='products-list__card__cartSVG' href="/cart">
+      ${cartSVG()}
+    </a>
+    <span>Add to cart</span>
+    </div>
     `;
     target.append(card);
   }
@@ -46,15 +49,15 @@ export default class Products {
     if (options) {
       this.options = options;
     }
-    this.products.innerHTML = `Wait for the list to load`;
+    this.productsElement.innerHTML = `Wait for the list to load`;
     const errorMessage = 'Error occurred';
     try {
       const productList = await returnProducts(this.options);
       const categorie = await getCategories();
       this.total = productList!.total!;
-      this.products.innerHTML = ``;
+      this.productsElement.innerHTML = ``;
       if (productList === null || categorie === null) {
-        this.products.innerHTML = errorMessage;
+        this.productsElement.innerHTML = errorMessage;
       } else {
         this.categories = categorie.body.results.map((value) => {
           if (value.parent)
@@ -66,7 +69,7 @@ export default class Products {
           return { id: value.id, name: value.name['en-US'], parent: null };
         });
         productList.list.forEach((product) => {
-          this.addCard(this.products, product);
+          this.addCard(this.productsElement, product);
         });
       }
     } catch (error) {
@@ -79,8 +82,8 @@ export default class Products {
       this.options = options;
     }
     await this.fillProducts(this.options);
-    this.products.classList.add('catalog__products');
-    this.products.classList.add('products-list');
-    return this.products;
+    this.productsElement.classList.add('catalog__products');
+    this.productsElement.classList.add('products-list');
+    return this.productsElement;
   }
 }

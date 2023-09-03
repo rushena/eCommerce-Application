@@ -15,7 +15,11 @@ export default class Paging {
     this.products = products;
     this.perpage = products.perPage;
     this.length = Math.ceil(products.total / this.perpage);
-    console.log(this.length);
+  }
+
+  public setLength(total: number) {
+    this.length = Math.ceil(total / this.perpage);
+    this.fillPaging();
   }
 
   public setPerPage(perpage: number) {
@@ -123,6 +127,9 @@ export default class Paging {
 
   public fillPaging() {
     const pagingList = this.getPagingList();
+    while (this.paging.firstChild) {
+      this.paging.removeChild(this.paging.firstChild);
+    }
     this.paging.innerHTML = '';
     pagingList.forEach((value) => {
       const item = document.createElement('div');

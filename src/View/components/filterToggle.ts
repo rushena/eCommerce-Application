@@ -9,7 +9,11 @@ export default class Toggle {
       let target = event.target as HTMLElement;
       target = target.closest('.catalog__topbar__filters-toggle')!;
       const filters = document.querySelector('.sidebar-container');
-      target.children[0].textContent = 'Hide filters';
+      if (target.children[0].textContent === 'Hide filters') {
+        target.children[0].textContent = 'Show filters';
+      } else {
+        target.children[0].textContent = 'Hide filters';
+      }
       filters?.classList.toggle('catalog__sidebar_active');
     });
   }

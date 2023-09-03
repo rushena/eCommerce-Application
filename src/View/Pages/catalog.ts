@@ -4,6 +4,7 @@ import Perpage from '../components/perpage';
 import Sorting from '../components/sorting';
 import Paging from '../components/paging';
 import Toggle from '../components/filterToggle';
+import Navigation from '../components/topBarNavigation';
 import '../../assets/css/catalog.css';
 import '../../assets/css/topbar.css';
 
@@ -31,8 +32,12 @@ export class Catalog {
     return paging;
   }
 
-  private renderTopToolbar(product: Products): HTMLElement {
-    console.log(product.total);
+  private getNavigation(product: Products): Navigation {
+    const navigation = new Navigation(product);
+    return navigation;
+  }
+
+  private renderTopToolbar(product: Products): [HTMLElement, Paging] {
     const paging = this.getPaging(product);
     const perpage = this.getPerpage(product, paging);
     const topbar = document.createElement('div');
@@ -43,11 +48,15 @@ export class Catalog {
       perpage.getElement(),
       paging.getElement()
     );
-    return topbar;
+    return [topbar, paging];
   }
 
-  private getSideBar(products: Products): HTMLElement {
-    const sideBar = new SideBar(products);
+  private getSideBar(
+    products: Products,
+    paging: Paging,
+    navigation: Navigation
+  ): HTMLElement {
+    const sideBar = new SideBar(products, paging, navigation);
     return sideBar.getElement();
   }
 
@@ -81,9 +90,15 @@ export class Catalog {
         sort: 'price asc',
       },
     });
-    middleSection.append(this.getSideBar(products), productsElement);
+    const navigation = this.getNavigation(products);
+    const [topToolBar, paging] = this.renderTopToolbar(products);
+    middleSection.append(
+      this.getSideBar(products, paging, navigation),
+      productsElement
+    );
     this.catalog.append(
-      this.renderTopToolbar(products),
+      navigation.getElement(),
+      topToolBar,
       middleSection,
       this.renderBotToolbar()
     );
