@@ -197,7 +197,7 @@ export default class SideBar {
       const newOptions: typeof this.products.options = {
         queryArgs: {
           ...this.products.options?.queryArgs,
-          ['text.en-us']: target.value,
+          ['text.en-US']: target.value,
         },
       };
       await this.products.fillProducts(newOptions);

@@ -16,3 +16,19 @@
   align-items: center;
   cursor: pointer;
 }
+
+@media (max-width: 870px) {
+  .catalog__topbar__sorting__description {
+    display: none;
+  }
+  @media (max-width: 7500px) {
+    .catalog__topbar__perpage label {
+      display: none;
+    }
+  }
+  @media (max-width: 7500px) {
+    .catalog__topbar {
+      flex-wrap: wrap;
+    }
+  }
+}
