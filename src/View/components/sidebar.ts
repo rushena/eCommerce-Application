@@ -127,6 +127,85 @@ export default class SideBar {
     return subCategory;
   }
 
+  private getColors() {
+    const colorList = [
+      '#000000',
+      '#C0DDED',
+      '#FCD164',
+      '#F75151',
+      '#0C2C7E',
+      '#D8C1AD',
+      '#874E19',
+      '#9A9494',
+      '#A27AC9',
+      '#67BA92',
+      '#FB9620',
+      '#F1F1F1',
+    ];
+    const colorNames = [
+      'Black',
+      'Blue-gray',
+      'Yellow',
+      'Red',
+      'Dark blue',
+      'Beige',
+      'Brown',
+      'Gray',
+      'Purple',
+      'Green',
+      'Orange',
+      'White',
+    ];
+    const colors = document.createElement('div');
+    colors.classList.add('sidebar-container__colors-container');
+    colors.innerHTML = `
+    <div class='sidebar-container__colors-toggle'>
+      <span class='sidebar-container__title'>Colors</span>
+      <div class='plus'>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    `;
+    const categoiesMenuElement = document.createElement('div');
+    categoiesMenuElement.classList.add('sidebar-container__colors-menu');
+    colorNames.forEach((item, index) => {
+      const categoryElement = document.createElement('label');
+      categoryElement.classList.add('colors-menu__item');
+      categoryElement.innerHTML = `
+      <input type="checkbox">
+      <span class="checkmark"></span>
+      <span class="color-sample"></span>
+      <div>${item}</div>
+      `;
+      const checkmark = categoryElement.querySelector(
+        '.color-sample'
+      ) as HTMLElement;
+      checkmark.style.backgroundColor = colorList[index];
+      categoiesMenuElement.append(categoryElement);
+    });
+    colors.append(categoiesMenuElement);
+
+    const plus = colors.querySelector('.plus');
+    colors.addEventListener('click', () => {
+      categoiesMenuElement?.classList.toggle(
+        'sidebar-container__colors-menu_active'
+      );
+      plus?.classList.toggle('plus_active');
+    });
+
+    /* categoiesMenuElement?.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const parent = target.closest('.colors-menu__item');
+      const colorInput =
+        colorNames[
+          [...categoiesMenuElement.children].indexOf(parent!)
+        ].toLowerCase();
+      colorHandler(colorInput, this.products, this.paging);
+    }); */
+    return colors;
+  }
+
   private getPrices() {
     const sliderElement = document.createElement('div');
     sliderElement.classList.add('sidebar-container__price');
@@ -188,6 +267,7 @@ export default class SideBar {
     </div>
     `;
     this.sideBar.append(this.getCategories());
+    this.sideBar.append(this.getColors());
     this.sideBar.append(this.getPrices());
 
     const searchBox = this.sideBar.querySelector('.sidebar-container__search')

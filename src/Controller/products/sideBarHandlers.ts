@@ -179,3 +179,27 @@ export async function priceHandle(
   await products.fillProducts(newOptions);
   paging.setLength(products.total);
 }
+
+export async function colorHandler(
+  color: string,
+  products: Products,
+  paging: Paging
+) {
+  const newFilter = products.options?.queryArgs?.filter;
+  if (!newFilter || !Array.isArray(newFilter)) return;
+  if (!products.currentCategories.includes('Color')) {
+    products.currentCategories.push('Color');
+  } else {
+    const index = products.currentCategories.indexOf('Color');
+    newFilter.splice(index, 1);
+  }
+  newFilter.push(`variants.attributes.color:"${color}"`);
+  const newOptions: typeof products.options = {
+    queryArgs: {
+      ...products.options?.queryArgs,
+      filter: newFilter,
+    },
+  };
+  await products.fillProducts(newOptions);
+  paging.setLength(products.total);
+}
