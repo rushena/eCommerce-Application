@@ -69,8 +69,6 @@ export async function getProductData(id: string){
 export async function setProductMainData(id: string, productPage: HTMLDivElement){
   await getProductData(id)
   .then((body)=>{
-    setID(id, productPage);
-
     const productName = body.name["en-US"];
     setProductName(productName, productPage);
   })
@@ -164,16 +162,16 @@ function changeSelectedImage(additionalImage: HTMLImageElement, src: string){
 // скачут изображения доделать
 function setOtherImages(srcArray: ProductImages[], productPage: HTMLDivElement){
   const otherImages = productPage.querySelector('.other-images') as HTMLDivElement;
-  srcArray.forEach((src)=>{
+  srcArray.forEach((src, index)=>{
     const additionalImage = document.createElement('img');
-    additionalImage.className = `product-image_size_small`;
+    additionalImage.className = `product-image_size_small product-image_${index+2}`;
     additionalImage.setAttribute('src', src.url);
     additionalImage.setAttribute('alt', 'product-image');
     additionalImage.addEventListener('click', ()=>{
       changeSelectedImage(additionalImage, src.url);
     });
     otherImages.appendChild(additionalImage);
-  })
+ })
 }
 
 function setProductCurrentPrice(currentPrice: string, productPage: HTMLDivElement){

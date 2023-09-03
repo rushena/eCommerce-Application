@@ -66,7 +66,7 @@ return productDetails;
 
 export default function getProductPage (id: string) {
   const productPage = document.createElement('div');
-  productPage.className = `product-card`;
+  productPage.className = `product-card id_${id}`;
   productPage.innerHTML = `
   <h2 class="product-name">Basic hooded sweatshirt in pink</h2>
   <div class="tabs">
