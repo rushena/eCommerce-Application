@@ -157,6 +157,14 @@ export function changeSelectedImage(additionalImage: HTMLImageElement, src: stri
 
 // скачут изображения доделать
 function setOtherImages(srcArray: ProductImages[], productPage: HTMLDivElement){
+  if(srcArray.length > 1){
+    const mainImageContainer = productPage.querySelector('.main-image-container') as HTMLDivElement;
+    mainImageContainer.insertAdjacentHTML('beforeend', 
+    `<div class="image-change">
+      <div class="previous-image"></div>
+      <div class="next-image"></div>
+    </div>`)
+  }
   const otherImages = productPage.querySelector('.other-images') as HTMLDivElement;
   srcArray.forEach((src, index)=>{
     const additionalImage = document.createElement('img');
