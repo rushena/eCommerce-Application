@@ -197,3 +197,38 @@ input.quantity {
   color: rgba(66, 69, 81, 1);
   margin-bottom: 10px;
 }
+
+.main-image-container {
+  position: relative;
+}
+
+.previous-image,
+.next-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.previous-image:hover,
+.next-image:hover {
+  cursor: pointer;
+}
+
+.previous-image{
+  background-image: url(./../img/prev-btn.png);
+}
+
+.next-image {
+  background-image: url(./../img/next-btn.png);
+}
+
+.image-change {
+  padding: 0 30px;
+  width: 46vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+}

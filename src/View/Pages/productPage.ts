@@ -1,11 +1,18 @@
 import { setProductMainData, setProductInfo, setProductDetails } from "../../Controller/apiRoot/getProduct";
+import { showNextImage, showPreviousImage } from "../components/Slider";
 
 function getProductInfoLayout(id: string){
   const productInfo = document.createElement('div');
 productInfo.className = `product-info`;
 productInfo.innerHTML = `
 <div class="product-gallery">
-          <img class="product-image" alt="product-image">
+  <div class="main-image-container">
+    <img class="product-image" alt="product-image">
+    <div class="image-change">
+      <div class="previous-image"></div>
+      <div class="next-image"></div>
+    </div>
+  </div> 
           <div class="other-images">
             <img class="product-image_size_small product-image_1 product-image_selected" alt="image">
           </div>

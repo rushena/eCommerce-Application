@@ -1,4 +1,5 @@
-import { getApiRoot } from "./generalClient"
+import { getApiRoot } from "./generalClient";
+import { showNextImage,showPreviousImage } from "../../View/components/Slider";
 
 type ProductImages = {
   url: string,
@@ -126,11 +127,6 @@ function setMainVariant(mainVariant, productPage: HTMLDivElement){
     }  
 }
 
-function setID(id: string, productPage: HTMLDivElement){
-  const productCard = productPage.querySelector('.product-card') as HTMLDivElement;
-  productCard.classList.add(`id_${id}`);
-}
-
 function setProductName(productName: string, productPage: HTMLDivElement){
   const productNameField = productPage.querySelector('.product-name') as HTMLHeadingElement;
     productNameField.innerHTML = productName;
@@ -147,15 +143,15 @@ function setProductMainImage(src: string, productPage: HTMLDivElement){
   })
 }
 
-function changeSelectedImage(additionalImage: HTMLImageElement, src: string){
-  const otherImagesArray = productPage.querySelectorAll('.product-image_size_small');
+export function changeSelectedImage(additionalImage: HTMLImageElement, src: string){
+  const otherImagesArray = document.querySelectorAll('.product-image_size_small');
       otherImagesArray.forEach((image)=>{
         if(image.classList.contains('product-image_selected')){
           image.classList.remove('product-image_selected')
         }
       });
       additionalImage.classList.add('product-image_selected');
-      const mainImage = productPage.querySelector('.product-image') as HTMLImageElement;
+      const mainImage = document.querySelector('.product-image') as HTMLImageElement;
       mainImage.setAttribute('src', src)
 }
 
@@ -172,6 +168,17 @@ function setOtherImages(srcArray: ProductImages[], productPage: HTMLDivElement){
     });
     otherImages.appendChild(additionalImage);
  })
+
+ const totalImageAmount = productPage.querySelectorAll('.product-image_size_small').length;
+console.log(totalImageAmount)
+const previousImageButton = productPage.querySelector('.previous-image') as HTMLDivElement;
+previousImageButton.addEventListener('click', ()=>{
+  showPreviousImage(totalImageAmount);
+})
+const nextImageButton = productPage.querySelector('.next-image') as HTMLDivElement;
+nextImageButton.addEventListener('click', () => {
+  showNextImage(totalImageAmount);
+})
 }
 
 function setProductCurrentPrice(currentPrice: string, productPage: HTMLDivElement){
