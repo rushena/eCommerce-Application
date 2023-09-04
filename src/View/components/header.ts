@@ -66,6 +66,8 @@ class Header {
     this.element = header;
   }
   private defineLoginElementSVG(): string {
+    if (!this.isLogged)
+      return `<a href='/user/authorization'>${logInSVG()}</a>`;
     return `<a href='/user'>${logInSVG()}</a>`;
   }
   private defineMobileLoginElementActions(): string {
