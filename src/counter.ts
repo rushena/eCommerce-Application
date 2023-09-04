@@ -1,4 +1,4 @@
-import { registerNewCustomer } from './Controller/registration/registerationClient';
+/* import { registerNewCustomer } from './Controller/registration/registerationClient';
 import { authentificateCustomer } from './Controller/login/loginClient';
 import { tests } from './Controller/apiRoot/testInterractions/testClient';
 
@@ -40,3 +40,4 @@ export function registrationTest() {
     });
   });
 }
+ */

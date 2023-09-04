@@ -1,0 +1,41 @@
+.sidebar-container__price {
+  width: 100%;
+  padding: calc(9px) 0px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-container__price-container input {
+  padding: 5px;
+  height: auto;
+  width: 45%;
+}
+
+.price-slider__rail {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #d7dadd;
+}
+
+.price-slider__connect {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #17696a;
+}
+
+.price-slider__handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  background-color: #17696a;
+  transform: translateY(-5px);
+}
+
+.price-slider__handle:first-of-type {
+  left: 20px;
+}

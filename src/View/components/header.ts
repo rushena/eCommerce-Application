@@ -1,7 +1,7 @@
 import './../../assets/css/header.css';
 import { cartSVG } from '../../assets/img/cart';
 import { logInSVG } from '../../assets/img/login';
-import { logOutSVG } from '../../assets/img/logout';
+// import { logOutSVG } from '../../assets/img/logout';
 import { menuHandler } from '../../Controller/header/header';
 
 class Header {
@@ -66,7 +66,7 @@ class Header {
     this.element = header;
   }
   private defineLoginElementSVG(): string {
-    return this.isLogged ? logOutSVG() : logInSVG();
+    return `<a href='/user'>${logInSVG()}</a>`;
   }
   private defineMobileLoginElementActions(): string {
     if (this.isLogged) {

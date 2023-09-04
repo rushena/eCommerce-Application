@@ -1,0 +1,9 @@
+.catalog__middle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.catalog__products {
+  flex-grow: 1;
+}

@@ -24,6 +24,7 @@ main {
   max-width: 1280px;
   margin: 0 auto;
   font-family: 'Lato', sans-serif;
+  padding: 30px 0;
 }
 
 label {
@@ -81,74 +82,11 @@ input.input-invalid {
     font-size: 36px;
   }
 }
-* {
-  box-sizing: border-box;
-}
 
-div,
-h2,
-h6,
-p {
-  margin: 0px;
-  padding: 0px;
-}
-
-main {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 30px 0;
-  font-family: 'Lato', sans-serif;
-}
-
-label {
-  display: block;
-  font-size: 16px;
-}
-
-label sup {
-  color: #ff4242;
-}
-
-input[type='text'],
-input[type='number'],
-input[type='password'],
-input[type='email'],
-select {
-  border: 1px solid #d7dadd;
-  border-radius: 4px;
-  height: 52px;
-  padding: 0px 15px;
+hr {
   width: 100%;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border: 1px solid #17696a66;
-  box-shadow: 0px 4px 4px -4px #1e212c08;
-  box-shadow: 0px 12px 10px -6px #17696a0a;
-  box-shadow: 0px 30px 24px -10px #17696a0d;
-  box-shadow: 0px 80px 80px -20px #17696a14;
-}
-
-input.input-invalid {
-  border: 1px solid rgba(255, 66, 66, 1);
-}
-
-.api-error {
-  height: 32px;
-}
-
-.api-error_color_red {
-  background-color: rgba(255, 0, 0, 0.15);
-  border: 1px solid rgba(255, 0, 0, 0.1);
-  border-radius: 8px;
-  color: rgba(172, 16, 16, 1);
-  font-size: 12px;
-}
-
-@media (max-width: 695px) {
-  h2 {
-    font-size: 36px;
-  }
+button:hover {
+  cursor: pointer;
 }

@@ -6,6 +6,8 @@ import createLoginPage from './Pages/login';
 import createRegistrationPage from './Pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
+import { ProfilePageView } from './Pages/Profile.page';
+import { Catalog } from './Pages/catalog';
 
 interface IView {
   renderStartElements: () => void;
@@ -18,6 +20,7 @@ export class View implements IView {
   static readonly $mainPage = new MainPage().getElement();
   static readonly $loginPage = createLoginPage();
   static readonly $RegistrationPage = createRegistrationPage();
+  static $catalogPage = new Catalog();
 
   renderStartElements(): void {
     const check = localStorage.getItem('check') === 'true';
@@ -36,6 +39,24 @@ export class View implements IView {
   static renderMainPage() {
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
+  }
+
+  static renderProfilePage() {
+    /* const isAuthCustomer: boolean = Boolean(
+      window.localStorage.getItem('check')
+    ); */
+    const isAuthCustomer = window.localStorage.getItem('check');
+
+    if (isAuthCustomer !== 'true') {
+      const link = document.createElement('a');
+      link.setAttribute('href', '/user/authorization');
+      link.click();
+    } else {
+      const $page = new ProfilePageView();
+
+      View.$mainContent.innerHTML = '';
+      View.$mainContent.append($page.getElement());
+    }
   }
 
   static renderRegistrationPage() {
@@ -62,9 +83,15 @@ export class View implements IView {
 
   static renderLogout() {
     const header = Header.getInstance();
+    localStorage.setItem('check', 'false');
     header.loginElement = false;
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
+  }
+
+  static renderCatalog(queryParams?: URLSearchParams) {
+    View.$mainContent.innerHTML = '';
+    View.$mainContent.append(View.$catalogPage.getElement(queryParams));
   }
 
   static render404Page() {

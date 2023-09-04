@@ -6,6 +6,7 @@ import './assets/css/login-page.css';
 import './assets/img/Mask group.jpg';
 import './assets/img/sign-in.jpg';
 import './assets/img/solar_eye-broken.png';
+
 /* import createLoginPage from './View/pages/login';
 import createRegistrationPage from './View/pages/registration';
 import Header from './View/components/header.ts';
