@@ -205,9 +205,7 @@ export default class SideBar {
       const target = event.target as HTMLElement;
       const parent = target.closest('.colors-menu__item');
       const colorInput =
-        colorNames[
-          [...categoiesMenuElement.children].indexOf(parent!)
-        ].toLowerCase();
+        colorNames[[...categoiesMenuElement.children].indexOf(parent!)]; //.toLowerCase();
       colorHandler(colorInput, this.products, this.paging);
     });
     return colors;

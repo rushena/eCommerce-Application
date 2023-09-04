@@ -206,14 +206,14 @@ export async function colorHandler(
   if (!newFilter || !Array.isArray(newFilter)) return;
   if (!products.currentCategories.includes('Color')) {
     products.currentCategories.push('Color');
-    newFilter.push(`variants.attributes.color:"${color}"`);
+    newFilter.push(`variants.attributes.color.key:"${color}"`);
   } else {
     const index = products.currentCategories.indexOf('Color');
     if (newFilter[index].includes(color)) {
       newFilter[index] = newFilter[index].replace(`,"${color}"`, '');
       newFilter[index] = newFilter[index].replace(`"${color}",`, '');
       newFilter[index] = newFilter[index].replace(`"${color}"`, '');
-      if (newFilter[index] === 'variants.attributes.color:') {
+      if (newFilter[index] === 'variants.attributes.color.key:') {
         newFilter.splice(index, 1);
         products.currentCategories.splice(index, 1);
       }
