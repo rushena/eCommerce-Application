@@ -6,11 +6,7 @@ import './assets/css/login-page.css';
 import './assets/img/Mask group.jpg';
 import './assets/img/sign-in.jpg';
 import './assets/img/solar_eye-broken.png';
-import getProductPage from './View/Pages/productPage';
 
-document.body.appendChild(
-  getProductPage('950ee7f6-b6d5-4d2a-82c2-8a9853138b37')
-);
 /* import createLoginPage from './View/pages/login';
 import createRegistrationPage from './View/pages/registration';
 import Header from './View/components/header.ts';

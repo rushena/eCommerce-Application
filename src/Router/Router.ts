@@ -34,6 +34,7 @@ export class Routing {
       '/user': {
         title: 'Account Information',
         renderFn: View.renderProfilePage,
+      },
       '/catalog': {
         title: 'catalog',
         renderFn: View.renderCatalog,

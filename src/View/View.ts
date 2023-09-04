@@ -1,12 +1,12 @@
 import { createFooter } from './components/footer';
 import Header from './components/header';
-import { PageNotFound } from './pages/404.page';
-import { MainPage } from './pages/Main.page';
-import createLoginPage from './pages/login';
-import createRegistrationPage from './pages/registration';
+import { PageNotFound } from './Pages/404.page';
+import { MainPage } from './Pages/Main.page';
+import createLoginPage from './Pages/login';
+import createRegistrationPage from './Pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
-import { ProfilePageView } from './pages/Profile.page';
+import { ProfilePageView } from './Pages/Profile.page';
 import { Catalog } from './Pages/catalog';
 
 interface IView {
