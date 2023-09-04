@@ -2,28 +2,13 @@ import {
   ClientBuilder,
   type PasswordAuthMiddlewareOptions,
   type HttpMiddlewareOptions,
-  TokenCache,
 } from '@commercetools/sdk-client-v2';
 import {
   createApiBuilderFromCtpClient,
   ApiRoot,
 } from '@commercetools/platform-sdk';
 import { User } from '../login/loginTypes';
-
-function store(initVal: string): TokenCache {
-  let value = initVal;
-  return {
-    get: () => {
-      return { token: value, expirationTime: 173000 };
-    },
-    set: (val) => {
-      value = val.token;
-      if (typeof window !== 'undefined') {
-        document.cookie = `accessToken=${val.token}; max-age=172000; path=/;`;
-      }
-    },
-  };
-}
+import { store } from './storeToken';
 
 // Configure authMiddlewareOptions
 const passwordAuthMiddlewareOptions = function (
