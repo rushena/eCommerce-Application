@@ -22,7 +22,7 @@ export class App implements IApp {
   start(): void {
     this.view.renderStartElements();
 
-    this.routing.get(document.location.pathname);
+    this.routing.get(document.location.pathname, true, document.location.href);
 
     document.addEventListener('click', (e: Event): void => {
       const $link: HTMLElement | null = (e.target as HTMLElement).closest('a');

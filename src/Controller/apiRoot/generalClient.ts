@@ -8,6 +8,7 @@ import {
   createApiBuilderFromCtpClient,
   ApiRoot,
 } from '@commercetools/platform-sdk';
+import { store } from './storeToken';
 
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: 'https://auth.europe-west1.gcp.commercetools.com',
@@ -19,6 +20,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   scopes: [
     'manage_my_shopping_lists:new-ecommerce-app view_categories:new-ecommerce-app manage_customer_groups:new-ecommerce-app manage_my_business_units:new-ecommerce-app manage_my_orders:new-ecommerce-app view_published_products:new-ecommerce-app create_anonymous_token:new-ecommerce-app manage_my_profile:new-ecommerce-app manage_my_quotes:new-ecommerce-app manage_my_quote_requests:new-ecommerce-app manage_customers:new-ecommerce-app manage_my_payments:new-ecommerce-app',
   ],
+  tokenCache: store(''),
   fetch,
 };
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
@@ -35,7 +37,7 @@ export const getApiRoot: () => ApiRoot = () => {
       ?.split('=')[1];
   }
   let ctpClient: Client;
-  // if user was logged in previously - has refresh token in cookie, we create client with this token
+  // if user was logged in previously - has access token in cookie, we create client with this token
   // else create unnamed client(might need to use AnonymousSession, once we get to shopping cart)
   if (accesscookieValue) {
     ctpClient = new ClientBuilder()
