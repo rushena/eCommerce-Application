@@ -55,8 +55,10 @@ export async function categoryHandler(
       if (item.parent?.id === categoryID) return true;
       return false;
     });
-    const subcategories = getSubCategories.call(products, subCategories);
-    sidebarElement.after(subcategories);
+    if (subCategories.length !== 0) {
+      const subcategories = getSubCategories.call(products, subCategories);
+      sidebarElement.after(subcategories);
+    }
 
     if (!window.location.href.includes('?')) {
       const parsedUrl = new URL(window.location.href);

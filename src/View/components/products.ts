@@ -5,6 +5,7 @@ import { getCategories } from '../../Controller/products/getCategorie';
 import { cartSVG } from '../../assets/img/cart';
 import '../../assets/css/products.css';
 import { Category, CurrentCategory } from '../../types/product.type';
+import getProductPage from '../Pages/productPage';
 
 export default class Products {
   private productsElement = document.createElement('div');
@@ -44,7 +45,10 @@ export default class Products {
     </div>
     `;
     card.addEventListener('click', () => {
-      // redirect to detailed page
+      const productPageElement = getProductPage(product.id);
+      history.pushState({}, '', `?detailed-product=${product.id}`);
+      document.body.children[3].innerHTML = '';
+      document.body.children[3].append(productPageElement);
     });
     target.append(card);
   }
