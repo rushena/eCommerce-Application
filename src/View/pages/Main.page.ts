@@ -26,7 +26,6 @@ export class MainPage {
 
   initSlider(block: HTMLElement): void {
     const slides = block.querySelectorAll('.main-promo__slider-item');
-    console.log(slides);
     let currentIndex = 0;
     const getNewCurentAndPrevIndex = () => {
       return [

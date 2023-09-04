@@ -1,0 +1,17 @@
+.catalog__topbar__pagination__item_current {
+  color: #17696a;
+}
+
+.catalog__topbar__pagination {
+  display: flex;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.catalog__topbar__pagination > * {
+  margin: 0 10px;
+}
+
+.catalog__topbar__pagination__item {
+  cursor: pointer;
+}
