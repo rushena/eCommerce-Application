@@ -179,9 +179,11 @@ export async function priceHandle(
   }
   newFilter.push(
     `variants.price.centAmount:range (${
-      firstInput.value === '' ? firstInput.placeholder : firstInput.value
+      firstInput.value === '' ? 0 : Number.parseFloat(firstInput.value) * 100
     } to ${
-      secondInput.value === '' ? secondInput.placeholder : secondInput.value
+      secondInput.value === ''
+        ? Number.parseFloat(secondInput.placeholder) * 100
+        : Number.parseFloat(secondInput.value) * 100
     })`
   );
   const newOptions: typeof products.options = {

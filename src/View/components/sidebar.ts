@@ -79,10 +79,6 @@ export default class SideBar {
         types as HTMLDivElement
       )
     );
-    /* if (elementForQuery) {
-      //types.addEventListener('', () => elementForQuery!.click());
-      setTimeout(() => elementForQuery!.click(), 300); // idk how to do it properly
-    } */
     return { element: types, queryElement: elementForQuery };
   }
 
