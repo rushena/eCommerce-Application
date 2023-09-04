@@ -40,7 +40,9 @@ export class View implements IView {
   }
 
   static renderProfilePage() {
-    const isAuthCustomer: boolean = Boolean(window.localStorage.getItem('check'));
+    const isAuthCustomer: boolean = Boolean(
+      window.localStorage.getItem('check')
+    );
 
     if (!isAuthCustomer) {
       const link = document.createElement('a');

@@ -39,7 +39,6 @@ export class Routing {
   }
 
   get(url: string, writeInHistory: boolean = true): void {
-    console.log(window.history);
     const routingPath = this.routes[url];
 
     if (routingPath) {
@@ -83,5 +82,11 @@ export class Routing {
 
   render404(): void {
     View.render404Page();
+  }
+
+  static get(url: string) {
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', url);
+    anchor.click();
   }
 }
