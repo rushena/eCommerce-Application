@@ -17,13 +17,13 @@
   padding: 10px 20px;
   color: rgba(154, 156, 165, 1);
   font-weight: 700;
-} 
+}
 
 .tab_selected,
 .product-image_selected {
   border: 1px solid rgba(23, 105, 106, 1);
   border-radius: 4px;
-  color:  rgba(23, 105, 106, 1);
+  color: rgba(23, 105, 106, 1);
 }
 
 .product-name {
@@ -33,7 +33,7 @@
 .product-info {
   display: flex;
   justify-content: space-between;
-  column-gap:  4vw;
+  column-gap: 4vw;
 }
 
 .product-gallery {
@@ -81,17 +81,17 @@
 .current-price {
   font-size: 24px;
   font-weight: 700;
-  color:rgba(255, 66, 66, 1);
+  color: rgba(255, 66, 66, 1);
 }
 
 .previous-price {
   font-size: 18px;
-  color:rgba(120, 122, 128, 1);
+  color: rgba(120, 122, 128, 1);
   text-decoration: line-through;
 }
 
 .discount {
-  color:white;
+  color: white;
   background-color: rgba(255, 66, 66, 1);
   height: 28px;
   border-radius: 4px;
@@ -164,13 +164,11 @@ input.quantity {
 
 .variant {
   width: 56px;
-  border: 1px solid  rgba(154, 156, 165, 1);
+  border: 1px solid rgba(154, 156, 165, 1);
   border-radius: 4px;
 }
 
-
 @media (max-width: 695px) {
-
   .product-info {
     flex-wrap: wrap;
   }
@@ -182,7 +180,6 @@ input.quantity {
   .product-sidebar {
     width: 100%;
   }
-
 }
 
 .product-details {
@@ -215,7 +212,7 @@ input.quantity {
   cursor: pointer;
 }
 
-.previous-image{
+.previous-image {
   background-image: url(./../img/prev-btn.png);
 }
 

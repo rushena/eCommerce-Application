@@ -1,9 +1,14 @@
-import { setProductMainData, setProductInfo, setProductDetails } from "../../Controller/apiRoot/getProduct";
+import {
+  setProductMainData,
+  setProductInfo,
+  setProductDetails,
+} from '../../Controller/apiRoot/getProduct';
+import '../../assets/css/product.css';
 
-function getProductInfoLayout(id: string){
+function getProductInfoLayout(id: string) {
   const productInfo = document.createElement('div');
-productInfo.className = `product-info`;
-productInfo.innerHTML = `
+  productInfo.className = `product-info`;
+  productInfo.innerHTML = `
 <div class="product-gallery">
   <div class="main-image-container">
     <img class="product-image" alt="product-image">
@@ -39,13 +44,12 @@ productInfo.innerHTML = `
         </div>
       </div>
 `;
-setProductInfo(id, productInfo);
+  setProductInfo(id, productInfo);
 
-return productInfo;
+  return productInfo;
 }
 
-function getProductDetailsLayout(id: string){
-
+function getProductDetailsLayout(id: string) {
   const productDetails = document.createElement('div');
   productDetails.className = `product-details`;
   productDetails.innerHTML = `
@@ -59,13 +63,13 @@ function getProductDetailsLayout(id: string){
         <h6>Brand</h6>
         <div class="product__brand">-</div>
       </div>
-`
-setProductDetails(id, productDetails);
+`;
+  setProductDetails(id, productDetails);
 
-return productDetails;
+  return productDetails;
 }
 
-export default function getProductPage (id: string) {
+export default function getProductPage(id: string) {
   const productPage = document.createElement('div');
   productPage.className = `product-card id_${id}`;
   productPage.innerHTML = `
@@ -75,7 +79,7 @@ export default function getProductPage (id: string) {
     <div class="tab tab__details">Product details</div>
   </div>
   <hr>
-  `
+  `;
   setProductMainData(id, productPage);
 
   const productInfoLayout = getProductInfoLayout(id);
@@ -83,27 +87,30 @@ export default function getProductPage (id: string) {
 
   productPage.appendChild(productInfoLayout);
 
-const generalTab = productPage.querySelector('.tab__general') as HTMLDivElement;
-const detailsTab = productPage.querySelector('.tab__details') as HTMLDivElement;
+  const generalTab = productPage.querySelector(
+    '.tab__general'
+  ) as HTMLDivElement;
+  const detailsTab = productPage.querySelector(
+    '.tab__details'
+  ) as HTMLDivElement;
 
-generalTab.addEventListener('click', ()=>{
-  if(!generalTab.classList.contains('tab_selected')){
-    detailsTab.classList.remove('tab_selected');
-    generalTab.classList.add('tab_selected');
-    productDetailsLayout.remove();
-    productPage.appendChild(productInfoLayout);
-  }
-});
+  generalTab.addEventListener('click', () => {
+    if (!generalTab.classList.contains('tab_selected')) {
+      detailsTab.classList.remove('tab_selected');
+      generalTab.classList.add('tab_selected');
+      productDetailsLayout.remove();
+      productPage.appendChild(productInfoLayout);
+    }
+  });
 
-detailsTab.addEventListener('click', ()=>{
-  if(!detailsTab.classList.contains('tab_selected')){
-    generalTab.classList.remove('tab_selected');
-    detailsTab.classList.add('tab_selected');
-    productInfoLayout.remove();
-    productPage.appendChild(productDetailsLayout);
-  }  
-})
+  detailsTab.addEventListener('click', () => {
+    if (!detailsTab.classList.contains('tab_selected')) {
+      generalTab.classList.remove('tab_selected');
+      detailsTab.classList.add('tab_selected');
+      productInfoLayout.remove();
+      productPage.appendChild(productDetailsLayout);
+    }
+  });
 
-return productPage;
-
+  return productPage;
 }
