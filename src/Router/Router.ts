@@ -31,6 +31,9 @@ export class Routing {
         title: 'logout',
         renderFn: View.renderLogout,
       },
+      '/user': {
+        title: 'Account Information',
+        renderFn: View.renderProfilePage,
       '/catalog': {
         title: 'catalog',
         renderFn: View.renderCatalog,
@@ -97,5 +100,11 @@ export class Routing {
 
   render404(): void {
     View.render404Page();
+  }
+
+  static get(url: string) {
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', url);
+    anchor.click();
   }
 }
