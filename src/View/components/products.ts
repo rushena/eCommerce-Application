@@ -47,8 +47,8 @@ export default class Products {
     card.addEventListener('click', () => {
       const productPageElement = getProductPage(product.id);
       history.pushState({}, '', `?detailed-product=${product.id}`);
-      document.body.children[3].innerHTML = '';
-      document.body.children[3].append(productPageElement);
+      document.querySelector('body > div')!.innerHTML = '';
+      document.querySelector('body > div')!.append(productPageElement);
     });
     target.append(card);
   }

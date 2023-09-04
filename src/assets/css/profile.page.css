@@ -61,146 +61,152 @@
 }
 
 .profile-page__info-form {
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.profile-page__info-form-field {margin-bottom: 16px;}
+.profile-page__info-form-field {
+  margin-bottom: 16px;
+}
 
-.profile-page__info-form-title, .profile-page__change-password-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 4px;
+.profile-page__info-form-title,
+.profile-page__change-password-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .profile-page__info-form-field._birthday .profile-page__info-form-label {
-    margin-bottom: 16px;
-    display: block;
+  margin-bottom: 16px;
+  display: block;
 }
 
 .profile-page__info-form-button-cancel {
-    background: #cd6666;
+  background: #cd6666;
 }
 
 .profile-page__change-password {
-    max-width: 450px;
+  max-width: 450px;
 }
 
 .profile-page__change-password-field {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .profile-page__change-password-input-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .profile-page__address {
-    border: 2px solid #eee;
-    padding: 24px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    overflow: hidden;
+  border: 2px solid #eee;
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
 }
 
 .profile-page__address-label {
-    margin: -26px -26px 24px;
-    text-align: center;
-    padding: 8px 16px;
-    background: #17696a;
-    color: #fff;
-    font-size: 14px;
+  margin: -26px -26px 24px;
+  text-align: center;
+  padding: 8px 16px;
+  background: #17696a;
+  color: #fff;
+  font-size: 14px;
 }
 
 .profile-page__address-title {
-    font-weight: 700;
-    color: #888;
-    font-size: 15px;
-    margin-bottom: 4px;
+  font-weight: 700;
+  color: #888;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .profile-page__address-value {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .profile-page__address-row + .profile-page__address-row {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .profile-page__address-add {
-    height: auto;
-    padding: 24px;
-    border-radius: 8px;
-    border: 2px solid #eee;
-    background: #fff;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
+  height: auto;
+  padding: 24px;
+  border-radius: 8px;
+  border: 2px solid #eee;
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .profile-page__address-add:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .profile-page__address-add svg {
-    max-width: 64px;
-    height: auto;
+  max-width: 64px;
+  height: auto;
 }
 
 .profile-page__address-add span {
-    display: block;
-    font-weight: 700;
-    color: #4b4b4b;
-    margin-top: 16px;
-    font-size: 20px;
+  display: block;
+  font-weight: 700;
+  color: #4b4b4b;
+  margin-top: 16px;
+  font-size: 20px;
 }
 
 .profile-page__address-add-form-field {
-    display: block;
-    margin-bottom: 16px;
+  display: block;
+  margin-bottom: 16px;
 }
 
 .profile-page__address-add-form-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
 }
 
 .profile-page__address-add-form-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
 }
 
-.profile-page__address-add-form-button-cancel {background: #cd6666;}
+.profile-page__address-add-form-button-cancel {
+  background: #cd6666;
+}
 
 .profile-page__address-buttons {
-    margin-top: 24px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 8px;
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 8px;
 }
 
 .profile-page__address-button-default {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    padding: 0;
-    height: auto;
-    font-weight: 700;
-    color: #17696a;
-    background: transparent;
-    border: none;
-    text-decoration: underline;
-    cursor: pointer;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding: 0;
+  height: auto;
+  font-weight: 700;
+  color: #17696a;
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.profile-page__address-button-edit, .profile-page__address-button-delete {
-    height: 40px;
-    cursor: pointer;
+.profile-page__address-button-edit,
+.profile-page__address-button-delete {
+  height: 40px;
+  cursor: pointer;
 }
 
 .profile-page__address-button-delete {
-    background: #cd6666;
+  background: #cd6666;
 }
 
 @media all and (min-width: 640px) {
@@ -222,7 +228,7 @@
   .profile-page__info-form-field._birthday {
     display: grid;
     grid-template-columns: 100px 1fr 100px;
-    grid-column-gap: 24px;;
+    grid-column-gap: 24px;
   }
 
   .profile-page__addresses {
@@ -231,7 +237,9 @@
     grid-gap: 16px;
   }
 
-  .profile-page__address {margin-bottom: 0;}
+  .profile-page__address {
+    margin-bottom: 0;
+  }
 }
 
 @media all and (min-width: 960px) {
@@ -268,7 +276,7 @@
 }
 
 @media all and (min-width: 1200px) {
-    .profile-page__addresses {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .profile-page__addresses {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

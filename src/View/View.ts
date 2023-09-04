@@ -42,11 +42,12 @@ export class View implements IView {
   }
 
   static renderProfilePage() {
-    const isAuthCustomer: boolean = Boolean(
+    /* const isAuthCustomer: boolean = Boolean(
       window.localStorage.getItem('check')
-    );
+    ); */
+    const isAuthCustomer = window.localStorage.getItem('check');
 
-    if (!isAuthCustomer) {
+    if (isAuthCustomer !== 'true') {
       const link = document.createElement('a');
       link.setAttribute('href', '/user/authorization');
       link.click();
@@ -82,6 +83,7 @@ export class View implements IView {
 
   static renderLogout() {
     const header = Header.getInstance();
+    localStorage.setItem('check', 'false');
     header.loginElement = false;
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);

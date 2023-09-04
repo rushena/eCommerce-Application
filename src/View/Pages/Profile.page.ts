@@ -86,8 +86,8 @@ export class ProfilePageView {
     this.renderContent($boxes);
 
     document.addEventListener('updateUserContent', () => {
-        this.renderContent($boxes);
-    })
+      this.renderContent($boxes);
+    });
 
     return $box;
   }
@@ -126,9 +126,9 @@ export class ProfilePageView {
     });
 
     document.addEventListener('cancelUpdateUserContent', () => {
-        $wrap.innerHTML = '';
-        $wrap.append(this.renderEditInfo(customerData), $button);
-    })
+      $wrap.innerHTML = '';
+      $wrap.append(this.renderEditInfo(customerData), $button);
+    });
   }
 
   renderEditInfo(data: CustomerData) {
@@ -160,9 +160,22 @@ export class ProfilePageView {
 
   renderEditGeneralInfoForm(data: CustomerData) {
     const $form: HTMLElement = document.createElement('form');
-    $form.classList.add('profile-page__info-form')
+    $form.classList.add('profile-page__info-form');
     const parseDate: string[] = data.dateOfBirth.split('-');
-    const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months: string[] = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
 
     $form.innerHTML = `
         <div class="profile-page__info-form-field">
@@ -247,19 +260,18 @@ export class ProfilePageView {
         </div>
     `;
 
-    $form.addEventListener('click', function(e) {
-        const $target = e.target as HTMLElement;
-        const $button = $target.closest('.profile-page__info-form-button-cancel');
-        if (!$button) return;
-        e.preventDefault();
-        document.dispatchEvent(new Event('cancelUpdateUserContent'));
-    })
+    $form.addEventListener('click', function (e) {
+      const $target = e.target as HTMLElement;
+      const $button = $target.closest('.profile-page__info-form-button-cancel');
+      if (!$button) return;
+      e.preventDefault();
+      document.dispatchEvent(new Event('cancelUpdateUserContent'));
+    });
 
     $form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.submitChageUserInfo(new FormData($form as HTMLFormElement));
-        
-    })
+      e.preventDefault();
+      this.submitChageUserInfo(new FormData($form as HTMLFormElement));
+    });
 
     return $form;
   }
@@ -268,7 +280,7 @@ export class ProfilePageView {
     const res = await this.profileController.updateUserInfo(formData);
 
     if (res.statusCode === 200) {
-        document.dispatchEvent(new Event('updateUserContent'));
+      document.dispatchEvent(new Event('updateUserContent'));
     }
   }
 
@@ -312,18 +324,17 @@ export class ProfilePageView {
     const $form = $wrap.querySelector('form');
 
     if ($form) {
-        $form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+      $form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-            const res = await this.submitChagePassord(new FormData($form));
-            console.log(res);
+        const res = await this.submitChagePassord(new FormData($form));
+        console.log(res);
 
-            if (res.statusCode === 200) {
-                Routing.get('/logout');
-                Routing.get('/user/authorization');
-            }
-
-        });
+        if (res.statusCode === 200) {
+          Routing.get('/logout');
+          Routing.get('/user/authorization');
+        }
+      });
     }
   }
 
@@ -364,19 +375,20 @@ export class ProfilePageView {
                 <button class="profile-page__address-add-form-button-cancel">Cancel</button>
             </div>
         </form>
-    `
+    `;
 
     $wrap.addEventListener('click', (e) => {
-        const $target = e.target as HTMLElement;
-        const $cancelButton = $target.closest('.profile-page__address-add-form-button-cancel');
+      const $target = e.target as HTMLElement;
+      const $cancelButton = $target.closest(
+        '.profile-page__address-add-form-button-cancel'
+      );
 
-        if (!$cancelButton) return;
+      if (!$cancelButton) return;
 
-        e.preventDefault();
+      e.preventDefault();
 
-        $wrap.outerHTML = '';
-
-    })
+      $wrap.outerHTML = '';
+    });
 
     return $wrap;
   }
@@ -412,29 +424,40 @@ export class ProfilePageView {
             <button class="profile-page__address-add-form-button-edit" type="submit">Edit</button>
             <button class="profile-page__address-add-form-button-cancel">Cancel</button>
         </div>
-    `
+    `;
 
-    $wrap.addEventListener('submit',async (e) => {
-        e.preventDefault();
-        const res = await this.profileController.changeAddress(data.id || '', new FormData($wrap));
-        if (res.statusCode === 200) {
-            document.dispatchEvent(new Event('updateUserContent'));
-        }
-    })
+    $wrap.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const res = await this.profileController.changeAddress(
+        data.id || '',
+        new FormData($wrap)
+      );
+      if (res.statusCode === 200) {
+        document.dispatchEvent(new Event('updateUserContent'));
+      }
+    });
 
     return $wrap;
   }
 
-  renderAddress(data: Address, type: 'billing' | 'shipping', defaultAddress : boolean = false) {
+  renderAddress(
+    data: Address,
+    type: 'billing' | 'shipping',
+    defaultAddress: boolean = false
+  ) {
     const $wrap = document.createElement('div');
     $wrap.classList.add('profile-page__address');
 
     if (defaultAddress) {
-        $wrap.classList.add('_default');
+      $wrap.classList.add('_default');
     }
-    
+
     const addressHTML: string = `
-        ${defaultAddress ? `<div class="profile-page__address-label">Default address</div>` : ``}
+        ${
+          defaultAddress
+            ? `<div class="profile-page__address-label">Default address</div>`
+            : ``
+        }
         <div class="profile-page__address-row">
             <div class="profile-page__address-title">Country:</div>
             <div class="profile-page__address-value">Poland</div>
@@ -454,7 +477,11 @@ export class ProfilePageView {
         <div class="profile-page__address-buttons">
             <button class="profile-page__address-button-edit">Edit</button>
             <button class="profile-page__address-button-delete">Delete</button>
-            ${!defaultAddress ? `<button class="profile-page__address-button-default">Use this address as default</button>` : ``}
+            ${
+              !defaultAddress
+                ? `<button class="profile-page__address-button-default">Use this address as default</button>`
+                : ``
+            }
             
         </div>
     `;
@@ -462,42 +489,50 @@ export class ProfilePageView {
     $wrap.innerHTML = addressHTML;
 
     $wrap.addEventListener('click', async (e) => {
-        const $target: HTMLElement = e.target as HTMLElement;
-        const $removeButton = $target.closest('.profile-page__address-button-delete');
+      const $target: HTMLElement = e.target as HTMLElement;
+      const $removeButton = $target.closest(
+        '.profile-page__address-button-delete'
+      );
 
-        if ($removeButton) {
-            const res = await this.profileController.deleteAddress(data.id || '');
-            if (res.statusCode === 200) {
-                $wrap.outerHTML = '';
-            }
-
-            return;
+      if ($removeButton) {
+        const res = await this.profileController.deleteAddress(data.id || '');
+        if (res.statusCode === 200) {
+          $wrap.outerHTML = '';
         }
 
-        const $defaultButton = $target.closest('.profile-page__address-button-default');
+        return;
+      }
 
-        if ($defaultButton) {
-            let res;
-            if (type === 'billing') {
-                res = await this.profileController.setDefaultBillingAddress(data.id || '');
-            } else {
-                res = await this.profileController.setDefaultShippingAddress(data.id || '');
-            }
+      const $defaultButton = $target.closest(
+        '.profile-page__address-button-default'
+      );
 
-            if (res.statusCode === 200) {
-                document.dispatchEvent(new Event('updateUserContent'));
-            }
-
-            return;
+      if ($defaultButton) {
+        let res;
+        if (type === 'billing') {
+          res = await this.profileController.setDefaultBillingAddress(
+            data.id || ''
+          );
+        } else {
+          res = await this.profileController.setDefaultShippingAddress(
+            data.id || ''
+          );
         }
 
-        const $editButton = $target.closest('.profile-page__address-button-edit');
-
-        if ($editButton) {
-            const $form = this.renderEditAddressForm(data);
-            $wrap.innerHTML = '';
-            $wrap.append($form);
+        if (res.statusCode === 200) {
+          document.dispatchEvent(new Event('updateUserContent'));
         }
+
+        return;
+      }
+
+      const $editButton = $target.closest('.profile-page__address-button-edit');
+
+      if ($editButton) {
+        const $form = this.renderEditAddressForm(data);
+        $wrap.innerHTML = '';
+        $wrap.append($form);
+      }
     });
 
     return $wrap;
@@ -522,40 +557,46 @@ export class ProfilePageView {
     $wrap.append($box);
 
     const billingAddresessDOM = billingAddressIds.map((address) => {
-      const currentAddress: Address | undefined = data.addresses.find((item) => item.id === address);
+      const currentAddress: Address | undefined = data.addresses.find(
+        (item) => item.id === address
+      );
       if (!currentAddress) {
         return '';
       } else {
-        return this.renderAddress(currentAddress, 'billing', currentAddress?.id === data.defaultBillingAddressId);
-    }
+        return this.renderAddress(
+          currentAddress,
+          'billing',
+          currentAddress?.id === data.defaultBillingAddressId
+        );
+      }
     });
 
     const $addAddressButton = this.renderAddNewAddresssButton();
 
     $addAddressButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const $formWrap = this.renderNewAddressForm();
-        $addAddressButton.before($formWrap);
-        const $form = $formWrap.querySelector('form');
+      e.preventDefault();
+      const $formWrap = this.renderNewAddressForm();
+      $addAddressButton.before($formWrap);
+      const $form = $formWrap.querySelector('form');
 
-        if ($form) {
-            $form.addEventListener('submit', async e => {
-                e.preventDefault();
-                const res = await this.profileController.addBillingAddress(new FormData($form));
+      if ($form) {
+        $form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const res = await this.profileController.addBillingAddress(
+            new FormData($form)
+          );
 
-                if (res.statusCode === 200) {
-                    document.dispatchEvent(new Event('updateUserContent'));
-                }
-            })
-        }
-
-    })
+          if (res.statusCode === 200) {
+            document.dispatchEvent(new Event('updateUserContent'));
+          }
+        });
+      }
+    });
 
     $box.append(...billingAddresessDOM, $addAddressButton);
   }
 
   setShippingAddresses($wrap: HTMLElement, data: Customer) {
-
     $wrap.innerHTML = '';
     const shippingAddressIds = data.shippingAddressIds || [];
     const $box = document.createElement('div');
@@ -564,35 +605,41 @@ export class ProfilePageView {
     $wrap.append($box);
 
     const shippingAddressDOM = shippingAddressIds.map((address) => {
-      const currentAddress: Address | undefined = data.addresses.find((item) => item.id === address);
+      const currentAddress: Address | undefined = data.addresses.find(
+        (item) => item.id === address
+      );
       if (!currentAddress) {
         return '';
       } else {
-        return this.renderAddress(currentAddress, 'shipping' ,currentAddress?.id === data.defaultShippingAddressId);
-    }
-      
+        return this.renderAddress(
+          currentAddress,
+          'shipping',
+          currentAddress?.id === data.defaultShippingAddressId
+        );
+      }
     });
 
     const $addAddressButton = this.renderAddNewAddresssButton();
 
     $addAddressButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const $formWrap = this.renderNewAddressForm();
-        $addAddressButton.before($formWrap);
-        const $form = $formWrap.querySelector('form');
+      e.preventDefault();
+      const $formWrap = this.renderNewAddressForm();
+      $addAddressButton.before($formWrap);
+      const $form = $formWrap.querySelector('form');
 
-        if ($form) {
-            $form.addEventListener('submit', async e => {
-                e.preventDefault();
-                const res = await this.profileController.addShippingAddress(new FormData($form));
+      if ($form) {
+        $form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const res = await this.profileController.addShippingAddress(
+            new FormData($form)
+          );
 
-                if (res.statusCode === 200) {
-                    document.dispatchEvent(new Event('updateUserContent'));
-                }
-            })
-        }
-
-    })
+          if (res.statusCode === 200) {
+            document.dispatchEvent(new Event('updateUserContent'));
+          }
+        });
+      }
+    });
 
     $box.append(...shippingAddressDOM, $addAddressButton);
   }

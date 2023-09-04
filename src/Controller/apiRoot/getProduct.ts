@@ -92,41 +92,53 @@ export async function setProductDetails(
   });
 }
 
-// рассписать mainVariant тип
 function setMainVariant(
   mainVariant: ProductVariant,
   productPage: HTMLDivElement
 ) {
-  if (
-    !mainVariant.images ||
-    !mainVariant.prices ||
-    !mainVariant.prices[0].discounted
-  )
-    return;
-  const productImageSrc = mainVariant.images[0].url;
-  setProductMainImage(productImageSrc, productPage);
-  mainVariant.images.shift();
-  setOtherImages(mainVariant.images, productPage);
+  let productImageSrc;
 
-  const currentPrice = mainVariant.prices[0].discounted.value.centAmount / 100;
-  const currentPriceCurrency = getCurrencySign(
-    mainVariant.prices[0].discounted.value.currencyCode
-  )!;
-  const currentPriceFull = currentPriceCurrency + currentPrice;
-  if (currentPriceFull) {
-    setProductCurrentPrice(currentPriceFull, productPage);
+  if (mainVariant.images) {
+    productImageSrc = mainVariant.images[0].url;
+    setProductMainImage(productImageSrc, productPage);
+
+    if (mainVariant.images.length > 0) {
+      mainVariant.images.shift();
+      setOtherImages(mainVariant.images, productPage);
+    }
   }
 
-  const previousPrice = mainVariant.prices[0].value.centAmount / 100;
-  const previousPriceCurrency = getCurrencySign(
-    mainVariant.prices[0].value.currencyCode
-  )!;
-  const previousPriceFull = previousPriceCurrency + previousPrice;
-  if (previousPriceFull) {
-    setProductPreviousPrice(previousPriceFull, productPage);
-  }
+  let currentPrice;
+  let currentPriceCurrency;
+  let previousPrice;
+  let previousPriceCurrency;
 
-  setDiscount(previousPrice, currentPrice, productPage);
+  if (mainVariant.prices) {
+    if (mainVariant.prices[0].discounted) {
+      currentPrice = mainVariant.prices[0].discounted.value.centAmount / 100;
+      currentPriceCurrency = getCurrencySign(
+        mainVariant.prices[0].discounted.value.currencyCode
+      );
+      if (currentPriceCurrency) {
+        const currentPriceFull = currentPriceCurrency + currentPrice;
+        setProductCurrentPrice(currentPriceFull, productPage);
+      }
+      previousPrice = mainVariant.prices[0].value.centAmount / 100;
+      previousPriceCurrency = getCurrencySign(
+        mainVariant.prices[0].value.currencyCode
+      );
+      if (previousPriceCurrency) {
+        const previousPriceFull = previousPriceCurrency + previousPrice;
+        setProductPreviousPrice(previousPriceFull, productPage);
+        setDiscount(previousPrice, currentPrice, productPage);
+      }
+    } else {
+      currentPrice = mainVariant.prices[0].value.centAmount / 100;
+      currentPriceCurrency = getCurrencySign(
+        mainVariant.prices[0].value.currencyCode
+      );
+    }
+  }
 
   const attributesArray = mainVariant.attributes;
   if (attributesArray) {
@@ -180,7 +192,7 @@ function setOtherImages(
   srcArray: ProductImages[],
   productPage: HTMLDivElement
 ) {
-  if (srcArray.length > 1) {
+  if (srcArray.length > 0) {
     const mainImageContainer = productPage.querySelector(
       '.main-image-container'
     ) as HTMLDivElement;
