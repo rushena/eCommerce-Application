@@ -69,9 +69,9 @@ export class View implements IView {
     View.$mainContent.append(View.$mainPage);
   }
 
-  static renderCatalog() {
+  static renderCatalog(queryParams?: URLSearchParams) {
     View.$mainContent.innerHTML = '';
-    View.$mainContent.append(View.$catalogPage.getElement());
+    View.$mainContent.append(View.$catalogPage.getElement(queryParams));
   }
 
   static render404Page() {

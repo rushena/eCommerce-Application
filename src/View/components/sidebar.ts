@@ -23,13 +23,13 @@ export default class SideBar {
     this.navigation = navigation;
   }
 
-  private getCategories() {
+  private getCategories(queryParams?: URLSearchParams) {
     const types = document.createElement('div');
     types.classList.add('sidebar-container__types-container');
     types.innerHTML = `
     <div class='sidebar-container__types-toggle'>
       <span class='sidebar-container__title'>Categories</span>
-      <div class='plus'>
+      <div class='plus ${queryParams ? 'plus_active' : ''}'>
         <div></div>
         <div></div>
       </div>
@@ -37,10 +37,15 @@ export default class SideBar {
     `;
     const categoiesMenuElement = document.createElement('div');
     categoiesMenuElement.classList.add('sidebar-container__types-menu');
+    if (queryParams)
+      categoiesMenuElement.classList.add(
+        'sidebar-container__types-menu_active'
+      );
     const parents = this.products.categories.filter((value) => {
       if (value.parent === null) return true;
       return false;
     });
+    let elementForQuery: undefined | HTMLLabelElement;
     parents.forEach((item) => {
       const categoryElement = document.createElement('label');
       categoryElement.classList.add('type-menu__item');
@@ -50,6 +55,9 @@ export default class SideBar {
       <div>${item.name}</div>
       `;
       categoiesMenuElement.append(categoryElement);
+      if (queryParams?.get('category') === item.name?.toLowerCase()) {
+        elementForQuery = categoryElement;
+      }
     });
     types.append(categoiesMenuElement);
 
@@ -71,7 +79,11 @@ export default class SideBar {
         types as HTMLDivElement
       )
     );
-    return types;
+    /* if (elementForQuery) {
+      //types.addEventListener('', () => elementForQuery!.click());
+      setTimeout(() => elementForQuery!.click(), 300); // idk how to do it properly
+    } */
+    return { element: types, queryElement: elementForQuery };
   }
 
   private getSubCategories(categoryList: Category[]) {
@@ -258,14 +270,19 @@ export default class SideBar {
     return sliderElement;
   }
 
-  public fillSideBar() {
+  public fillSideBar(queryParams?: URLSearchParams) {
     this.sideBar.innerHTML = `
     <div class='sidebar-container__search'>
       <input type='text' placeholder='Search'>
       <div></div>
     </div>
     `;
-    this.sideBar.append(this.getCategories());
+    const { element: categoriesElement, queryElement: queryElement } =
+      this.getCategories(queryParams ?? undefined);
+    this.sideBar.append(categoriesElement);
+    if (queryElement) {
+      queryElement.click();
+    }
     this.sideBar.append(this.getColors());
     this.sideBar.append(this.getPrices());
 
@@ -284,8 +301,12 @@ export default class SideBar {
     });
   }
 
-  public getElement() {
-    this.fillSideBar();
+  public getElement(queryParams?: URLSearchParams) {
+    if (queryParams) {
+      this.fillSideBar(queryParams);
+    } else {
+      this.fillSideBar();
+    }
     this.sideBar.classList.add('catalog__sidebar');
     this.sideBar.classList.add('sidebar-container');
     return this.sideBar;

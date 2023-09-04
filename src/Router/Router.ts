@@ -9,7 +9,7 @@ export class Routing {
 
     window.addEventListener('popstate', (e: PopStateEvent): void => {
       e.preventDefault();
-      this.get(document.location.pathname, false);
+      this.get(document.location.pathname, false, document.location.href);
     });
   }
 
@@ -28,33 +28,43 @@ export class Routing {
         renderFn: View.renderRegistrationPage,
       },
       '/logout': {
-        title: 'Registration',
+        title: 'logout',
         renderFn: View.renderLogout,
       },
       '/catalog': {
-        title: 'Registration',
+        title: 'catalog',
         renderFn: View.renderCatalog,
       },
     } as Routes;
   }
 
-  get(url: string, writeInHistory: boolean = true): void {
+  get(url: string, writeInHistory: boolean = true, fullUrl?: string): void {
     const routingPath = this.routes[url];
 
     if (routingPath) {
-      this.staticPath(routingPath);
+      if (fullUrl && fullUrl.includes('?')) {
+        document.title = routingPath.title;
+        this.callWithQuery(
+          url,
+          new URLSearchParams(fullUrl.slice(fullUrl.indexOf('?')))
+        );
+      } else {
+        this.staticPath(routingPath);
+      }
     } else {
       this.combinePath(url);
     }
 
     if (writeInHistory) {
-      window.history.pushState({}, '', url);
+      if (!fullUrl || !fullUrl.includes('?')) {
+        window.history.pushState({}, '', url);
+      }
     }
   }
 
   staticPath({ title, renderFn }: Route): void {
     document.title = title;
-    renderFn(title);
+    renderFn();
   }
 
   combinePath(url: string): void {
@@ -78,6 +88,11 @@ export class Routing {
     }
 
     pathRoute.renderFn();
+  }
+
+  callWithQuery(page: string, queryParams: URLSearchParams): void {
+    const routingPath = this.routes[page];
+    routingPath.renderFn(queryParams);
   }
 
   render404(): void {

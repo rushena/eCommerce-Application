@@ -1,6 +1,6 @@
 export type Route = {
   title: string;
-  renderFn: (id?: string | number) => void;
+  renderFn: (queryParams?: URLSearchParams) => void;
   regEx?: RegExp;
 };
 

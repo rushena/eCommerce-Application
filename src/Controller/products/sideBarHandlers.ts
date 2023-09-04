@@ -38,6 +38,9 @@ export async function categoryHandler(
     document.querySelector(
       '.sidebar-container__sub-category-container'
     )!.innerHTML = '';
+    const parsedUrl = new URL(window.location.href);
+    parsedUrl.searchParams.delete('category');
+    history.pushState({}, '', parsedUrl);
   } else {
     const previousIndex = newFilter.indexOf(
       newFilter.find((item) => item.includes('categories.id:'))!
@@ -52,15 +55,25 @@ export async function categoryHandler(
       if (item.parent?.id === categoryID) return true;
       return false;
     });
-    console.log(products);
     const subcategories = getSubCategories.call(products, subCategories);
     sidebarElement.after(subcategories);
+
+    if (!window.location.href.includes('?')) {
+      const parsedUrl = new URL(window.location.href);
+      parsedUrl.searchParams.append('category', categoryText.toLowerCase());
+      history.pushState({}, '', parsedUrl);
+    } else {
+      const parsedUrl = new URL(window.location.href);
+      parsedUrl.searchParams.set('category', categoryText.toLowerCase());
+      history.pushState({}, '', parsedUrl);
+    }
   }
   navigation.fillNavigation();
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,
       filter: newFilter,
+      offset: 0,
     },
   };
   await products.fillProducts(newOptions);
@@ -143,6 +156,7 @@ export async function subCategoryHandler(
     queryArgs: {
       ...products.options?.queryArgs,
       filter: newFilter,
+      offset: 0,
     },
   };
   await products.fillProducts(newOptions);
@@ -174,6 +188,7 @@ export async function priceHandle(
     queryArgs: {
       ...products.options?.queryArgs,
       filter: newFilter,
+      offset: 0,
     },
   };
   await products.fillProducts(newOptions);
@@ -209,6 +224,7 @@ export async function colorHandler(
     queryArgs: {
       ...products.options?.queryArgs,
       filter: newFilter,
+      offset: 0,
     },
   };
   await products.fillProducts(newOptions);

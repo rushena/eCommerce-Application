@@ -54,10 +54,15 @@ export class Catalog {
   private getSideBar(
     products: Products,
     paging: Paging,
-    navigation: Navigation
+    navigation: Navigation,
+    queryParams?: URLSearchParams
   ): HTMLElement {
     const sideBar = new SideBar(products, paging, navigation);
-    return sideBar.getElement();
+    if (queryParams) {
+      return sideBar.getElement(queryParams);
+    } else {
+      return sideBar.getElement();
+    }
   }
 
   private getProducts(): Products {
@@ -77,7 +82,7 @@ export class Catalog {
     return botbar;
   }
 
-  private async addAllBlocks() {
+  private async addAllBlocks(queryParams?: URLSearchParams) {
     this.catalog.classList.add('main');
     const middleSection = document.createElement('div');
     middleSection.classList.add('catalog__middle');
@@ -93,7 +98,7 @@ export class Catalog {
     const navigation = this.getNavigation(products);
     const [topToolBar, paging] = this.renderTopToolbar(products);
     middleSection.append(
-      this.getSideBar(products, paging, navigation),
+      this.getSideBar(products, paging, navigation, queryParams),
       productsElement
     );
     this.catalog.append(
@@ -104,9 +109,13 @@ export class Catalog {
     );
   }
 
-  public getElement() {
+  public getElement(queryParams?: URLSearchParams) {
     this.catalog.innerHTML = '';
-    this.addAllBlocks();
+    if (queryParams) {
+      this.addAllBlocks(queryParams);
+    } else {
+      this.addAllBlocks();
+    }
     return this.catalog;
   }
 }
