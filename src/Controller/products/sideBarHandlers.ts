@@ -189,11 +189,22 @@ export async function colorHandler(
   if (!newFilter || !Array.isArray(newFilter)) return;
   if (!products.currentCategories.includes('Color')) {
     products.currentCategories.push('Color');
+    newFilter.push(`variants.attributes.color:"${color}"`);
   } else {
     const index = products.currentCategories.indexOf('Color');
-    newFilter.splice(index, 1);
+    if (newFilter[index].includes(color)) {
+      newFilter[index] = newFilter[index].replace(`,"${color}"`, '');
+      newFilter[index] = newFilter[index].replace(`"${color}",`, '');
+      newFilter[index] = newFilter[index].replace(`"${color}"`, '');
+      if (newFilter[index] === 'variants.attributes.color:') {
+        newFilter.splice(index, 1);
+        products.currentCategories.splice(index, 1);
+      }
+    } else {
+      newFilter[index] += `,"${color}"`;
+    }
   }
-  newFilter.push(`variants.attributes.color:"${color}"`);
+  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,

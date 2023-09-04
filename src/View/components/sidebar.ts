@@ -7,10 +7,9 @@ import {
   categoryHandler,
   priceHandle,
   subCategoryHandler,
+  colorHandler,
 } from '../../Controller/products/sideBarHandlers';
 import { Category } from '../../types/product.type';
-// import { PriceSlider } from './priceSliders';
-// import { createDOMElement } from '../../Utility/createElement';
 
 export default class SideBar {
   private sideBar = document.createElement('div');
@@ -194,7 +193,7 @@ export default class SideBar {
       plus?.classList.toggle('plus_active');
     });
 
-    /* categoiesMenuElement?.addEventListener('click', (event) => {
+    categoiesMenuElement?.addEventListener('mouseup', (event) => {
       const target = event.target as HTMLElement;
       const parent = target.closest('.colors-menu__item');
       const colorInput =
@@ -202,7 +201,7 @@ export default class SideBar {
           [...categoiesMenuElement.children].indexOf(parent!)
         ].toLowerCase();
       colorHandler(colorInput, this.products, this.paging);
-    }); */
+    });
     return colors;
   }
 

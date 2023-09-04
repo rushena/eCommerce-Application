@@ -162,11 +162,11 @@
 
   .colors-menu__item:hover input ~ .checkmark {
     background-color: #fff;
-    border: solid #b3b7bc 1px;
+    border: solid #b3b7bc 2px;
   }
 
   .colors-menu__item input:checked ~ .checkmark {
-    border: solid #17696a 1px;
+    border: solid #17696a 2px;
   }
 
   .colors-menu__item {

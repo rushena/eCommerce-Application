@@ -126,6 +126,10 @@ export default class Paging {
   }
 
   public fillPaging() {
+    if (this.length === 0) {
+      this.paging.innerHTML = '0';
+      return;
+    }
     const pagingList = this.getPagingList();
     while (this.paging.firstChild) {
       this.paging.removeChild(this.paging.firstChild);

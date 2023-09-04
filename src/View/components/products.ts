@@ -31,9 +31,9 @@ export default class Products {
       ${product.name['en-US'] ? product.name['en-US'] : product.name['en']}
     </div>
     <div class='products-list__card__price'>
-      <span>$${product.masterVariant.prices![0].value.centAmount}</span>
+      <span>$${product.masterVariant.prices![0].value.centAmount / 100}</span>
       <span class='old'>
-      $${product.masterVariant.prices![0].value.centAmount}
+      $${product.masterVariant.prices![0].value.centAmount / 100}
       </span>
     </div>
     <div class='products-list__card__add-to-cart'>
@@ -43,6 +43,9 @@ export default class Products {
     <span>Add to cart</span>
     </div>
     `;
+    card.addEventListener('click', () => {
+      // redirect to detailed page
+    });
     target.append(card);
   }
   public async fillProducts(options?: getOptions) {
@@ -55,6 +58,10 @@ export default class Products {
       const productList = await returnProducts(this.options);
       const categorie = await getCategories();
       this.total = productList!.total!;
+      if (productList?.list.length === 0) {
+        this.productsElement.innerHTML = 'No items found ;(';
+        return;
+      }
       this.productsElement.innerHTML = ``;
       if (productList === null || categorie === null) {
         this.productsElement.innerHTML = errorMessage;
