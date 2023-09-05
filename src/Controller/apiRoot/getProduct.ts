@@ -208,7 +208,7 @@ function setProductMainImage(src: string, productPage: HTMLDivElement) {
   ) as HTMLImageElement;
   selectedImage.setAttribute('src', src);
   selectedImage.addEventListener('click', () => {
-    changeSelectedImage(selectedImage, src);
+    changeSelectedImage(selectedImage, src, productPage);
   });
 }
 
@@ -228,9 +228,10 @@ function setProductMainImage(src: string, productPage: HTMLDivElement) {
 
 export function changeSelectedImage(
   additionalImage: HTMLImageElement,
-  src: string
+  src: string,
+  productPage: HTMLDivElement
 ) {
-  const otherImagesArray = document.querySelectorAll(
+  const otherImagesArray = productPage.querySelectorAll(
     '.product-image_size_small'
   );
   otherImagesArray.forEach((image) => {
@@ -239,7 +240,7 @@ export function changeSelectedImage(
     }
   });
   additionalImage.classList.add('product-image_selected');
-  const mainImage = document.querySelector(
+  const mainImage = productPage.querySelector(
     '.product-image'
   ) as HTMLImageElement;
   mainImage.setAttribute('src', src);
@@ -273,7 +274,7 @@ function setOtherImages(
     additionalImage.setAttribute('src', src.url);
     additionalImage.setAttribute('alt', 'product-image');
     additionalImage.addEventListener('click', () => {
-      changeSelectedImage(additionalImage, src.url);
+      changeSelectedImage(additionalImage, src.url, productPage);
     });
     otherImages.appendChild(additionalImage);
   });

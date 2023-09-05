@@ -46,6 +46,6 @@
   right: 0;
 }
 
-.close-button {
+.modal-window__close-button:hover {
   cursor: pointer;
 }
