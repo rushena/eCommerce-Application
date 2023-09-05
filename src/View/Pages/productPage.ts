@@ -4,6 +4,7 @@ import {
   setProductDetails,
 } from '../../Controller/apiRoot/getProduct';
 import '../../assets/css/product.css';
+import '../../assets/css/modal-window.css';
 
 function getProductInfoLayout(id: string) {
   const productInfo = document.createElement('div');
