@@ -148,6 +148,46 @@
   background-color: pink;
 }
 
+.color_Gray {
+  background-color: grey;
+}
+
+.color_Brown {
+  background-color: burlywood;
+}
+
+.color_Beige {
+  background-color: bisque;
+}
+
+.color_Green {
+  background-color: green;
+}
+
+.color_Orange {
+  background-color: orange;
+}
+
+.color_White {
+  background-color: white;
+}
+
+.color_Blue-gray {
+  background-color: rgb(159, 214, 223);
+}
+
+.color_Dark-blue {
+  background-color: rgb(31, 12, 153);
+}
+
+.color_Purple {
+  background-color: rgb(127, 26, 155);
+}
+
+.color_Black {
+  background-color: black;
+}
+
 .cart-add-block {
   display: flex;
   column-gap: 25px;
