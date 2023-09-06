@@ -31,7 +31,14 @@ export async function categoryHandler(
       }
     }).length > 0
   ) {
-    const index = products.currentCategories.indexOf(categoryText);
+    const index = products.currentCategories.indexOf(
+      products.currentCategories.filter((item) => {
+        if (typeof item !== 'string') {
+          return item.parent === categoryText;
+        }
+      })[0]
+    );
+    console.log(index);
     newFilter.splice(index, 1);
     products.currentCategories.splice(index, 1);
     inputElement.checked = false;
