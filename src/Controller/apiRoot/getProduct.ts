@@ -102,7 +102,9 @@ function setMainVariant(
     mainVariant.images.shift();
     setProductMainImage(productImageSrc, productPage);
 
-    const mainImage = productPage.querySelector('.product-image') as HTMLDivElement;
+    const mainImage = productPage.querySelector(
+      '.product-image'
+    ) as HTMLDivElement;
     mainImage.addEventListener('click', () => {
       const background = document.createElement('div');
       background.className = 'background';
@@ -118,30 +120,32 @@ function setMainVariant(
           <div class="other-images">
             <img class="product-image_size_small product-image_1 product-image_selected" alt="image">
           </div>
-        </div>`
+        </div>`;
 
       setProductMainImage(productImageSrc, modalWindow);
-      
-      if(mainVariant.images){
+
+      if (mainVariant.images) {
         if (mainVariant.images.length > 0) {
           setOtherImages(mainVariant.images, modalWindow);
         }
       }
 
-      const closeButton = modalWindow.querySelector('.modal-window__close-button') as HTMLDivElement;
-      closeButton.addEventListener('click', ()=>{
+      const closeButton = modalWindow.querySelector(
+        '.modal-window__close-button'
+      ) as HTMLDivElement;
+      closeButton.addEventListener('click', () => {
         modalWindow.remove();
         background.remove();
-      })
+      });
 
-      background.addEventListener('click', ()=>{
+      background.addEventListener('click', () => {
         modalWindow.remove();
         background.remove();
-      })
+      });
 
       document.body.appendChild(background);
       document.body.appendChild(modalWindow);
-     })
+    });
 
     if (mainVariant.images.length > 0) {
       setOtherImages(mainVariant.images, productPage);
@@ -193,10 +197,6 @@ function setProductName(productName: string, productPage: HTMLDivElement) {
   ) as HTMLHeadingElement;
   productNameField.innerHTML = productName;
 }
-
-
-
-
 
 function setProductMainImage(src: string, productPage: HTMLDivElement) {
   const mainImage = productPage.querySelector(
@@ -252,17 +252,17 @@ function setOtherImages(
   productPage: HTMLDivElement
 ) {
   //if (srcArray.length > 0) {
-    const mainImageContainer = productPage.querySelector(
-      '.main-image-container'
-    ) as HTMLDivElement;
-    mainImageContainer.insertAdjacentHTML(
-      'beforeend',
-      `<div class="image-change">
+  const mainImageContainer = productPage.querySelector(
+    '.main-image-container'
+  ) as HTMLDivElement;
+  mainImageContainer.insertAdjacentHTML(
+    'beforeend',
+    `<div class="image-change">
       <div class="previous-image"></div>
       <div class="next-image"></div>
     </div>`
-    );
- // }
+  );
+  // }
   const otherImages = productPage.querySelector(
     '.other-images'
   ) as HTMLDivElement;

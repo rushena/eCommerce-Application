@@ -45,8 +45,10 @@ export async function categoryHandler(
     const previousIndex = newFilter.indexOf(
       newFilter.find((item) => item.includes('categories.id:'))!
     );
-    newFilter.splice(previousIndex, 1);
-    products.currentCategories.splice(previousIndex, 1);
+    if (previousIndex !== -1) {
+      newFilter.splice(previousIndex, 1);
+      products.currentCategories.splice(previousIndex, 1);
+    }
     products.currentCategories.push({ parent: categoryText, children: [] });
     newFilter.push(`categories.id:"${categoryID}"`);
     inputElement.checked = true;
@@ -71,6 +73,8 @@ export async function categoryHandler(
     }
   }
   navigation.fillNavigation();
+  console.log(products.currentCategories);
+  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,
@@ -223,6 +227,7 @@ export async function colorHandler(
       newFilter[index] += `,"${color}"`;
     }
   }
+  console.log(products.currentCategories);
   console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
