@@ -10,12 +10,17 @@ type ProductImages = {
   };
 };
 
-type ProductAttributes = {
+type ProductAttributesEnum = {
   name: string;
   value: {
     key: string;
     label: string;
   };
+};
+
+type ProductAttributes = {
+  name: string;
+  value: string;
 };
 
 // type ProductVariants = {
@@ -330,7 +335,7 @@ function setDiscount(
 }
 
 function setColors(
-  attributesArray: ProductAttributes[],
+  attributesArray: ProductAttributesEnum[],
   productPage: HTMLDivElement
 ) {
   attributesArray.forEach((attribute) => {
@@ -366,7 +371,7 @@ function setColors(
 }
 
 function setSize(
-  attributesArray: ProductAttributes[],
+  attributesArray: ProductAttributesEnum[],
   productPage: HTMLDivElement
 ) {
   attributesArray.forEach((attribute) => {
@@ -407,7 +412,7 @@ function setDescription(
       const descriptionBlock = productPage.querySelector(
         '.product__description'
       ) as HTMLDivElement;
-      descriptionBlock.innerHTML = attribute.value.key;
+      descriptionBlock.innerHTML = attribute.value;
       return;
     }
   });
@@ -422,7 +427,7 @@ function setBrand(
       const brandBlock = productPage.querySelector(
         '.product__brand'
       ) as HTMLDivElement;
-      brandBlock.innerHTML = attribute.value.key;
+      brandBlock.innerHTML = attribute.value;
       return;
     }
   });

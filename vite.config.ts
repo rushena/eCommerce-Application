@@ -68,14 +68,14 @@ export default defineConfig({
       plugins: [rollupNodePolyFill],
     },
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'src/assets/img',
-          dest: 'src/assets/',
-        },
-      ],
-    }),
-  ],
+  // plugins: [
+  //   viteStaticCopy({
+  //     targets: [
+  //       {
+  //         src: 'src/assets/img',
+  //         dest: 'src/assets/',
+  //       },
+  //     ],
+  //   }),
+  // ],
 });
