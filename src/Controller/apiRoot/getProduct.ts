@@ -257,16 +257,20 @@ function setOtherImages(
   productPage: HTMLDivElement
 ) {
   //if (srcArray.length > 0) {
-  const mainImageContainer = productPage.querySelector(
-    '.main-image-container'
+  const productImage = productPage.querySelector(
+    '.product-image'
   ) as HTMLDivElement;
-  mainImageContainer.insertAdjacentHTML(
-    'beforeend',
-    `<div class="image-change">
-      <div class="previous-image"></div>
-      <div class="next-image"></div>
-    </div>`
+  productImage.insertAdjacentHTML(
+    'beforebegin',
+    `
+    <div class="previous-image"></div>
+    `
   );
+  productImage.insertAdjacentHTML('afterend',
+  `
+  <div class="next-image"></div>
+  `
+  )
   // }
   const otherImages = productPage.querySelector(
     '.other-images'
