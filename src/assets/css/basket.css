@@ -1,0 +1,222 @@
+.cart-container {
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-container__orders {
+  margin: 0 50px 0 0;
+  flex-grow: 1;
+}
+
+.cart-container__orders__toppanel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 32px 0;
+}
+
+.cart-container__orders__toppanel h2 {
+  color: #1e212c;
+  font-family: Lato;
+  font-size: 46px;
+  font-weight: 900;
+  line-height: 130%;
+}
+
+.cart-container__orders__toppanel div {
+  padding: 0 40px;
+  border-radius: 4px;
+  background: #17696a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.cart-container__orders__toppanel a {
+  color: #17696a;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 160%;
+  text-decoration: underline;
+}
+
+.cart-container__orders__items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cart-container__orders__items > :first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.item-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f4f5f6;
+  padding: 24px;
+  border-bottom: 1px solid#E5E8ED;
+}
+
+.item-card img {
+  width: 80px;
+  height: 80px;
+  margin: 0 10px 0 0;
+}
+
+.item-card__description {
+  width: 210px;
+}
+
+.item-card__quantity .item-card__quantity-input {
+  width: 72px;
+  height: auto;
+  padding: 9px 12px;
+  background: #fff;
+}
+
+.item-card__price {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 92px;
+}
+
+.item-card__price span {
+  color: #1e212c;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.item-card__price span.red {
+  color: #ff4242;
+  font-family: Lato;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.item-card__price span.old {
+  color: #787a80;
+  font-family: Lato;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 150%;
+  text-decoration: line-through;
+  padding-top: 0.25rem;
+}
+
+.item-card__delete span {
+  display: inline-block;
+  padding: 0px 24px;
+  color: #17696a;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  border: 1px solid #17696a;
+  cursor: pointer;
+}
+
+.cart-container__orders__subtotal {
+  color: #1e212c;
+  text-align: right;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 150%;
+  padding: 24px 20px 24px 0;
+  background-color: #f4f5f6;
+  border-radius: 0 0 4px 4px;
+  background: #f4f5f6;
+}
+
+/* sidebar */
+
+.cart-container__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cart-container__sidebar__promocode > div {
+  color: #424551;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+.cart-container__sidebar__promocode__input {
+  display: flex;
+  justify-content: center;
+}
+
+.cart-container__sidebar__promocode__input input {
+  border-radius: 4px;
+  border: 1px solid #d7dadd;
+  border-radius: 4px 0 0 4px;
+  background: #fff;
+  flex-grow: 1;
+}
+
+.cart-container__sidebar__promocode__input div {
+  padding: 0 40px;
+  border-radius: 0px 4px 4px 0px;
+  background: #17696a;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.cart-container__sidebar__order-summary {
+  padding: 24px 0;
+  border-radius: 4px;
+  background: #f4f5f6;
+}
+
+.cart-container__sidebar__order-summary h3 {
+  color: #1e212c;
+  margin: 0;
+  padding: 0 24px 24px 24px;
+  border-bottom: 1px solid #e5e8ed;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 130%;
+}
+
+.order-details {
+  margin: 0;
+  padding: 16px 24px 24px 24px;
+  border-bottom: 1px solid #e5e8ed;
+  color: var(--gray-800, #424551);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 160%;
+}
+
+.order-details div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-container__sidebar__order-summary h4 {
+  display: flex;
+  justify-content: space-between;
+  color: #1e212c;
+  margin: 0;
+  padding: 20px 24px 0 24px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 150%;
+}

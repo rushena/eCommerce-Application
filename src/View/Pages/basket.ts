@@ -1,5 +1,6 @@
 import { Cart, LineItem } from '@commercetools/platform-sdk';
 import { getCart } from '../../Controller/basket/basket';
+import '../../assets/css/basket.css';
 
 interface BasketTemplate {
   getElement: () => HTMLElement;
@@ -17,7 +18,9 @@ export class Basket implements BasketTemplate {
   private getPrice(item: LineItem) {
     if (item.variant.prices![0].discounted) {
       return `
-      <span>$${item.variant.prices![0].discounted!.value.centAmount / 100}
+      <span class='red'>$${
+        item.variant.prices![0].discounted!.value.centAmount / 100
+      }
       </span>
       <span class='old'>
       $${item.variant.prices![0].value.centAmount / 100}
@@ -48,7 +51,7 @@ export class Basket implements BasketTemplate {
         ${this.getPrice(item)}
       </div>
       <div class='item-card__delete'>
-        Delete
+        <span>Delete</span>
       </div>
     `;
     let imageElement: HTMLImageElement;
@@ -66,15 +69,27 @@ export class Basket implements BasketTemplate {
     ordersElement.innerHTML = `
       <div class='cart-container__orders__toppanel'>
       <h2>Cart</h2>
+      <div>Clear all</div>
       <a href='/catalog'>
         Back to shopping
       </a>
       </div>
     `;
     const ordersItemsElement = document.createElement('div');
+    ordersItemsElement.classList.add('cart-container__orders__items');
     for (const item of items) {
       ordersItemsElement.append(this.renderOrderItem(item));
     }
+    const subtotalElement = document.createElement('div');
+    subtotalElement.classList.add('cart-container__orders__subtotal');
+    subtotalElement.textContent = `Subtotal: $${this.cart!.lineItems.reduce(
+      (accumulator, current) => {
+        const newValue = accumulator + current.price.value.centAmount / 100;
+        return newValue;
+      },
+      0
+    )}`;
+    ordersItemsElement.append(subtotalElement);
     if (items.length === 0)
       ordersItemsElement.innerText = 'There is no items in your cart ;(';
     ordersElement.append(ordersItemsElement);
@@ -100,20 +115,27 @@ export class Basket implements BasketTemplate {
       </div>
     </div>
     <div class='cart-container__sidebar__order-summary'>
-     <div>
+     <h3>
       Order totals
-     </div>
+     </h3>
+     <div class='order-details'>
      <div>
-      <span>Subtotal: ${this.cart.lineItems.reduce((accumulator, current) => {
+      <span>Subtotal:</span>
+      <span>$${this.cart.lineItems.reduce((accumulator, current) => {
         const newValue = accumulator + current.price.value.centAmount / 100;
         return newValue;
       }, 0)}</span>
-      <span>Discount: ${discount ?? '-'}</span>
+      </div>
+      <div>
+      <span>Discount:</span>
+      <span>${discount ? `$${discount}` : '—'}</span>
+      </div>
      </div>
+     <h4>
+       <span>Order total:</span>
+       <span>$${this.cart.totalPrice.centAmount / 100}</span>
+      </h4>
     </div>
-    <div>
-      Order total: ${this.cart.totalPrice}
-     </div>
     </div>
     `;
     return sidebarElement;
