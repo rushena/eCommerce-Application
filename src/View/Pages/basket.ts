@@ -31,14 +31,13 @@ export class Basket implements BasketTemplate {
     }
   }
 
-  private renderOrderItem(item: LineItem): string {
-    return `
-    <div class='cart-container__orders__item item-card'>
-      <div class='item-card__image'>
-        ${item.variant.images![0]}
-      </div>
+  private renderOrderItem(item: LineItem): HTMLElement {
+    const itemElement = document.createElement('div') as HTMLElement;
+    itemElement.classList.add('cart-container__orders__item');
+    itemElement.classList.add('item-card');
+    itemElement.innerHTML = `
       <div class='item-card__description'>
-        ${item.name}
+        ${item.name['en-US']}
       </div>
       <div class='item-card__quantity'>
         <input type='number' value='${
@@ -51,8 +50,14 @@ export class Basket implements BasketTemplate {
       <div class='item-card__delete'>
         Delete
       </div>
-    </div>
     `;
+    let imageElement: HTMLImageElement;
+    if (item.variant.images !== undefined && item.variant.images.length !== 0) {
+      imageElement = document.createElement('img');
+      imageElement.src = item.variant.images[0].url;
+      imageElement.onload = () => itemElement.prepend(imageElement);
+    }
+    return itemElement;
   }
 
   private renderOrder(items: LineItem[], cartContainer: HTMLElement) {
@@ -70,6 +75,8 @@ export class Basket implements BasketTemplate {
     for (const item of items) {
       ordersItemsElement.append(this.renderOrderItem(item));
     }
+    if (items.length === 0)
+      ordersItemsElement.innerText = 'There is no items in your cart ;(';
     ordersElement.append(ordersItemsElement);
     cartContainer.append(ordersElement);
   }

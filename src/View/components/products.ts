@@ -6,6 +6,7 @@ import { cartSVG } from '../../assets/img/cart';
 import '../../assets/css/products.css';
 import { Category, CurrentCategory } from '../../types/product.type';
 import getProductPage from '../Pages/productPage';
+import { addToBasket } from '../../Controller/basket/addToBasket';
 
 export default class Products {
   private productsElement = document.createElement('div');
@@ -54,13 +55,27 @@ export default class Products {
       ${this.drawPrices(product)}
     </div>
     <div class='products-list__card__add-to-cart'>
-    <a class='products-list__card__cartSVG' href="/cart">
-      ${cartSVG()}
-    </a>
-    <span>Add to cart</span>
+      <a class='products-list__card__cartSVG' href="/cart">
+        ${cartSVG()}
+      </a>
+      <span>Add to cart</span>
     </div>
     `;
-    card.addEventListener('click', () => {
+    card
+      .querySelector('.products-list__card__add-to-cart')
+      ?.addEventListener('click', async (event) => {
+        event.stopImmediatePropagation();
+        await addToBasket(product.id);
+      });
+    card.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (
+        target
+          .closest('.products-list__card__add-to-cart')
+          ?.classList.contains('products-list__card__add-to-cart')
+      ) {
+        return;
+      }
       const productPageElement = getProductPage(product.id);
       history.pushState({}, '', `?detailed-product=${product.id}`);
       document.querySelector('body > div')!.innerHTML = '';

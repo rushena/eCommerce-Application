@@ -266,11 +266,12 @@ function setOtherImages(
     <div class="previous-image"></div>
     `
   );
-  productImage.insertAdjacentHTML('afterend',
-  `
+  productImage.insertAdjacentHTML(
+    'afterend',
+    `
   <div class="next-image"></div>
   `
-  )
+  );
   // }
   const otherImages = productPage.querySelector(
     '.other-images'

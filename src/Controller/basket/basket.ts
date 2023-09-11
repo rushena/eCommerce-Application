@@ -29,6 +29,7 @@ async function getSimpleCart() {
       const cart = response.body;
       cartcookieValue = cart.id;
       document.cookie = `cartID=${cartcookieValue}; max-age=172000; path=/;`;
+      document.cookie = `cartVersion=${cart.version}; max-age=172000; path=/;`;
     } catch (error) {
       console.error(error);
     }
