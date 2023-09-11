@@ -8,6 +8,7 @@ import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
 import { ProfilePageView } from './Pages/Profile.page';
 import { Catalog } from './Pages/catalog';
+import { Basket } from './Pages/basket';
 
 interface IView {
   renderStartElements: () => void;
@@ -21,6 +22,7 @@ export class View implements IView {
   static readonly $loginPage = createLoginPage();
   static readonly $RegistrationPage = createRegistrationPage();
   static $catalogPage = new Catalog();
+  static readonly $cartPage = new Basket();
 
   renderStartElements(): void {
     const check = localStorage.getItem('check') === 'true';
@@ -92,6 +94,11 @@ export class View implements IView {
   static renderCatalog(queryParams?: URLSearchParams) {
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$catalogPage.getElement(queryParams));
+  }
+
+  static renderBasket() {
+    View.$mainContent.innerHTML = '';
+    View.$mainContent.append(View.$cartPage.getElement());
   }
 
   static render404Page() {

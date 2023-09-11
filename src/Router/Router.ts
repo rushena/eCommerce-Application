@@ -39,6 +39,10 @@ export class Routing {
         title: 'catalog',
         renderFn: View.renderCatalog,
       },
+      '/cart': {
+        title: 'cart',
+        renderFn: View.renderBasket,
+      },
     } as Routes;
   }
 
