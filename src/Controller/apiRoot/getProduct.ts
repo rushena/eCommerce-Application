@@ -10,12 +10,17 @@ type ProductImages = {
   };
 };
 
-type ProductAttributes = {
+type ProductAttributesEnum = {
   name: string;
   value: {
     key: string;
     label: string;
   };
+};
+
+type ProductAttributes = {
+  name: string;
+  value: string;
 };
 
 // type ProductVariants = {
@@ -96,14 +101,58 @@ function setMainVariant(
   mainVariant: ProductVariant,
   productPage: HTMLDivElement
 ) {
-  let productImageSrc;
-
+  let productImageSrc: string;
   if (mainVariant.images) {
     productImageSrc = mainVariant.images[0].url;
+    mainVariant.images.shift();
     setProductMainImage(productImageSrc, productPage);
 
+    const mainImage = productPage.querySelector(
+      '.product-image'
+    ) as HTMLDivElement;
+    mainImage.addEventListener('click', () => {
+      const background = document.createElement('div');
+      background.className = 'background';
+
+      const modalWindow = document.createElement('div');
+      modalWindow.className = 'modal-window';
+      modalWindow.innerHTML = `
+      <div class="modal-window__close-button"></div>
+        <div class="modal-window__gallery">
+          <div class="main-image-container">
+            <img class="product-image" alt="product-image">
+          </div> 
+          <div class="other-images">
+            <img class="product-image_size_small product-image_1 product-image_selected" alt="image">
+          </div>
+        </div>`;
+
+      setProductMainImage(productImageSrc, modalWindow);
+
+      if (mainVariant.images) {
+        if (mainVariant.images.length > 0) {
+          setOtherImages(mainVariant.images, modalWindow);
+        }
+      }
+
+      const closeButton = modalWindow.querySelector(
+        '.modal-window__close-button'
+      ) as HTMLDivElement;
+      closeButton.addEventListener('click', () => {
+        modalWindow.remove();
+        background.remove();
+      });
+
+      background.addEventListener('click', () => {
+        modalWindow.remove();
+        background.remove();
+      });
+
+      document.body.appendChild(background);
+      document.body.appendChild(modalWindow);
+    });
+
     if (mainVariant.images.length > 0) {
-      mainVariant.images.shift();
       setOtherImages(mainVariant.images, productPage);
     }
   }
@@ -164,15 +213,30 @@ function setProductMainImage(src: string, productPage: HTMLDivElement) {
   ) as HTMLImageElement;
   selectedImage.setAttribute('src', src);
   selectedImage.addEventListener('click', () => {
-    changeSelectedImage(selectedImage, src);
+    changeSelectedImage(selectedImage, src, productPage);
   });
 }
 
+// function setProductMainImage(src: string, productPage: HTMLDivElement) {
+//   const mainImage = productPage.querySelector(
+//     '.product-image'
+//   ) as HTMLImageElement;
+//   mainImage.setAttribute('src', src);
+//   const selectedImage = productPage.querySelector(
+//     '.product-image_selected'
+//   ) as HTMLImageElement;
+//   selectedImage.setAttribute('src', src);
+//   selectedImage.addEventListener('click', () => {
+//     changeSelectedImage(selectedImage, src);
+//   });
+// }
+
 export function changeSelectedImage(
   additionalImage: HTMLImageElement,
-  src: string
+  src: string,
+  productPage: HTMLDivElement
 ) {
-  const otherImagesArray = document.querySelectorAll(
+  const otherImagesArray = productPage.querySelectorAll(
     '.product-image_size_small'
   );
   otherImagesArray.forEach((image) => {
@@ -181,7 +245,7 @@ export function changeSelectedImage(
     }
   });
   additionalImage.classList.add('product-image_selected');
-  const mainImage = document.querySelector(
+  const mainImage = productPage.querySelector(
     '.product-image'
   ) as HTMLImageElement;
   mainImage.setAttribute('src', src);
@@ -192,18 +256,22 @@ function setOtherImages(
   srcArray: ProductImages[],
   productPage: HTMLDivElement
 ) {
-  if (srcArray.length > 0) {
-    const mainImageContainer = productPage.querySelector(
-      '.main-image-container'
-    ) as HTMLDivElement;
-    mainImageContainer.insertAdjacentHTML(
-      'beforeend',
-      `<div class="image-change">
-      <div class="previous-image"></div>
-      <div class="next-image"></div>
-    </div>`
-    );
-  }
+  //if (srcArray.length > 0) {
+  const productImage = productPage.querySelector(
+    '.product-image'
+  ) as HTMLDivElement;
+  productImage.insertAdjacentHTML(
+    'beforebegin',
+    `
+    <div class="previous-image"></div>
+    `
+  );
+  productImage.insertAdjacentHTML('afterend',
+  `
+  <div class="next-image"></div>
+  `
+  )
+  // }
   const otherImages = productPage.querySelector(
     '.other-images'
   ) as HTMLDivElement;
@@ -215,7 +283,7 @@ function setOtherImages(
     additionalImage.setAttribute('src', src.url);
     additionalImage.setAttribute('alt', 'product-image');
     additionalImage.addEventListener('click', () => {
-      changeSelectedImage(additionalImage, src.url);
+      changeSelectedImage(additionalImage, src.url, productPage);
     });
     otherImages.appendChild(additionalImage);
   });
@@ -228,13 +296,13 @@ function setOtherImages(
     '.previous-image'
   ) as HTMLDivElement;
   previousImageButton.addEventListener('click', () => {
-    showPreviousImage(totalImageAmount);
+    showPreviousImage(totalImageAmount, productPage);
   });
   const nextImageButton = productPage.querySelector(
     '.next-image'
   ) as HTMLDivElement;
   nextImageButton.addEventListener('click', () => {
-    showNextImage(totalImageAmount);
+    showNextImage(totalImageAmount, productPage);
   });
 }
 
@@ -271,7 +339,7 @@ function setDiscount(
 }
 
 function setColors(
-  attributesArray: ProductAttributes[],
+  attributesArray: ProductAttributesEnum[],
   productPage: HTMLDivElement
 ) {
   attributesArray.forEach((attribute) => {
@@ -307,7 +375,7 @@ function setColors(
 }
 
 function setSize(
-  attributesArray: ProductAttributes[],
+  attributesArray: ProductAttributesEnum[],
   productPage: HTMLDivElement
 ) {
   attributesArray.forEach((attribute) => {
@@ -348,7 +416,7 @@ function setDescription(
       const descriptionBlock = productPage.querySelector(
         '.product__description'
       ) as HTMLDivElement;
-      descriptionBlock.innerHTML = attribute.value.key;
+      descriptionBlock.innerHTML = attribute.value;
       return;
     }
   });
@@ -363,7 +431,7 @@ function setBrand(
       const brandBlock = productPage.querySelector(
         '.product__brand'
       ) as HTMLDivElement;
-      brandBlock.innerHTML = attribute.value.key;
+      brandBlock.innerHTML = attribute.value;
       return;
     }
   });

@@ -1,6 +1,7 @@
 .catalog__navigation {
   width: 100%;
   margin: 10px 0 10px 0;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

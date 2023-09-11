@@ -15,6 +15,25 @@ export default class Products {
   public perPage = 15;
   public total = 0;
 
+  private drawPrices(product: ProductProjection): string {
+    if (product.masterVariant.prices![0].discounted) {
+      return `
+      <span>$${
+        product.masterVariant.prices![0].discounted!.value.centAmount / 100
+      }
+      </span>
+      <span class='old'>
+      $${product.masterVariant.prices![0].value.centAmount / 100}
+      </span>
+      `;
+    } else {
+      return `
+      <span>$${product.masterVariant.prices![0].value.centAmount / 100}
+      </span>
+      `;
+    }
+  }
+
   private async addCard(target: HTMLElement, product: ProductProjection) {
     const card = document.createElement('div');
     card.classList.add('products-list__card');
@@ -32,10 +51,7 @@ export default class Products {
       ${product.name['en-US'] ? product.name['en-US'] : product.name['en']}
     </div>
     <div class='products-list__card__price'>
-      <span>$${product.masterVariant.prices![0].value.centAmount / 100}</span>
-      <span class='old'>
-      $${product.masterVariant.prices![0].value.centAmount / 100}
-      </span>
+      ${this.drawPrices(product)}
     </div>
     <div class='products-list__card__add-to-cart'>
     <a class='products-list__card__cartSVG' href="/cart">
