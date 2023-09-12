@@ -1,7 +1,7 @@
 import { getApiRoot } from '../apiRoot/generalClient.ts';
 
 async function getSimpleCart() {
-  const check = localStorage.getItem('check') === 'true';
+  // const check = localStorage.getItem('check') === 'true';
 
   let cartcookieValue;
   if (typeof window !== 'undefined') {
@@ -34,26 +34,14 @@ async function getSimpleCart() {
       console.error(error);
     }
   }
-  if (check) {
-    return getApiRoot()
-      .withProjectKey({
-        projectKey: 'new-ecommerce-app',
-      })
-      .me()
-      .carts()
-      .withId({ ID: cartcookieValue! })
-      .get()
-      .execute();
-  } else {
-    return getApiRoot()
-      .withProjectKey({
-        projectKey: 'new-ecommerce-app',
-      })
-      .carts()
-      .withId({ ID: cartcookieValue! })
-      .get()
-      .execute();
-  }
+  return getApiRoot()
+    .withProjectKey({
+      projectKey: 'new-ecommerce-app',
+    })
+    .carts()
+    .withId({ ID: cartcookieValue! })
+    .get()
+    .execute();
 }
 
 export async function getCart() {
