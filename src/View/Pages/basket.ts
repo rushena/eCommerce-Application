@@ -1,6 +1,9 @@
 import { Cart, LineItem } from '@commercetools/platform-sdk';
 import { getCart } from '../../Controller/basket/basket';
 import '../../assets/css/basket.css';
+import { deleteFromBasket } from '../../Controller/basket/deleteFromBasket';
+import { changeQuantity } from '../../Controller/basket/changeQuantity';
+import { clearBasket } from '../../Controller/basket/clearBasket';
 
 interface BasketTemplate {
   getElement: () => HTMLElement;
@@ -60,6 +63,19 @@ export class Basket implements BasketTemplate {
       imageElement.src = item.variant.images[0].url;
       imageElement.onload = () => itemElement.prepend(imageElement);
     }
+    itemElement
+      .querySelector('.item-card__delete')
+      ?.addEventListener('click', async () => {
+        await deleteFromBasket(item);
+        this.renderElement();
+      });
+    const quantityInput = itemElement.querySelector(
+      '.item-card__quantity-input'
+    ) as HTMLInputElement;
+    quantityInput.addEventListener('change', async (event) => {
+      await changeQuantity(item, event);
+      this.renderElement();
+    });
     return itemElement;
   }
 
@@ -69,7 +85,7 @@ export class Basket implements BasketTemplate {
     ordersElement.innerHTML = `
       <div class='cart-container__orders__toppanel'>
       <h2>Cart</h2>
-      <div>Clear all</div>
+      <div class='cart-container__orders__toppanel__clear-all'>Clear all</div>
       <a href='/catalog'>
         Back to shopping
       </a>
@@ -84,14 +100,22 @@ export class Basket implements BasketTemplate {
     subtotalElement.classList.add('cart-container__orders__subtotal');
     subtotalElement.textContent = `Subtotal: $${this.cart!.lineItems.reduce(
       (accumulator, current) => {
-        const newValue = accumulator + current.price.value.centAmount / 100;
+        const newValue =
+          accumulator +
+          (current.price.value.centAmount / 100) * current.quantity;
         return newValue;
       },
       0
     )}`;
     ordersItemsElement.append(subtotalElement);
     if (items.length === 0)
-      ordersItemsElement.innerText = 'There is no items in your cart ;(';
+      ordersItemsElement.innerHTML = 'There is no items in your cart ;(';
+    ordersElement
+      .querySelector('.cart-container__orders__toppanel__clear-all')
+      ?.addEventListener('click', async () => {
+        await clearBasket();
+        this.renderElement();
+      });
     ordersElement.append(ordersItemsElement);
     cartContainer.append(ordersElement);
   }
@@ -122,7 +146,9 @@ export class Basket implements BasketTemplate {
      <div>
       <span>Subtotal:</span>
       <span>$${this.cart.lineItems.reduce((accumulator, current) => {
-        const newValue = accumulator + current.price.value.centAmount / 100;
+        const newValue =
+          accumulator +
+          (current.price.value.centAmount / 100) * current.quantity;
         return newValue;
       }, 0)}</span>
       </div>

@@ -1,7 +1,8 @@
 import { getApiRoot } from '../apiRoot/generalClient.ts';
 import { getCart } from './basket.ts';
+import { LineItem } from '@commercetools/platform-sdk';
 
-export async function addToBasket(id: string) {
+export async function deleteFromBasket(item: LineItem) {
   await getCart();
   let cartCookieValue;
   if (typeof window !== 'undefined') {
@@ -29,10 +30,8 @@ export async function addToBasket(id: string) {
         body: {
           actions: [
             {
-              action: 'addLineItem',
-              productId: id,
-              variantId: 1,
-              quantity: 1,
+              action: 'removeLineItem',
+              lineItemId: item.id,
             },
           ],
           version: Number.parseInt(cartVersionCookieValue),
