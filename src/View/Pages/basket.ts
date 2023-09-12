@@ -4,6 +4,7 @@ import '../../assets/css/basket.css';
 import { deleteFromBasket } from '../../Controller/basket/deleteFromBasket';
 import { changeQuantity } from '../../Controller/basket/changeQuantity';
 import { clearBasket } from '../../Controller/basket/clearBasket';
+import { addPromoCode } from '../../Controller/basket/addPromoCode';
 
 interface BasketTemplate {
   getElement: () => HTMLElement;
@@ -124,18 +125,24 @@ export class Basket implements BasketTemplate {
     const sidebarElement = document.createElement('div');
     sidebarElement.classList.add('cart-container__sidebar');
     if (this.cart === null) return sidebarElement;
+    const summPrice = this.cart.lineItems.reduce((accumulator, current) => {
+      const newValue =
+        accumulator + (current.price.value.centAmount / 100) * current.quantity;
+      return newValue;
+    }, 0);
     let discount;
-    if (this.cart.directDiscounts[0]) {
-      discount = this.cart.directDiscounts[0].value;
+    if (this.cart.discountCodes.length > 0) {
+      discount = summPrice - this.cart.totalPrice.centAmount / 100;
+      discount = discount.toFixed(2);
     }
     sidebarElement.innerHTML = `
     <div class='cart-container__sidebar__promocode'>
       <div> Apply a promo code
       </div>
       <div class='cart-container__sidebar__promocode__input'>
-      <input type='text' placeholder='Enter promo code'>
-      <div> Apply
-      </div>
+        <input type='text' placeholder='Enter promo code'>
+        <div> Apply
+        </div>
       </div>
     </div>
     <div class='cart-container__sidebar__order-summary'>
@@ -164,6 +171,16 @@ export class Basket implements BasketTemplate {
     </div>
     </div>
     `;
+
+    sidebarElement
+      .querySelector('.cart-container__sidebar__promocode__input div')
+      ?.addEventListener('click', async () => {
+        const inputElement = sidebarElement.querySelector(
+          '.cart-container__sidebar__promocode__input input'
+        ) as HTMLInputElement;
+        await addPromoCode(inputElement.value);
+        this.renderElement();
+      });
     return sidebarElement;
   }
 
