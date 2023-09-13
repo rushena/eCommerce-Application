@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 

@@ -7,6 +7,7 @@ import '../../assets/css/products.css';
 import { Category, CurrentCategory } from '../../types/product.type';
 import getProductPage from '../Pages/productPage';
 import { addToBasket } from '../../Controller/basket/addToBasket';
+import Header from './header';
 
 export default class Products {
   private productsElement = document.createElement('div');
@@ -66,6 +67,7 @@ export default class Products {
       ?.addEventListener('click', async (event) => {
         event.stopImmediatePropagation();
         await addToBasket(product.id);
+        Header.getInstance().cartElement = Header.getNumberOfCurrent() + 1;
       });
     card.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;

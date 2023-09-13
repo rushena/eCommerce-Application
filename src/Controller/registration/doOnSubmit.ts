@@ -1,4 +1,5 @@
-import { getElementValue } from '../../Utility/submitForm';
+import { Routing } from '../../Router/Router';
+import { getInputElement } from '../../Utility/submitForm';
 import { registerNewCustomer } from './registerationClient';
 
 const months: { [key: string]: number } = {
@@ -39,49 +40,62 @@ export async function doOnRegistrationSubmit(event: SubmitEvent) {
   const form = event.target as HTMLFormElement;
   if (!form.reportValidity()) return;
   event.preventDefault();
-  const email = getElementValue(form, '.e-mail');
-  const password = getElementValue(form, '.password1');
-  const birthDay = getElementValue(form, '.birthday-date');
-  const birthMonth = getElementValue(form, '.birthday-month');
-  const birthYear = getElementValue(form, '.birthday-year');
-  const firstName = getElementValue(form, '.first-name');
-  const lastName = getElementValue(form, '.last-name');
-  const billingCountry = getElementValue(form, '.billing-country');
-  const shipingCountry = getElementValue(form, '.shipping-country');
-  const billingIndex = getElementValue(form, '.billing-index');
-  const shippingIndex = getElementValue(form, '.shipping-index');
-  const billingCity = getElementValue(form, '.billing-city');
-  const shippingCity = getElementValue(form, '.shipping-city');
-  const billingAddress = getElementValue(form, '.billing-address');
-  const shippingAddress = getElementValue(form, '.shipping-address');
+  const email = getInputElement(form, '.e-mail');
+  const password = getInputElement(form, '.password1');
+  const birthDay = getInputElement(form, '.birthday-date');
+  const birthMonth = getInputElement(form, '.birthday-month');
+  const birthYear = getInputElement(form, '.birthday-year');
+  const firstName = getInputElement(form, '.first-name');
+  const lastName = getInputElement(form, '.last-name');
+  const billingCountry = getInputElement(form, '.billing-country');
+  const shipingCountry = getInputElement(form, '.shipping-country');
+  const billingIndex = getInputElement(form, '.billing-index');
+  const shippingIndex = getInputElement(form, '.shipping-index');
+  const billingCity = getInputElement(form, '.billing-city');
+  const shippingCity = getInputElement(form, '.shipping-city');
+  const billingAddress = getInputElement(form, '.billing-address');
+  const shippingAddress = getInputElement(form, '.shipping-address');
 
   const response = await registerNewCustomer({
-    email: email,
-    password: password,
-    firstName: firstName,
-    lastName: lastName,
-    dateOfBirth: `${birthYear}-${months[birthMonth]}-${birthDay}`,
+    email: email.value,
+    password: password.value,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    dateOfBirth: `${birthYear}-${months[birthMonth.value]}-${birthDay}`,
     addresses: [
       getAdress(
-        countries[billingCountry],
-        billingIndex,
-        billingCity,
-        billingAddress
+        countries[billingCountry.value],
+        billingIndex.value,
+        billingCity.value,
+        billingAddress.value
       ),
       getAdress(
-        countries[shipingCountry],
-        shippingIndex,
-        shippingCity,
-        shippingAddress
+        countries[shipingCountry.value],
+        shippingIndex.value,
+        shippingCity.value,
+        shippingAddress.value
       ),
     ],
     defaultBillingAddress: 0,
     defaultShippingAddress: 1,
   });
   if (response.success === true) {
-    const anchor = document.createElement('a');
-    anchor.setAttribute('href', '/');
-    anchor.click();
+    email.value = '';
+    birthDay.value = '';
+    birthMonth.value = '';
+    birthYear.value = '';
+    firstName.value = '';
+    lastName.value = '';
+    billingCountry.value = '';
+    shipingCountry.value = '';
+    billingIndex.value = '';
+    shippingIndex.value = '';
+    billingCity.value = '';
+    shippingCity.value = '';
+    billingAddress.value = '';
+    shippingAddress.value = '';
+    const router = new Routing();
+    router.get('/');
   } else {
     const errorrDiv = document.querySelector('.api-error')!;
     errorrDiv.textContent = response.errorMessage;

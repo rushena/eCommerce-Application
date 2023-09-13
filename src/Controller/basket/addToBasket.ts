@@ -1,7 +1,7 @@
 import { getApiRoot } from '../apiRoot/generalClient.ts';
 import { getCart } from './basket.ts';
 
-export async function addToBasket(id: string) {
+export async function addToBasket(id: string, quantity?: number) {
   await getCart();
   let cartCookieValue;
   if (typeof window !== 'undefined') {
@@ -32,7 +32,7 @@ export async function addToBasket(id: string) {
               action: 'addLineItem',
               productId: id,
               variantId: 1,
-              quantity: 1,
+              quantity: quantity ?? 1,
             },
           ],
           version: Number.parseInt(cartVersionCookieValue),

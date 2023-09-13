@@ -1,24 +1,25 @@
-import { getElementValue } from '../../Utility/submitForm';
+import { getInputElement } from '../../Utility/submitForm';
 import { authentificateCustomer } from './loginClient';
 import Header from '../../View/components/header';
+import { Routing } from '../../Router/Router';
 
 export async function doOnAuthSubmit(event: SubmitEvent) {
-  console.log(321);
   const form = event.target as HTMLFormElement;
   if (!form.reportValidity()) return;
   event.preventDefault();
-  const email = getElementValue(form, '.e-mail');
-  const password = getElementValue(form, '.password1');
+  const email = getInputElement(form, '.e-mail');
+  const password = getInputElement(form, '.password1');
   const response = await authentificateCustomer({
-    username: email,
-    password: password,
+    username: email.value,
+    password: password.value,
   });
   if (response.success === true) {
     const header = Header.getInstance();
-    const anchor = document.createElement('a');
     header.loginElement = true;
-    anchor.setAttribute('href', '/');
-    anchor.click();
+    email.value = '';
+    password.value = '';
+    const router = new Routing();
+    router.get('/');
   } else {
     // console.log('error');
     const errorrDiv = document.querySelector('.api-error')!;

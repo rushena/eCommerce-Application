@@ -44,9 +44,6 @@ export class View implements IView {
   }
 
   static renderProfilePage() {
-    /* const isAuthCustomer: boolean = Boolean(
-      window.localStorage.getItem('check')
-    ); */
     const isAuthCustomer = window.localStorage.getItem('check');
 
     if (isAuthCustomer !== 'true') {
@@ -87,6 +84,9 @@ export class View implements IView {
     const header = Header.getInstance();
     localStorage.setItem('check', 'false');
     header.loginElement = false;
+    header.cartElement = 0;
+    document.cookie = `cartVersion=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `cartID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     View.$mainContent.innerHTML = '';
     View.$mainContent.append(View.$mainPage);
   }

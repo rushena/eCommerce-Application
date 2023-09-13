@@ -5,6 +5,7 @@ import { deleteFromBasket } from '../../Controller/basket/deleteFromBasket';
 import { changeQuantity } from '../../Controller/basket/changeQuantity';
 import { clearBasket } from '../../Controller/basket/clearBasket';
 import { addPromoCode } from '../../Controller/basket/addPromoCode';
+import Header from '../components/header';
 
 interface BasketTemplate {
   getElement: () => HTMLElement;
@@ -69,6 +70,8 @@ export class Basket implements BasketTemplate {
       ?.addEventListener('click', async () => {
         await deleteFromBasket(item);
         this.renderElement();
+        Header.getInstance().cartElement =
+          Header.getNumberOfCurrent() - item.quantity;
       });
     const quantityInput = itemElement.querySelector(
       '.item-card__quantity-input'
@@ -116,6 +119,7 @@ export class Basket implements BasketTemplate {
       ?.addEventListener('click', async () => {
         await clearBasket();
         this.renderElement();
+        Header.getInstance().cartElement = 0;
       });
     ordersElement.append(ordersItemsElement);
     cartContainer.append(ordersElement);

@@ -5,6 +5,8 @@ import {
 } from '../../Controller/apiRoot/getProduct';
 import '../../assets/css/product.css';
 import '../../assets/css/modal-window.css';
+import { addToBasket } from '../../Controller/basket/addToBasket';
+import Header from '../components/header';
 
 function getProductInfoLayout(id: string) {
   const productInfo = document.createElement('div');
@@ -45,7 +47,19 @@ function getProductInfoLayout(id: string) {
         </div>
       </div>
 `;
+
   setProductInfo(id, productInfo);
+  productInfo
+    .querySelector('.add-to-cart')
+    ?.addEventListener('click', async (event) => {
+      event.stopImmediatePropagation();
+      const inputElement = productInfo.querySelector(
+        '.cart-add-block input'
+      ) as HTMLInputElement;
+      await addToBasket(id, Number.parseInt(inputElement.value));
+      Header.getInstance().cartElement =
+        Header.getNumberOfCurrent() + Number.parseInt(inputElement.value);
+    });
 
   return productInfo;
 }

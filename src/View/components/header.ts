@@ -9,9 +9,9 @@ class Header {
   private isLogged = false;
   private currentCartItems = 0;
   public element: HTMLElement;
-  constructor(options = { isLogged: false, cartItems: 0 }) {
-    this.isLogged = options.isLogged;
-    this.currentCartItems = options.cartItems;
+  constructor(options?: { isLogged: boolean; cartItems: number }) {
+    this.isLogged = options ? options.isLogged : false;
+    this.currentCartItems = options ? options.cartItems : 0;
     const header = document.createElement('header');
     header.classList.add('header');
     header.innerHTML = `
@@ -150,6 +150,10 @@ class Header {
     document
       .querySelector('.mobile-menu__button')!
       .addEventListener('click', (event: Event) => menuHandler(event));
+  }
+
+  public static getNumberOfCurrent() {
+    return Header.instance.currentCartItems;
   }
 
   public static getInstance(options?: {
