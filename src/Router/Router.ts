@@ -9,7 +9,6 @@ export class Routing {
 
     window.addEventListener('popstate', (e: PopStateEvent): void => {
       e.preventDefault();
-      console.log(123);
       this.get(document.location.pathname, false, document.location.href);
     });
   }
@@ -51,6 +50,7 @@ export class Routing {
     const routingPath = this.routes[url];
 
     if (routingPath) {
+      console.log(routingPath);
       if (fullUrl && fullUrl.includes('?')) {
         document.title = routingPath.title;
         this.callWithQuery(
@@ -61,7 +61,15 @@ export class Routing {
         this.staticPath(routingPath);
       }
     } else {
-      this.combinePath(url);
+      console.log(fullUrl);
+      if (fullUrl && fullUrl.includes('?')) {
+        this.callWithQuery(
+          url,
+          new URLSearchParams(fullUrl.slice(fullUrl.indexOf('?')))
+        );
+      } else {
+        this.combinePath(url);
+      }
     }
 
     if (writeInHistory) {
@@ -78,7 +86,6 @@ export class Routing {
 
   combinePath(url: string): void {
     const urlToArrSlice = url.split('/').slice(1);
-
     if (urlToArrSlice.length < 2) {
       this.render404();
       return;

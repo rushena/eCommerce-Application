@@ -33,8 +33,11 @@ export class App implements IApp {
       const url: string | null = $link.getAttribute('href');
 
       if (url === '#' || !url) return;
-
-      this.routing.get(url);
+      if (url && url.includes('?')) {
+        this.routing.get(url.slice(0, url.indexOf('?')), true, url);
+      } else {
+        this.routing.get(url);
+      }
     });
   }
 }

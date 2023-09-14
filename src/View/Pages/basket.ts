@@ -106,11 +106,14 @@ export class Basket implements BasketTemplate {
       (accumulator, current) => {
         const newValue =
           accumulator +
-          (current.price.value.centAmount / 100) * current.quantity;
+          (current.price.discounted
+            ? (current.price.discounted!.value.centAmount / 100) *
+              current.quantity
+            : (current.price.value.centAmount / 100) * current.quantity);
         return newValue;
       },
       0
-    )}`;
+    ).toFixed(2)}`;
     ordersItemsElement.append(subtotalElement);
     if (items.length === 0)
       ordersItemsElement.innerHTML = 'There is no items in your cart ;(';
@@ -131,7 +134,11 @@ export class Basket implements BasketTemplate {
     if (this.cart === null) return sidebarElement;
     const summPrice = this.cart.lineItems.reduce((accumulator, current) => {
       const newValue =
-        accumulator + (current.price.value.centAmount / 100) * current.quantity;
+        accumulator +
+        (current.price.discounted
+          ? (current.price.discounted!.value.centAmount / 100) *
+            current.quantity
+          : (current.price.value.centAmount / 100) * current.quantity);
       return newValue;
     }, 0);
     let discount;
@@ -156,12 +163,17 @@ export class Basket implements BasketTemplate {
      <div class='order-details'>
      <div>
       <span>Subtotal:</span>
-      <span>$${this.cart.lineItems.reduce((accumulator, current) => {
-        const newValue =
-          accumulator +
-          (current.price.value.centAmount / 100) * current.quantity;
-        return newValue;
-      }, 0)}</span>
+      <span>$${this.cart.lineItems
+        .reduce((accumulator, current) => {
+          const newValue =
+            accumulator +
+            (current.price.discounted
+              ? (current.price.discounted!.value.centAmount / 100) *
+                current.quantity
+              : (current.price.value.centAmount / 100) * current.quantity);
+          return newValue;
+        }, 0)
+        .toFixed(2)}</span>
       </div>
       <div>
       <span>Discount:</span>

@@ -21,7 +21,17 @@ export async function authentificateCustomer(
     if (project.statusCode! >= 400) {
       return { success: false, errorMessage: '' };
     }
-    return { success: true, token: project.body.customer.id };
+
+    return project.body.cart
+      ? {
+          success: true,
+          token: project.body.customer.id,
+          cart: project.body.cart.id,
+        }
+      : {
+          success: true,
+          token: project.body.customer.id,
+        };
   } catch (error) {
     return {
       success: false,
