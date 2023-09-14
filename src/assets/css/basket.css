@@ -202,6 +202,22 @@
   cursor: pointer;
 }
 
+.cart-container__sidebar__promocode__active-codes {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-container__sidebar__promocode__active-codes li {
+  margin: 3px;
+  padding: 3px;
+  background-color: #f4f5f6;
+  border-radius: 4px;
+}
+
 .cart-container__sidebar__order-summary {
   padding: 24px 0;
   border-radius: 4px;

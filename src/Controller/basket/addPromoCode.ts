@@ -43,7 +43,8 @@ export async function addPromoCode(code: string) {
       document.cookie = `cartVersion=${response.body.version}; max-age=172000; path=/;`;
       return response.body;
     }
-  } catch (error) {
-    console.error(error);
+  } catch {
+    return null;
+    /* do nothing */
   }
 }

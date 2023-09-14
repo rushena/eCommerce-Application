@@ -14,6 +14,7 @@ interface BasketTemplate {
 export class Basket implements BasketTemplate {
   private cart: Cart | null;
   private basketElement = document.createElement('main');
+  private activePromos: string[] = [];
 
   constructor() {
     this.cart = null;
@@ -131,6 +132,7 @@ export class Basket implements BasketTemplate {
           await clearBasket();
           this.renderElement();
           Header.getInstance().cartElement = 0;
+          this.activePromos = [];
         }
       });
     ordersElement.append(ordersItemsElement);
@@ -155,6 +157,14 @@ export class Basket implements BasketTemplate {
       discount = summPrice - this.cart.totalPrice.centAmount / 100;
       discount = discount.toFixed(2);
     }
+    const promoCodes = this.activePromos.reduce((accumulator, value) => {
+      return (
+        accumulator +
+        `<li>
+      ${value}
+      </li>`
+      );
+    }, '');
     sidebarElement.innerHTML = `
     <div class='cart-container__sidebar__promocode'>
       <div> Apply a promo code
@@ -164,6 +174,9 @@ export class Basket implements BasketTemplate {
         <div> Apply
         </div>
       </div>
+      <ul class='cart-container__sidebar__promocode__active-codes'>
+      ${promoCodes}
+      </ul>
     </div>
     <div class='cart-container__sidebar__order-summary'>
      <h3>
@@ -203,7 +216,10 @@ export class Basket implements BasketTemplate {
         const inputElement = sidebarElement.querySelector(
           '.cart-container__sidebar__promocode__input input'
         ) as HTMLInputElement;
-        await addPromoCode(inputElement.value);
+        const response = await addPromoCode(inputElement.value);
+        if (response !== null) {
+          this.activePromos.push(inputElement.value);
+        }
         this.renderElement();
       });
     return sidebarElement;
