@@ -71,7 +71,9 @@ export class Basket implements BasketTemplate {
         await deleteFromBasket(item);
         this.renderElement();
         Header.getInstance().cartElement =
-          Header.getNumberOfCurrent() - item.quantity;
+          Header.getNumberOfCurrent() - item.quantity >= 0
+            ? Header.getNumberOfCurrent() - item.quantity
+            : 0;
       });
     const quantityInput = itemElement.querySelector(
       '.item-card__quantity-input'

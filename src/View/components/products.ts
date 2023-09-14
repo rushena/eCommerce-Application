@@ -56,7 +56,7 @@ export default class Products {
       ${this.drawPrices(product)}
     </div>
     <div class='products-list__card__add-to-cart'>
-      <a class='products-list__card__cartSVG' href="/cart">
+      <a class='products-list__card__cartSVG'>
         ${cartSVG()}
       </a>
       <span>Add to cart</span>
@@ -66,8 +66,9 @@ export default class Products {
       .querySelector('.products-list__card__add-to-cart')
       ?.addEventListener('click', async (event) => {
         event.stopImmediatePropagation();
-        await addToBasket(product.id);
-        Header.getInstance().cartElement = Header.getNumberOfCurrent() + 1;
+        const response = await addToBasket(product.id);
+        if (response !== null)
+          Header.getInstance().cartElement = Header.getNumberOfCurrent() + 1;
       });
     card.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
