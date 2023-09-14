@@ -57,6 +57,11 @@
   justify-content: flex-start;
 }
 
+.cart-container__orders__items > a {
+  color: #17696a;
+  text-decoration: underline;
+}
+
 .cart-container__orders__items > :first-child {
   border-radius: 4px 4px 0 0;
 }

@@ -90,11 +90,11 @@ export class Basket implements BasketTemplate {
     ordersElement.classList.add('cart-container__orders');
     ordersElement.innerHTML = `
       <div class='cart-container__orders__toppanel'>
-      <h2>Cart</h2>
-      <div class='cart-container__orders__toppanel__clear-all'>Clear all</div>
-      <a href='/catalog'>
-        Back to shopping
-      </a>
+        <h2>Cart</h2>
+        <div class='cart-container__orders__toppanel__clear-all'>Clear all</div>
+        <a href='/catalog'>
+          Back to shopping
+        </a>
       </div>
     `;
     const ordersItemsElement = document.createElement('div');
@@ -118,13 +118,20 @@ export class Basket implements BasketTemplate {
     ).toFixed(2)}`;
     ordersItemsElement.append(subtotalElement);
     if (items.length === 0)
-      ordersItemsElement.innerHTML = 'There is no items in your cart ;(';
+      ordersItemsElement.innerHTML = `There is no items in your cart ;( <a href='/catalog'>
+      Back to shopping
+    </a>`;
+
     ordersElement
       .querySelector('.cart-container__orders__toppanel__clear-all')
       ?.addEventListener('click', async () => {
-        await clearBasket();
-        this.renderElement();
-        Header.getInstance().cartElement = 0;
+        if (
+          confirm('Are you sure want to clear all items from the cart?') == true
+        ) {
+          await clearBasket();
+          this.renderElement();
+          Header.getInstance().cartElement = 0;
+        }
       });
     ordersElement.append(ordersItemsElement);
     cartContainer.append(ordersElement);
