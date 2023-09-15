@@ -61,7 +61,6 @@ export class Routing {
         this.staticPath(routingPath);
       }
     } else {
-      console.log(fullUrl);
       if (fullUrl && fullUrl.includes('?')) {
         this.callWithQuery(
           url,
