@@ -9,7 +9,6 @@ export class Routing {
 
     window.addEventListener('popstate', (e: PopStateEvent): void => {
       e.preventDefault();
-      console.log(123);
       this.get(document.location.pathname, false, document.location.href);
     });
   }

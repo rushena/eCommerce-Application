@@ -19,8 +19,8 @@ export class App implements IApp {
     return this._view;
   }
 
-  start(): void {
-    this.view.renderStartElements();
+  async start(): Promise<void> {
+    await this.view.renderStartElements();
 
     this.routing.get(document.location.pathname, true, document.location.href);
 

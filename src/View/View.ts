@@ -9,6 +9,7 @@ import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
 import { ProfilePageView } from './Pages/Profile.page';
 import { Catalog } from './Pages/catalog';
 import { Basket } from './Pages/basket';
+import { getCart } from '../Controller/basket/basket';
 
 interface IView {
   renderStartElements: () => void;
@@ -24,13 +25,20 @@ export class View implements IView {
   static $catalogPage = new Catalog();
   static readonly $cartPage = new Basket();
 
-  renderStartElements(): void {
+  async renderStartElements(): Promise<void> {
     const check = localStorage.getItem('check') === 'true';
     let option: { isLogged: boolean; cartItems: number };
+    let itemCount: number | null = null;
+    const response = await getCart();
+    if (response !== null) {
+      itemCount = response.lineItems.reduce((accumulator, value) => {
+        return accumulator + value.quantity;
+      }, 0);
+    }
     if (check === null) {
-      option = { isLogged: true, cartItems: 0 };
+      option = { isLogged: true, cartItems: itemCount ?? 0 };
     } else {
-      option = { isLogged: check, cartItems: 0 };
+      option = { isLogged: check, cartItems: itemCount ?? 0 };
     }
     const header = Header.getInstance(option);
 
