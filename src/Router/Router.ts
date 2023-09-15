@@ -9,6 +9,7 @@ export class Routing {
 
     window.addEventListener('popstate', (e: PopStateEvent): void => {
       e.preventDefault();
+      console.log(123);
       this.get(document.location.pathname, false, document.location.href);
     });
   }
@@ -50,7 +51,6 @@ export class Routing {
     const routingPath = this.routes[url];
 
     if (routingPath) {
-      console.log(routingPath);
       if (fullUrl && fullUrl.includes('?')) {
         document.title = routingPath.title;
         this.callWithQuery(
