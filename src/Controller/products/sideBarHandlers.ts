@@ -71,12 +71,15 @@ export async function categoryHandler(
 
     if (!window.location.href.includes('?')) {
       const parsedUrl = new URL(window.location.href);
+      if (!parsedUrl.href.includes('catalog')) parsedUrl.href += 'catalog';
       parsedUrl.searchParams.append('category', categoryText.toLowerCase());
       history.pushState({}, '', parsedUrl);
     } else {
       const parsedUrl = new URL(window.location.href);
-      parsedUrl.searchParams.set('category', categoryText.toLowerCase());
-      history.pushState({}, '', parsedUrl);
+      if (!parsedUrl.searchParams.has('category', categoryText.toLowerCase())) {
+        parsedUrl.searchParams.set('category', categoryText.toLowerCase());
+        history.pushState({}, '', parsedUrl);
+      }
     }
   }
   navigation.fillNavigation();

@@ -19,8 +19,8 @@ export class App implements IApp {
     return this._view;
   }
 
-  start(): void {
-    this.view.renderStartElements();
+  async start(): Promise<void> {
+    await this.view.renderStartElements();
 
     this.routing.get(document.location.pathname, true, document.location.href);
 
@@ -34,6 +34,8 @@ export class App implements IApp {
 
       if (url === '#' || !url) return;
       if (url && url.includes('?')) {
+        console.log(url);
+        console.log(url.slice(0, url.indexOf('?')));
         this.routing.get(url.slice(0, url.indexOf('?')), true, url);
       } else {
         this.routing.get(url);

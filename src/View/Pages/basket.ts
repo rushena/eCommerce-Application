@@ -62,9 +62,17 @@ export class Basket implements BasketTemplate {
     `;
     let imageElement: HTMLImageElement;
     if (item.variant.images !== undefined && item.variant.images.length !== 0) {
+      const anchor = document.createElement('a');
+      anchor.setAttribute(
+        'href',
+        `/catalog?detailed-product=${item.productId}`
+      );
       imageElement = document.createElement('img');
       imageElement.src = item.variant.images[0].url;
-      imageElement.onload = () => itemElement.prepend(imageElement);
+      imageElement.onload = () => {
+        anchor.append(imageElement);
+        itemElement.prepend(anchor);
+      };
     }
     itemElement
       .querySelector('.item-card__delete')

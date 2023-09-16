@@ -50,7 +50,6 @@ export class Routing {
     const routingPath = this.routes[url];
 
     if (routingPath) {
-      console.log(routingPath);
       if (fullUrl && fullUrl.includes('?')) {
         document.title = routingPath.title;
         this.callWithQuery(
@@ -61,7 +60,6 @@ export class Routing {
         this.staticPath(routingPath);
       }
     } else {
-      console.log(fullUrl);
       if (fullUrl && fullUrl.includes('?')) {
         this.callWithQuery(
           url,
