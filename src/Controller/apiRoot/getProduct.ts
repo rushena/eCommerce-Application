@@ -291,7 +291,7 @@ function setOtherImages(
   const totalImageAmount = productPage.querySelectorAll(
     '.product-image_size_small'
   ).length;
-  console.log(totalImageAmount);
+
   const previousImageButton = productPage.querySelector(
     '.previous-image'
   ) as HTMLDivElement;

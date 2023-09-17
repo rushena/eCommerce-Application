@@ -19,7 +19,7 @@ function checkCityValidity(
   element: HTMLElement
 ) {
   city.addEventListener('blur', () => {
-    console.log(city, cityError);
+    //console.log(city, cityError);
     if (city.validity.valid) {
       cityError.textContent = '';
       applyStyleToInput(city, 'valid');

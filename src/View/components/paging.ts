@@ -59,7 +59,7 @@ export default class Paging {
         itemArray = ['1', `2`, '>'];
       }
     } else if (this.current === this.length) {
-      console.log(this.length);
+      //console.log(this.length);
       if (this.length >= 5) {
         itemArray = [
           '<',

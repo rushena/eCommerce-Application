@@ -64,7 +64,7 @@ export default class Perpage {
 
   public getValue(): string {
     const inputElement = this.perpage.children[1] as HTMLInputElement;
-    console.log(inputElement);
+    //console.log(inputElement);
     return inputElement.value === ''
       ? inputElement.placeholder
       : inputElement.value;

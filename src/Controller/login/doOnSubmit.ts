@@ -3,7 +3,7 @@ import { authentificateCustomer } from './loginClient';
 import Header from '../../View/components/header';
 
 export async function doOnAuthSubmit(event: SubmitEvent) {
-  console.log(321);
+  //console.log(321);
   const form = event.target as HTMLFormElement;
   if (!form.reportValidity()) return;
   event.preventDefault();
