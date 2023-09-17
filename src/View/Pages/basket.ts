@@ -88,7 +88,11 @@ export class Basket implements BasketTemplate {
       '.item-card__quantity-input'
     ) as HTMLInputElement;
     quantityInput.addEventListener('change', async (event) => {
-      await changeQuantity(item, event);
+      const response = await changeQuantity(item, event);
+      Header.getInstance().cartElement =
+        response?.lineItems.reduce((accumulator, value) => {
+          return accumulator + value.quantity;
+        }, 0) ?? Header.getNumberOfCurrent();
       this.renderElement();
     });
     return itemElement;
@@ -178,7 +182,7 @@ export class Basket implements BasketTemplate {
       <div> Apply a promo code
       </div>
       <div class='cart-container__sidebar__promocode__input'>
-        <input type='text' placeholder='Enter promo code'>
+        <input type='text' placeholder='Enter promo code(PING10)'>
         <div> Apply
         </div>
       </div>
