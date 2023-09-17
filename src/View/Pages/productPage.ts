@@ -5,8 +5,12 @@ import {
 } from '../../Controller/apiRoot/getProduct';
 import '../../assets/css/product.css';
 import '../../assets/css/modal-window.css';
+import { getCart } from '../../Controller/basket/basket';
+import {addToBasket} from '../../Controller/basket/addToBasket';
+import {deleteFromBasket} from '../../Controller/basket/deleteFromBasket';
 
 function getProductInfoLayout(id: string) {
+
   const productInfo = document.createElement('div');
   productInfo.className = `product-info`;
   productInfo.innerHTML = `
@@ -20,9 +24,9 @@ function getProductInfoLayout(id: string) {
         </div>
         <div class="product-sidebar">
           <div class="price-block">
-            <div class="current-price">$15.50</div>
-            <div class="previous-price">$31%</div>
-            <div class="discount">-50%</div>
+            <div class="current-price"></div>
+            <div class="previous-price"></div>
+            <div class="discount"></div>
           </div>
           <div class="color-block">
           </div>
@@ -40,11 +44,46 @@ function getProductInfoLayout(id: string) {
           <div class="variants-block"></div>
           <div class="cart-add-block">
             <input class="quantity" type="number" value="1" min="1" max="100">
-            <button class="add-to-cart"><img src="./src/assets/img/Cart.png" alt="cart-image"> Add to cart </button>
+            <button class="add-to-cart"><img src="./src/assets/img/Cart.png" alt="cart-image">  </button>
           </div>
         </div>
       </div>
 `;
+
+console.log('4', getCart())
+  //переключает кнопку с добавить в удалить
+  getCart().then((contents)=>{
+    const addToCartButton = productInfo.querySelector('.add-to-cart') as HTMLButtonElement;
+    console.log('addToCart', addToCartButton)
+    contents.forEach((item) => {
+      console.log('itemID',item.productId)
+      if(item.productId === id){
+        addToCartButton.innerHTML = '<img src="./src/assets/img/Cart.png" alt="cart-image"> Remove from cart';
+        addToCartButton.classList.add('non-active');
+      } else {
+        addToCartButton.innerHTML = '<img src="./src/assets/img/Cart.png" alt="cart-image"> Add to cart';
+      }
+    })
+
+    //слушатель на добавление / удаление из корзины. Возможно нужно добавить про хеадер
+    addToCartButton.addEventListener(('click'), () => {      
+      if(addToCartButton.classList.contains('non-active')){
+        getCart().then((contents)=>{
+          contents.forEach((item)=>{
+            if(item.productId === id){
+              deleteFromBasket(item);
+            }
+          })
+        })
+      } else {
+        const quantityInput = addToCartButton.querySelector('.quantity') as HTMLInputElement;
+        const productQuantity = quantityInput.value;
+        addToBasket(id, productQuantity);
+      }
+      addToCartButton.classList.toggle('non-active');
+    })
+  })
+
   setProductInfo(id, productInfo);
 
   return productInfo;
