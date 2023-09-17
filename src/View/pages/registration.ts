@@ -300,7 +300,7 @@ export default function createRegistrationPage(): HTMLElement {
             <button class="button create-an-account-button" type="submit">Create an Account</button>
             <div>
               <span>Already have an account?</span>
-              <a class="log-in-page-link">Log in</a>
+              <a class="log-in-page-link" href='/user/authorization'>Log in</a>
             </div>
         </form>
       </div>

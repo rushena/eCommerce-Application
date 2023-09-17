@@ -44,9 +44,14 @@ export default class Products {
       product.masterVariant.images !== undefined &&
       product.masterVariant.images.length !== 0
     ) {
+      const imageContainer = document.createElement('div');
+      imageContainer.classList.add('products-list__card__img-container');
       imageElement = document.createElement('img');
       imageElement.src = product.masterVariant.images[0].url;
-      imageElement.onload = () => card.prepend(imageElement);
+      imageElement.onload = () => {
+        imageContainer.append(imageElement);
+        card.prepend(imageContainer);
+      };
     }
     card.innerHTML = `
     <div class='products-list__card__description'>
