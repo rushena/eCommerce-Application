@@ -118,7 +118,11 @@ export class Catalog {
         this.addAllBlocks(queryParams);
       } else {
         const productPageElement = getProductPage(detailedProductID);
-        history.pushState({}, '', `?detailed-product=${detailedProductID}`);
+        const previousProduct = new URL(window.location.href).searchParams.get(
+          'detailed-product'
+        )!;
+        if (previousProduct !== detailedProductID)
+          history.pushState({}, '', `?detailed-product=${detailedProductID}`);
         document.querySelector('body > div')!.innerHTML = '';
         document.querySelector('body > div')!.append(productPageElement);
       }
