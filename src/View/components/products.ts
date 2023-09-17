@@ -6,6 +6,7 @@ import { cartSVG } from '../../assets/img/cart';
 import '../../assets/css/products.css';
 import { Category, CurrentCategory } from '../../types/product.type';
 import getProductPage from '../Pages/productPage';
+import { getCart } from '../../Controller/basket/basket';
 
 export default class Products {
   private productsElement = document.createElement('div');
@@ -53,13 +54,29 @@ export default class Products {
     <div class='products-list__card__price'>
       ${this.drawPrices(product)}
     </div>
-    <div class='products-list__card__add-to-cart'>
+    <button class='products-list__card__add-to-cart'>
     <a class='products-list__card__cartSVG' href="/cart">
       ${cartSVG()}
     </a>
     <span>Add to cart</span>
-    </div>
+    </button>
     `;
+
+  //проверяет или есть в корзине и дезактивирует кнопку
+    getCart().then((content) => {
+      const addToCartButton = card.querySelector('.products-list__card__add-to-cart') as HTMLButtonElement;
+      content.forEach((item) => {
+        if(item.productId === product.id){
+         // нужно добавить также при нажатии на добавить в корзину
+          addToCartButton.setAttribute('disabled','')
+          addToCartButton.classList.add('non-active');
+          addToCartButton.querySelector('span')!.innerText = 'Already added to cart'; 
+        }
+      })
+    })
+    
+   
+
     card.addEventListener('click', () => {
       const productPageElement = getProductPage(product.id);
       history.pushState({}, '', `?detailed-product=${product.id}`);

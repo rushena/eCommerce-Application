@@ -28,6 +28,15 @@
   flex-shrink: 0;
 }
 
+.products-list__card__add-to-cart.non-active {
+  background-color: #17696a76;
+  cursor: default;
+}
+
+.products-list__card__add-to-cart {
+  background-color: #17696a;
+}
+
 .products-list__card__description {
   margin: 0 16px;
 }
@@ -59,7 +68,6 @@
   border-radius: 4px;
   height: 34px;
   padding: 0px 15px;
-  background-color: #17696a;
   color: white;
   display: flex;
   align-items: center;
