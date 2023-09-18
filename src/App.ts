@@ -28,6 +28,8 @@ export class App implements IApp {
       const $link: HTMLElement | null = (e.target as HTMLElement).closest('a');
       if ($link === null) return;
 
+      if ($link.classList.contains('without-routing')) return;
+
       e.preventDefault();
 
       const url: string | null = $link.getAttribute('href');

@@ -1,12 +1,13 @@
 import { createFooter } from './components/footer';
 import Header from './components/header';
-import { PageNotFound } from './Pages/404.page';
-import { MainPage } from './Pages/Main.page';
-import createLoginPage from './Pages/login';
-import createRegistrationPage from './Pages/registration';
+import { PageNotFound } from './pages/404.page';
+import { MainPage } from './pages/Main.page';
+import createLoginPage from './pages/login';
+import createRegistrationPage from './pages/registration';
 import { doOnAuthSubmit } from '../Controller/login/doOnSubmit';
 import { doOnRegistrationSubmit } from '../Controller/registration/doOnSubmit';
 import { ProfilePageView } from './Pages/Profile.page';
+import { AboutPage } from './pages/about.page';
 import { Catalog } from './Pages/catalog';
 import { Basket } from './Pages/basket';
 import { getCart } from '../Controller/basket/basket';
@@ -22,6 +23,7 @@ export class View implements IView {
   static readonly $mainPage = new MainPage().getElement();
   static readonly $loginPage = createLoginPage();
   static readonly $RegistrationPage = createRegistrationPage();
+  static readonly $aboutPage = new AboutPage().getElement();
   static $catalogPage = new Catalog();
   static readonly $cartPage = new Basket();
 
@@ -112,5 +114,9 @@ export class View implements IView {
 
   static render404Page() {
     View.$mainContent.innerHTML = View.$notFound.outerHTML;
+  }
+
+  static renderAboutPage() {
+    View.$mainContent.innerHTML = View.$aboutPage.outerHTML;
   }
 }

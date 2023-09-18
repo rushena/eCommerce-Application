@@ -35,6 +35,10 @@ export class Routing {
         title: 'Account Information',
         renderFn: View.renderProfilePage,
       },
+      '/about': {
+        title: 'About Us',
+        renderFn: View.renderAboutPage,
+      },
       '/catalog': {
         title: 'catalog',
         renderFn: View.renderCatalog,
