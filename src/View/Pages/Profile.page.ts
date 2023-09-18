@@ -328,7 +328,6 @@ export class ProfilePageView {
         e.preventDefault();
 
         const res = await this.submitChagePassord(new FormData($form));
-        console.log(res);
 
         if (res.statusCode === 200) {
           Routing.get('/logout');

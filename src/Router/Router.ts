@@ -35,9 +35,17 @@ export class Routing {
         title: 'Account Information',
         renderFn: View.renderProfilePage,
       },
+      '/about': {
+        title: 'About Us',
+        renderFn: View.renderAboutPage,
+      },
       '/catalog': {
         title: 'catalog',
         renderFn: View.renderCatalog,
+      },
+      '/cart': {
+        title: 'cart',
+        renderFn: View.renderBasket,
       },
     } as Routes;
   }
@@ -56,7 +64,14 @@ export class Routing {
         this.staticPath(routingPath);
       }
     } else {
-      this.combinePath(url);
+      if (fullUrl && fullUrl.includes('?')) {
+        this.callWithQuery(
+          url,
+          new URLSearchParams(fullUrl.slice(fullUrl.indexOf('?')))
+        );
+      } else {
+        this.combinePath(url);
+      }
     }
 
     if (writeInHistory) {
@@ -73,7 +88,6 @@ export class Routing {
 
   combinePath(url: string): void {
     const urlToArrSlice = url.split('/').slice(1);
-
     if (urlToArrSlice.length < 2) {
       this.render404();
       return;

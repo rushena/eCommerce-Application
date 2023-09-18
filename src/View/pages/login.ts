@@ -32,7 +32,7 @@ export default function createLoginPage(): HTMLElement {
             <button class="button sign-in-button" type="submit">Sign In</button>
             <div>
               <span>Don't have an account?</span>
-              <a class="log-in-page-link">Register</a>
+              <a class="log-in-page-link" href='/user/registration'>Register</a>
             </div>
         </form>
       </div>

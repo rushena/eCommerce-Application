@@ -9,7 +9,7 @@ export function store(initVal: string): TokenCache {
     set: (val) => {
       value = val.token;
       if (typeof window !== 'undefined') {
-        document.cookie = `accessToken=${val.token}; max-age=172000; path=/;`;
+        document.cookie = `accessToken=${val.token}; max-age=7200; path=/;`;
       }
     },
   };

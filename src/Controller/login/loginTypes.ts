@@ -2,6 +2,7 @@ interface SuccesAuthResponse {
   // I'm not sure what kind of info we gonna need in succes response
   success: true;
   token: string;
+  cart?: string;
 }
 interface ErrorAuthResponse {
   success: false;
