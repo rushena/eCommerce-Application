@@ -75,7 +75,12 @@ export async function categoryHandler(
       history.pushState({}, '', parsedUrl);
     } else {
       const parsedUrl = new URL(window.location.href);
-      if (!parsedUrl.searchParams.has('category', categoryText.toLowerCase())) {
+      console.log(
+        parsedUrl.searchParams.get('category') === categoryText.toLowerCase()
+      );
+      if (
+        parsedUrl.searchParams.get('category') !== categoryText.toLowerCase()
+      ) {
         parsedUrl.searchParams.set('category', categoryText.toLowerCase());
         history.pushState({}, '', parsedUrl);
       }
