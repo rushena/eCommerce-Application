@@ -177,7 +177,7 @@ function setMainVariant(
         mainVariant.prices[0].value.currencyCode
       );
       if (previousPriceCurrency) {
-        const previousPriceFull = previousPriceCurrency + previousPrice;
+        const previousPriceFull = '$' + previousPrice;
         setProductPreviousPrice(previousPriceFull, productPage);
         setDiscount(previousPrice, currentPrice, productPage);
       }
@@ -186,6 +186,9 @@ function setMainVariant(
       currentPriceCurrency = getCurrencySign(
         mainVariant.prices[0].value.currencyCode
       );
+      setProductCurrentPrice('$' + currentPrice, productPage);
+      setProductPreviousPrice('', productPage);
+      setDiscount(0, 0, productPage, false);
     }
   }
 
@@ -314,6 +317,7 @@ function setProductCurrentPrice(
   const currentPriceField = productPage.querySelector(
     '.current-price'
   ) as HTMLDivElement;
+  currentPriceField.classList.add('non-active');
   currentPriceField.innerText = currentPrice;
 }
 
@@ -330,13 +334,18 @@ function setProductPreviousPrice(
 function setDiscount(
   previousPrice: number,
   currentPrice: number,
-  productPage: HTMLDivElement
+  productPage: HTMLDivElement,
+  isNeeded: boolean = true
 ) {
   const discount = productPage.querySelector('.discount') as HTMLDivElement;
-  discount.innerText =
-    (((previousPrice - currentPrice) / previousPrice) * 100)
-      .toFixed(2)
-      .toString() + '%';
+  if (isNeeded) {
+    discount.innerText =
+      (((previousPrice - currentPrice) / previousPrice) * 100)
+        .toFixed(2)
+        .toString() + '%';
+  } else {
+    discount.classList.add('non-active');
+  }
 }
 
 function setColors(

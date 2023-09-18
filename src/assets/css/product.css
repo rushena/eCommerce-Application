@@ -88,6 +88,10 @@
   color: rgba(255, 66, 66, 1);
 }
 
+.current-price.non-active {
+  color: black;
+}
+
 .previous-price {
   font-size: 18px;
   color: rgba(120, 122, 128, 1);
@@ -104,6 +108,10 @@
   justify-content: center;
   align-items: center;
   margin-left: 30px;
+}
+
+.discount.non-active {
+  display: none;
 }
 
 .product-sidebar h6 {
