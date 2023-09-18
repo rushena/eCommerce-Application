@@ -54,30 +54,30 @@ export class MainPage {
     $mainCatalog.innerHTML = `
       <div class="main-catalog__inner block-inner">
         <div class="main-catalog__list">
-          <div class="main-catalog__item">
+          <a class="main-catalog__item" href='/catalog?category=furniture'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog1.jpg" alt="Furniture"></div>
             <div class="main-catalog__item-text">Furniture</div>
-          </div>
-          <div class="main-catalog__item">
+          </a>
+          <a class="main-catalog__item" href='/catalog?category=clothes'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog2.jpg" alt="Clothes"></div>
             <div class="main-catalog__item-text">Clothes</div>
-          </div>
-          <div class="main-catalog__item">
+          </a>
+          <a class="main-catalog__item" href='/catalog?category=stationery'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog3.jpg" alt="Stationery"></div>
             <div class="main-catalog__item-text">Stationery</div>
-          </div>
-          <div class="main-catalog__item">
+          </a>
+          <a class="main-catalog__item" href='/catalog?category=electronics'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog4.jpg" alt="Electronics"></div>
             <div class="main-catalog__item-text">Electronics</div>
-          </div>
-          <div class="main-catalog__item">
+          </a>
+          <a class="main-catalog__item" href='/catalog?category=hobby'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog5.jpg" alt="Hobby"></div>
             <div class="main-catalog__item-text">Hobby</div>
-          </div>
-          <div class="main-catalog__item">
+          </a>
+          <a class="main-catalog__item" href='/catalog?category=other'>
             <div class="main-catalog__item-image"><img src="./src/assets/img/main-catalog6.jpg" alt="Food"></div>
-            <div class="main-catalog__item-text">Food</div>
-          </div>
+            <div class="main-catalog__item-text">Other</div>
+          </a>
         </div>
       </div>
     `;

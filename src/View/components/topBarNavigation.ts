@@ -18,15 +18,17 @@ export default class Navigation {
     ${this.products.currentCategories.length >= 1 ? '<span> > </span>' : ''}
     `;
     this.products.currentCategories.forEach((value) => {
+      if (value === 'Color' || value === 'Price') return;
       const newLink = document.createElement('a');
       newLink.classList.add('navigation__item');
-      // newLink.setAttribute('href', ) PROBLEM how should i do this?
       if (typeof value === 'string') {
         newLink.innerHTML = `<span>${value}</span>`;
       } else {
-        newLink.innerHTML = `<span> ${value.parent} ${
-          value.children.length > 0 ? '>' : ''
-        } ${value.children.join(', ')} </span>`;
+        newLink.innerHTML = `<span> <a href = './catalog?category=${value.parent.toLowerCase()}'>${
+          value.parent
+        }</a> ${value.children.length > 0 ? '>' : ''} ${value.children.join(
+          ', '
+        )} </span>`;
       }
       this.navigation.append(newLink);
     });

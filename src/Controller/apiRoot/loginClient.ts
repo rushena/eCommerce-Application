@@ -23,7 +23,7 @@ const passwordAuthMiddlewareOptions = function (
       user: user,
     },
     scopes: [
-      'manage_my_shopping_lists:new-ecommerce-app view_categories:new-ecommerce-app manage_customer_groups:new-ecommerce-app manage_my_business_units:new-ecommerce-app manage_my_orders:new-ecommerce-app view_published_products:new-ecommerce-app create_anonymous_token:new-ecommerce-app manage_my_profile:new-ecommerce-app manage_my_quotes:new-ecommerce-app manage_my_quote_requests:new-ecommerce-app manage_customers:new-ecommerce-app manage_my_payments:new-ecommerce-app',
+      'view_categories:new-ecommerce-app manage_customer_groups:new-ecommerce-app manage_my_orders:new-ecommerce-app manage_orders:new-ecommerce-app view_published_products:new-ecommerce-app create_anonymous_token:new-ecommerce-app view_orders:new-ecommerce-app manage_my_shopping_lists:new-ecommerce-app view_order_edits:new-ecommerce-app manage_my_business_units:new-ecommerce-app manage_my_quotes:new-ecommerce-app manage_my_quote_requests:new-ecommerce-app manage_customers:new-ecommerce-app manage_my_payments:new-ecommerce-app manage_order_edits:new-ecommerce-app manage_my_profile:new-ecommerce-app',
     ],
     tokenCache: store(''),
     fetch,

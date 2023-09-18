@@ -5,9 +5,15 @@ import {
 } from '../../Controller/apiRoot/getProduct';
 import '../../assets/css/product.css';
 import '../../assets/css/modal-window.css';
+import { getCart } from '../../Controller/basket/basket';
+import { addToBasket } from '../../Controller/basket/addToBasket';
+import { deleteFromBasket } from '../../Controller/basket/deleteFromBasket';
+import Header from '../components/header';
 
-function getProductInfoLayout(id: string) {
+async function getProductInfoLayout(id: string) {
   const productInfo = document.createElement('div');
+  const cart = await getCart();
+  const isItemInCart = cart?.lineItems.find((item) => item.productId === id);
   productInfo.className = `product-info`;
   productInfo.innerHTML = `
 <div class="product-gallery">
@@ -39,13 +45,47 @@ function getProductInfoLayout(id: string) {
           </div> -->
           <div class="variants-block"></div>
           <div class="cart-add-block">
-            <input class="quantity" type="number" value="1" min="1" max="100">
-            <button class="add-to-cart"><img src="./src/assets/img/Cart.png" alt="cart-image"> Add to cart </button>
+            <input class="quantity" type="number" value="1" min="1" max="100" ${
+              isItemInCart ? 'disabled' : ''
+            }>
+            <button class="add-to-cart"><img src="./src/assets/img/Cart.png" alt="cart-image"> ${
+              isItemInCart ? 'Remove from cart' : 'Add to cart'
+            } </button>
           </div>
         </div>
       </div>
 `;
+
   setProductInfo(id, productInfo);
+  productInfo
+    .querySelector('.add-to-cart')
+    ?.addEventListener('click', async (event) => {
+      const target = event.target as HTMLElement;
+      const buttonElement = target.closest('.add-to-cart') as HTMLElement;
+      event.stopImmediatePropagation();
+      const inputElement = productInfo.querySelector(
+        '.cart-add-block input'
+      ) as HTMLInputElement;
+      if (!inputElement.disabled) {
+        await addToBasket(id, Number.parseInt(inputElement.value));
+        buttonElement.textContent = 'Remove from cart';
+        inputElement.disabled = true;
+        Header.getInstance().cartElement =
+          Header.getNumberOfCurrent() + Number.parseInt(inputElement.value);
+      } else {
+        const cart = await getCart();
+        if (cart === null) return;
+        const idInCart = cart.lineItems.findIndex(
+          (item) => item.productId === id
+        );
+        await deleteFromBasket(cart.lineItems[idInCart]);
+        buttonElement.innerHTML =
+          '<img src="./src/assets/img/Cart.png" alt="cart-image"> Add to cart';
+        inputElement.disabled = false;
+        Header.getInstance().cartElement =
+          Header.getNumberOfCurrent() - cart.lineItems[idInCart].quantity;
+      }
+    });
 
   return productInfo;
 }
@@ -70,7 +110,7 @@ function getProductDetailsLayout(id: string) {
   return productDetails;
 }
 
-export default function getProductPage(id: string) {
+export default async function getProductPage(id: string) {
   const productPage = document.createElement('div');
   productPage.className = `product-card id_${id}`;
   productPage.innerHTML = `
@@ -83,7 +123,7 @@ export default function getProductPage(id: string) {
   `;
   setProductMainData(id, productPage);
 
-  const productInfoLayout = getProductInfoLayout(id);
+  const productInfoLayout = await getProductInfoLayout(id);
   const productDetailsLayout = getProductDetailsLayout(id);
 
   productPage.appendChild(productInfoLayout);

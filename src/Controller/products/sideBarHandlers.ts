@@ -38,7 +38,6 @@ export async function categoryHandler(
         }
       })[0]
     );
-    console.log(index);
     newFilter.splice(index, 1);
     products.currentCategories.splice(index, 1);
     inputElement.checked = false;
@@ -71,17 +70,23 @@ export async function categoryHandler(
 
     if (!window.location.href.includes('?')) {
       const parsedUrl = new URL(window.location.href);
+      if (!parsedUrl.href.includes('catalog')) parsedUrl.href += 'catalog';
       parsedUrl.searchParams.append('category', categoryText.toLowerCase());
       history.pushState({}, '', parsedUrl);
     } else {
       const parsedUrl = new URL(window.location.href);
-      parsedUrl.searchParams.set('category', categoryText.toLowerCase());
-      history.pushState({}, '', parsedUrl);
+      console.log(
+        parsedUrl.searchParams.get('category') === categoryText.toLowerCase()
+      );
+      if (
+        parsedUrl.searchParams.get('category') !== categoryText.toLowerCase()
+      ) {
+        parsedUrl.searchParams.set('category', categoryText.toLowerCase());
+        history.pushState({}, '', parsedUrl);
+      }
     }
   }
   navigation.fillNavigation();
-  console.log(products.currentCategories);
-  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,
@@ -234,8 +239,6 @@ export async function colorHandler(
       newFilter[index] += `,"${color}"`;
     }
   }
-  console.log(products.currentCategories);
-  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,

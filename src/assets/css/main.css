@@ -67,6 +67,10 @@ body {
   grid-row-gap: 24px;
 }
 
+.main-catalog__item {
+  text-decoration: none;
+}
+
 .main-catalog__item-image {
   font-size: 0px;
   line-height: 0;

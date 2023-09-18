@@ -42,9 +42,14 @@ export function createFooter(): HTMLElement {
       <div class='footer-bottom__copyright'>
       <span>© All rights reserved. Made with</span> ${heartSVG()}
       </div>
-      <a class='footer-bottom__toTop' href='#'>Go to top</a>
+      <d class='footer-bottom__toTop'>Go to top</d>
     </div>
   </div>
   `;
+  footerElement
+    .querySelector('.footer-bottom__toTop')
+    ?.addEventListener('click', () => {
+      document.documentElement.scrollTop = 0;
+    });
   return footerElement;
 }

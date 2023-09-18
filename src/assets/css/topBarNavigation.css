@@ -12,3 +12,8 @@
   display: flex;
   align-items: center;
 }
+
+.navigation__item a {
+  color: black;
+  text-decoration: none;
+}

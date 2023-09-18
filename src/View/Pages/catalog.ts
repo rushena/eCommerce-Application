@@ -7,6 +7,7 @@ import Toggle from '../components/filterToggle';
 import Navigation from '../components/topBarNavigation';
 import '../../assets/css/catalog.css';
 import '../../assets/css/topbar.css';
+import getProductPage from './productPage';
 
 export class Catalog {
   private catalog = document.createElement('main');
@@ -109,10 +110,22 @@ export class Catalog {
     );
   }
 
-  public getElement(queryParams?: URLSearchParams) {
+  public async getElement(queryParams?: URLSearchParams) {
     this.catalog.innerHTML = '';
     if (queryParams) {
-      this.addAllBlocks(queryParams);
+      const detailedProductID = queryParams.get('detailed-product');
+      if (!detailedProductID) {
+        this.addAllBlocks(queryParams);
+      } else {
+        const productPageElement = await getProductPage(detailedProductID);
+        const previousProduct = new URL(window.location.href).searchParams.get(
+          'detailed-product'
+        )!;
+        if (previousProduct !== detailedProductID)
+          history.pushState({}, '', `?detailed-product=${detailedProductID}`);
+        document.querySelector('body > div')!.innerHTML = '';
+        document.querySelector('body > div')!.append(productPageElement);
+      }
     } else {
       this.addAllBlocks();
     }

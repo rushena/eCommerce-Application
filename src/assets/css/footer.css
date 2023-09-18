@@ -78,3 +78,13 @@
   align-items: end;
   gap: 4px;
 }
+
+.footer-bottom__toTop {
+  text-decoration: none;
+  color: #ffffff99;
+  cursor: pointer;
+}
+
+.footer-bottom__toTop:hover {
+  color: #ffffff;
+}
