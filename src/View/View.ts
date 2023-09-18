@@ -101,6 +101,6 @@ export class View implements IView {
   }
 
   static renderAboutPage() {
-    View.$mainContent.innerHTML = View.$notFound.outerHTML;
+    View.$mainContent.innerHTML = View.$aboutPage.outerHTML;
   }
 }
