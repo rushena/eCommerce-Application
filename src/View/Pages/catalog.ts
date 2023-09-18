@@ -110,14 +110,14 @@ export class Catalog {
     );
   }
 
-  public getElement(queryParams?: URLSearchParams) {
+  public async getElement(queryParams?: URLSearchParams) {
     this.catalog.innerHTML = '';
     if (queryParams) {
       const detailedProductID = queryParams.get('detailed-product');
       if (!detailedProductID) {
         this.addAllBlocks(queryParams);
       } else {
-        const productPageElement = getProductPage(detailedProductID);
+        const productPageElement = await getProductPage(detailedProductID);
         const previousProduct = new URL(window.location.href).searchParams.get(
           'detailed-product'
         )!;

@@ -34,8 +34,6 @@ export class App implements IApp {
 
       if (url === '#' || !url) return;
       if (url && url.includes('?')) {
-        console.log(url);
-        console.log(url.slice(0, url.indexOf('?')));
         this.routing.get(url.slice(0, url.indexOf('?')), true, url);
       } else {
         this.routing.get(url);

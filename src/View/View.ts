@@ -99,9 +99,10 @@ export class View implements IView {
     View.$mainContent.append(View.$mainPage);
   }
 
-  static renderCatalog(queryParams?: URLSearchParams) {
+  static async renderCatalog(queryParams?: URLSearchParams) {
     View.$mainContent.innerHTML = '';
-    View.$mainContent.append(View.$catalogPage.getElement(queryParams));
+    const catalogRelatedPage = await View.$catalogPage.getElement(queryParams);
+    View.$mainContent.append(catalogRelatedPage);
   }
 
   static renderBasket() {

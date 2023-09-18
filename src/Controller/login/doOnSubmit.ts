@@ -42,7 +42,6 @@ export async function doOnAuthSubmit(event: SubmitEvent) {
     }
 
     if (response.cart) {
-      console.log(123);
       const existingCartResponse = await getApiRoot()
         .withProjectKey({
           projectKey: 'new-ecommerce-app',
@@ -79,7 +78,6 @@ export async function doOnAuthSubmit(event: SubmitEvent) {
       document.cookie = `cartVersion=${basketUpdateResponse.body.version}; max-age=172000; path=/;`;
     }
   } else {
-    // console.log('error');
     const errorrDiv = document.querySelector('.api-error')!;
     errorrDiv.textContent = response.errorMessage;
     errorrDiv.classList.add('api-error_color_red');

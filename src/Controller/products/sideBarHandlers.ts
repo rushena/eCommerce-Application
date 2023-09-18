@@ -38,7 +38,6 @@ export async function categoryHandler(
         }
       })[0]
     );
-    console.log(index);
     newFilter.splice(index, 1);
     products.currentCategories.splice(index, 1);
     inputElement.checked = false;
@@ -83,8 +82,6 @@ export async function categoryHandler(
     }
   }
   navigation.fillNavigation();
-  console.log(products.currentCategories);
-  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,
@@ -237,8 +234,6 @@ export async function colorHandler(
       newFilter[index] += `,"${color}"`;
     }
   }
-  console.log(products.currentCategories);
-  console.log(newFilter);
   const newOptions: typeof products.options = {
     queryArgs: {
       ...products.options?.queryArgs,
