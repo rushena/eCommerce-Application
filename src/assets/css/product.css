@@ -1,0 +1,285 @@
+.product-card {
+  max-width: 1230px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.tab {
+  height: 46px;
+  padding: 10px 20px;
+  color: rgba(154, 156, 165, 1);
+  font-weight: 700;
+}
+
+.tab_selected,
+.product-image_selected {
+  border: 1px solid rgba(23, 105, 106, 1);
+  border-radius: 4px;
+  color: rgba(23, 105, 106, 1);
+}
+
+.product-name {
+  font-size: 46px;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 4vw;
+}
+
+.product-gallery {
+  width: 46vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 30px;
+  padding: 5px 0 5px 0;
+}
+
+.product-gallery .product-image {
+  cursor: pointer;
+}
+
+.product-image {
+  width: 80%;
+  border-radius: 4px;
+}
+
+.other-images {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.product-image_size_small {
+  border-radius: 4px;
+  width: 104px;
+}
+
+.product-sidebar {
+  width: 47vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 5px 0 5px 0;
+}
+
+.price-block {
+  display: flex;
+  width: 232px;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.current-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(255, 66, 66, 1);
+}
+
+.current-price.non-active {
+  color: black;
+}
+
+.previous-price {
+  font-size: 18px;
+  color: rgba(120, 122, 128, 1);
+  text-decoration: line-through;
+}
+
+.discount {
+  color: white;
+  background-color: rgba(255, 66, 66, 1);
+  height: 28px;
+  border-radius: 4px;
+  padding: 1px 8px 1px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.discount.non-active {
+  display: none;
+}
+
+.product-sidebar h6 {
+  font-size: 14px;
+  color: rgba(66, 69, 81, 1);
+  margin-bottom: 10px;
+}
+
+.colors {
+  display: flex;
+  column-gap: 10px;
+}
+
+.color-container {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(154, 156, 165, 1);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-container-selected {
+  border: 1px solid rgba(23, 105, 106, 1);
+}
+
+.color {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+}
+
+.color_Red {
+  background-color: red;
+}
+
+.color_Yellow {
+  background-color: yellow;
+}
+
+.color_Pink {
+  background-color: pink;
+}
+
+.color_Gray {
+  background-color: grey;
+}
+
+.color_Brown {
+  background-color: burlywood;
+}
+
+.color_Beige {
+  background-color: bisque;
+}
+
+.color_Green {
+  background-color: green;
+}
+
+.color_Orange {
+  background-color: orange;
+}
+
+.color_White {
+  background-color: white;
+}
+
+.color_Blue-gray {
+  background-color: rgb(159, 214, 223);
+}
+
+.color_Dark-blue {
+  background-color: rgb(31, 12, 153);
+}
+
+.color_Purple {
+  background-color: rgb(127, 26, 155);
+}
+
+.color_Black {
+  background-color: black;
+}
+
+.cart-add-block {
+  display: flex;
+  column-gap: 25px;
+}
+
+input.quantity {
+  width: 80px;
+}
+
+.add-to-cart {
+  max-width: 100%;
+}
+
+.product-card h2 {
+  margin: 20px 0 20px 0;
+}
+
+.variant {
+  width: 56px;
+  border: 1px solid rgba(154, 156, 165, 1);
+  border-radius: 4px;
+}
+
+@media (max-width: 695px) {
+  .product-info {
+    flex-wrap: wrap;
+  }
+
+  .product-gallery {
+    width: 100%;
+  }
+
+  .product-sidebar {
+    width: 100%;
+  }
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 20px;
+}
+
+.product-details h6 {
+  font-size: 14px;
+  color: rgba(66, 69, 81, 1);
+  margin-bottom: 10px;
+}
+
+.main-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.previous-image,
+.next-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.previous-image:hover,
+.next-image:hover {
+  cursor: pointer;
+}
+
+.previous-image {
+  background-image: url(./../img/prev-btn.png);
+}
+
+.next-image {
+  background-image: url(./../img/next-btn.png);
+}
+
+.image-change {
+  padding: 0 30px;
+  width: 46vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+}

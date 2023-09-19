@@ -1,0 +1,10 @@
+.catalog__middle {
+  padding: 0 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.catalog__products {
+  flex-grow: 1;
+}

@@ -1,0 +1,35 @@
+.catalog__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 32px 0;
+  padding: 0 16px;
+}
+
+.catalog__topbar__filters-toggle {
+  border: 1px solid;
+  border-radius: 4px;
+  height: 52px;
+  padding: 0px 15px;
+  background-color: #17696a;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media (max-width: 870px) {
+  .catalog__topbar__sorting__description {
+    display: none;
+  }
+  @media (max-width: 7500px) {
+    .catalog__topbar__perpage label {
+      display: none;
+    }
+  }
+  @media (max-width: 7500px) {
+    .catalog__topbar {
+      flex-wrap: wrap;
+    }
+  }
+}
